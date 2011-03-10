@@ -209,9 +209,12 @@ akmod-wl
 akmod-kqemu
 akmod-rt2860
 akmod-rt2870
+akmod-rt3062
 akmod-rt3070
+akmod-rt3090
 akmod-VirtualBox-OSE
 akmod-nvidia
+akmod-nvidia-96xx
 akmod-nvidia-173xx
 akmod-catalyst
 
@@ -219,9 +222,12 @@ kmod-wl
 kmod-kqemu
 kmod-rt2860
 kmod-rt2870
+kmod-rt3062
 kmod-rt3070
+kmod-rt3090
 kmod-VirtualBox-OSE
 kmod-nvidia
+kmod-nvidia-96xx
 kmod-nvidia-173xx
 kmod-catalyst
 
@@ -229,9 +235,12 @@ broadcom-wl
 kqemu
 rt2860
 rt2870
+rt3062
 rt3070
+rt3090
 VirtualBox-OSE
 xorg-x11-drv-nvidia
+xorg-x11-drv-nvidia-96xx
 xorg-x11-drv-nvidia-173xx
 xorg-x11-drv-catalyst
 

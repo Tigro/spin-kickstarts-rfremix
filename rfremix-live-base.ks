@@ -67,7 +67,9 @@ isomd5sum
 kmod-wl
 kmod-rt2860
 kmod-rt2870
+kmod-rt3062
 kmod-rt3070
+kmod-rt3090
 
 %end
 
