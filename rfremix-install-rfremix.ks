@@ -12,7 +12,7 @@
 %include rfremix-packages.ks
 
 # Add the repos you wish to use to compose here.  At least one of them needs group data.
-repo --name=russianfedora --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-russianfedora-$releasever&arch=$basearch --exclude kernel*debug* --exclude kernel-kdump* --exclude kernel-PAE* --exclude syslog-ng --exclude java-1.5.0-gcj-devel --exclude astronomy-bookmarks --exclude generic* --exclude java-1.5.0-gcj-javadoc --exclude btanks --exclude GConf2-dbus* --exclude bluez-gnome --exclude perl --exclude perl-libs --exclude kernel*
+repo --name=russianfedora --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-russianfedora-$releasever&arch=$basearch --exclude kernel*debug* --exclude kernel-kdump* --exclude kernel-PAE* --exclude syslog-ng --exclude java-1.5.0-gcj-devel --exclude astronomy-bookmarks --exclude generic* --exclude java-1.5.0-gcj-javadoc --exclude btanks --exclude GConf2-dbus* --exclude bluez-gnome --exclude perl --exclude perl-libs --exclude kernel* --exclude subversion
 repo --name=russianfedora-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-russianfedora-updates-$releasever&arch=$basearch --exclude kmod*PAE*
 #repo --name=russianfedora-updates-testing --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-russianfedora-updates-testing-$releasever&arch=$basearch --exclude kmod*PAE*
 repo --name=rpmfusion-free --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-rpmfusion-free-$releasever&arch=$basearch --exclude kmod*
