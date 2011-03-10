@@ -41,6 +41,7 @@ gstreamer-plugins-ugly
 # unwanted packages from @kde-desktop
 # don't include these for now to fit on a cd
 
+-kdeaccessibility*
 -amarok*		# amarok has duplicate functionality with juk (~13 megs)
 -desktop-backgrounds-basic
 -digikam		# digikam has duplicate functionality with gwenview (~11 megs)
