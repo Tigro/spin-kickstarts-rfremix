@@ -1,0 +1,309 @@
+* 14.1.4 - Wed Dec 29 2010 Arkady L. Shane <ashejn@yandex-team.ru>
+- added system-config-languages on lives
+- exclude kmods and kernel from release repos
+- also exclude some packages from release repos such as perl
+
+* 14.1.3 - Sat Oct 30 2010 Arkady L. Shane <ashejn@yandex-team.ru>
+- use gdm instead of lxdm on Live
+- autologin after 20 seconds on XFCE Live
+
+* 14.1.2 - Sat Oct 30 2010 Arkady L. Shane <ashejn@yandex-team.ru>
+- exclude all PAE kernel modules
+
+* 14.1.1 - Fri Oct 29 2010 Arkady L. Shane <ashejn@yandex-team.ru>
+- drop wine from install media. 64bit wine requires 32bit wine
+
+* 14.1.0 - Fri Oct 29 2010 Arkady L. Shane <ashejn@yandex-team.ru>
+- do not exclude some xfce packages from install media
+- sync lxde config with upstream
+
+* 14.0.11 - Fri Oct 29 2010 Arkady L. Shane <ashejn@yandex-team.ru>
+- drop em8300
+
+* 14.0.10 - Thu Oct 28 2010 Arkady L. Shane <ashejn@yandex-team.ru>
+- added phonon-backend-vlc, kde-partitionmanager, xsane and
+  transmission-qt to install media and LiveDVD-KDE
+- added kmod and akmod to install media
+- drop ndiswrapper
+- install rt* and wl on lives
+
+* 14.0.9 - Wed Oct 27 2010 Arkady L. Shane <ashejn@yandex-team.ru>
+- LXDE: include gnome-keyring-pam (#643435)
+- -fprintd-pam , until related crashes in kdm
+
+* 14.0.8 - Tue Oct 26 2010 Arkady L. Shane <ashejn@yandex-team.ru>
+- some fixes of lxde and kde kickstarts
+
+* 14.0.7 - Tue Oct 20 2010 Arkady L. Shane <ashejn@yandex-team.ru>
+- fix version in live-base ks
+
+* 14.0.6 - Tue Oct 20 2010 Arkady L. Shane <ashejn@yandex-team.ru>
+- fix release version in mirror urls
+- optimize font exclusion
+- remove kftpgrabber
+- added meego and games kickstart files
+- remove pre-rawhide kickstart
+- update rawhide kickstart
+- added kmod and akmods in install kickstart
+
+* 14.0.5 - Fri Oct 15 2010 Arkady L. Shane <ashejn@yandex-team.ru>
+- use new repositories urls
+
+* 14.0.4 - Wed Oct 13 2010 Arkady L. Shane <ashejn@yandex-team.ru>
+- new urls for pre rawhide
+- fix url fo release kickstart
+
+* 14.0.3 - Tue Oct 12 2010 Arkady L. Shane <ashejn@yandex-team.ru>
+- added system-config-lvm on lives
+- drop all devel packages from livedvd-kde
+- install psi-plus instead of psi
+- update release install file (sync with pre-rawhide)
+- added fbreader on DVD
+
+* 14.0.2 - Mon Sep 27 2010 Arkady L. Shane <ashejn@yandex-team.ru>
+- disable updates-testing repo
+
+* 14.0.1 - Fri Sep 24 2010 Arkady L. Shane <ashejn@yandex-team.ru>
+- drop many packages to place Fedora Live on 700M cd
+
+* 14.0.0 - Tue Sep 21 2010 Arkady L. Shane <ashejn@yandex-team.ru>
+- bump release to 14
+- include all fedora languages
+- merge fedora live base to rfremix live base
+
+* 13.1.9 - Tue Aug 31 2010 Arkady L. Shane <ashejn@yandex-team.ru>
+- as rh#626780 fixed drop patches repo from urls
+
+* 13.1.8 - Mon Aug 30 2010 Arkady L. Shane <ashejn@yandex-team.ru>
+- skip fedora-updates Network Manager and add patches repo
+- drop openoffice Math and Draw from LXDE Live to save space
+- exclude duplicate packages
+
+* 13.1.7 - Mon Aug 30 2010 Arkady L. Shane <ashejn@yandex-team.ru>
+- exclude flash and fedora-release-notes from live's
+
+* 13.1.6 - Mon Aug 30 2010 Arkady L. Shane <ashejn@yandex-team.ru>
+- import all RPM-GPG-KEYs on lives (rf#176)
+- added precompiled modules for wireless cards on lives (rf#177)
+- 20 seconds for autologin instead of 10 (rf#183)
+
+* 13.1.5 - Tue Aug 24 2010 Arkady L. Shane <ashejn@yandex-team.ru>
+- exclude blueman from KDE DVD (rf#165)
+- added @office to KDE DVD (rf#164)
+- stop rfremixconf on Lives
+
+* 13.1.4 - Thu Aug 19 2010 Arkady L. Shane <ashejn@yandex-team.ru>
+- exclude generic* packages
+
+* 13.1.3 - Thu Aug 19 2010 Arkady L. Shane <ashejn@yandex-team.ru>
+- added avidemux-plugins
+
+* 13.1.2 - Tue May 25 2010 Arkady L. Shane <ashejn@yandex-team.ru>
+- exclude all kernel modules with version 2.6.33.3-85
+
+* 13.1.1 - Mon May 24 2010 Arkady L. Shane <ashejn@yandex-team.ru>
+- exclude kernel from russianfedora repo
+- added vim-enhanced to my kickstart
+- sync rfremix-live-base.ks with fedora-live-base.ks
+
+* 13.1.0 - Wed May 19 2010 Arkady L. Shane <ashejn@yandex-team.ru>
+- remove some unexistent font packages
+- bump pre release kickstart file to Fedora 14
+- sync rawhide and release kickstart files with pre release
+- added my kickstart file with tigro repo support
+- no java in lxde
+- use claws mail instead of thunderbird in xfce and lxde
+- final release
+
+* 13.0.5 - Thu May 13 2010 Arkady L. Shane <ashejn@yandex-team.ru>
+- disable updates-testing repo
+
+* 13.0.4 - Wed May 12 2010 Arkady L. Shane <ashejn@yandex-team.ru>
+- drop compiz from livecds
+- added kmods on install media
+- optimaze livecd size
+- added qmmp on KDE Live and install media 
+
+* 13.0.3 - Fri Apr  9 2010 Arkady L. Shane <ashejn@yandex-team.ru>
+- drop some languages what is absent in anaconda
+- added updates and updates-testing for pre ks
+
+* 13.0.2 - Wed Mar 24 2010 Arkady L. Shane <ashejn@yandex-team.ru>
+- remove some groups and packages
+
+* 13.0.1 - Wed Mar 24 2010 Arkady L. Shane <ashejn@yandex-team.ru>
+- clean up pre-rawhide package list
+
+* 13.0.0 - Tue Mar 16 2010 Arkady L. Shane <ashejn@yandex-team.ru>
+- bump to 13 release
+
+* 12.0.12 - Mon Nov 16 2009 Arkady L. Shane <ashejn@yandex-team.ru>
+- exclude PAE kernels and modules in lives
+
+* 12.0.11 - Thu Nov 13 2009 Arkady L. Shane <ashejn@yandex-team.ru>
+- updated all live kses
+
+* 12.0.10 - Wed Nov 12 2009 Arkady L. Shane <ashejn@yandex-team.ru>
+- turn to non devel in live kses
+
+* 12.0.9 - Sun Nov  8 2009 Arkady L. Shane <ashejn@yandex-team.ru>
+- update install release ks file
+
+* 12.0.8 - Sun Nov  8 2009 Arkady L. Shane <ashejn@yandex-team.ru>
+- added kdeedu and htop
+
+* 12.0.7 - Sun Nov  8 2009 Arkady L. Shane <ashejn@yandex-team.ru>
+- added @window-managers
+
+* 12.0.5 - Thu Nov  5 2009 Arkady L. Shane <ashejn@yandex-team.ru>
+- added more languages
+- added qutim
+
+* 12.0.4 - Fri Oct 30 2009 Arkady L. Shane <ashejn@yandex-team.ru>
+- update rfremix install release ks
+- added new package file
+
+* 12.0.3 - Wed Oct 28 2009 Arkady L. Shane <ashejn@yandex-team.ru>
+- update rfremix install rawhide ks
+
+* 12.0.2 - Mon Oct 19 2009 Arkady L. Shane <ashejn@yandex-team.ru>
+- update all live kses
+- added lxde ks
+- added kdebase-runtime-flags
+
+* 12.0.1 - Fri Oct  2 2009 Arkady L. Shane <ashejn@yandex-team.ru>
+- more languages in ks file
+
+* 12.0.0 - Fri Sep 18 2009 Arkady L. Shane <ashejn@yandex-team.ru>
+- adopt for Fedora 12 development
+- bump release for corresponding with Fedora release
+- rename package and kickstarts to something-rfremix
+
+* 0.8.11 - Mon Jun  8 2009 Arkady L. Shane <ashejn@yandex-team.ru>
+- turn off russianfedoraremixconf in lives instead of
+  russianfedoraconf
+- change name for live's anaconda
+
+* 0.8.10 - Thu Jun  4 2009 Arkady L. Shane <ashejn@yandex-team.ru>
+- avoid dupes
+
+* 0.8.9 - Thu Jun  4 2009 Arkady L. Shane <ashejn@yandex-team.ru>
+- fix excludes
+
+* 0.8.8 - Wed Jun  3 2009 Arkady L. Shane <ashejn@yandex-team.ru>
+- added some packages to install media
+- fix size for live cd and dvd
+
+* 0.8.7 - Mon Jun  1 2009 Arkady L. Shane <ashejn@yandex-team.ru>
+- remove slmodem as it is absent for x86_64
+- use 5096 image size
+
+* 0.8.6 - Mon Jun  1 2009 Arkady L. Shane <ashejn@yandex-team.ru>
+- added some kmods
+- remove yachat
+- remove olpc entries
+
+* 0.8.5 - Thu May 28 2009 Arkady L. Shane <ashejn@yandex-team.ru>
+- cleanup ks files
+
+* 0.8.4 - Mon May 25 2009 Arkady L. Shane <ashejn@yandex-team.ru>
+- added empathy to lives instead of pidgin
+- autodetect cp1251 on lives
+- install blueman by default and turn off gnome-bluetooth icon
+
+* 0.8.3 - Tue May 19 2009 Arkady L. Shane <ashejn@yandex-team.ru>
+- another fix for akmod*
+
+* 0.8.2 - Tue May 19 2009 Arkady L. Shane <ashejn@yandex-team.ru>
+- exclude all akmod* from repo
+
+* 0.8.1 - Tue May 19 2009 Arkady L. Shane <ashejn@yandex-team.ru>
+- remove akmod* from install media
+
+* 0.8.0 - Mon May 18 2009 Arkady L. Shane <ashejn@yandex-team.ru>
+- bump release for RF 11
+- fix kernel modules in ks
+
+* 0.7.17 - Thu May 14 2009 Arkady L. Shane <ashejn@yandex-team.ru>
+- add some kernel modules to release install file
+
+* 0.7.16 - Fri Apr 24 2009 Arkady L. Shane <ashejn@yandex-team.ru>
+- remove fedora-release-notes for kde live
+- exchange 1152 with 1024 for all lives
+
+* 0.7.15 - Fri Apr 24 2009 Arkady L. Shane <ashejn@yandex-team.ru>
+- add *parted
+
+* 0.7.14 - Mon Apr 20 2009 Arkady L. Shane <ashejn@yandex-team.ru>
+- remove tomboy again
+
+* 0.7.13 - Sun Apr 19 2009 Arkady L. Shane <ashejn@yandex-team.ru>
+- remove florence, add gok again
+- remove k3b, too large
+- add tomboy
+
+* 0.7.12 - Sun Apr 13 2009 Arkady L. Shane <ashejn@yandex-team.ru>
+- update mirrorlists
+
+* 0.7.11 - Sun Apr 13 2009 Arkady L. Shane <ashejn@yandex-team.ru>
+- use mirrorlists instead of baseurl now
+
+* 0.7.10 - Sun Apr 12 2009 Arkady L. Shane <ashejn@yandex-team.ru>
+- enable GConf layouts configuration
+- fix livedvd includes
+
+* 0.7.9 - Thu Apr  9 2009 Arkady L. Shane <ashejn@yandex-team.ru>
+- remove olpc-logos
+
+* 0.7.8 - Wed Apr  8 2009 Arkady L. Shane <ashejn@yandex-team.ru>
+- optimize for new keyboard switch method
+
+* 0.7.7 - Tue Apr  7 2009 Arkady L. Shane <ashejn@yandex-team.ru>
+- optimize KDE and GNOME livecds
+
+* 0.7.6 - Mon Apr  6 2009 Arkady L. Shane <ashejn@yandex-team.ru>
+- clean kses
+
+* 0.7.5 - Mon Apr  6 2009 Arkady L. Shane <ashejn@yandex-team.ru>
+- added new ru_RU live-base
+- remove Asian fonts and input methods for lives
+- many fixes in xfce ks
+
+* 0.7.4 - Wed Apr  1 2009 Arkady L. Shane <ashejn@yandex-team.ru>
+- clean up
+
+* 0.7.3 - Tue Mar 31 2009 Arkady L. Shane <ashejn@yandex-team.ru>
+- drop some languages
+
+* 0.7.2 - Tue Mar 31 2009 Arkady L. Shane <ashejn@yandex-team.ru>
+- drop nvidia beta and btanks from rawhide ks
+
+* 0.7.1 - Tue Mar 31 2009 Arkady L. Shane <ashejn@yandex-team.ru>
+- rawhide must use akmods instead of precompile kmods
+
+* 0.7 - Thu Mar 26 2009 Arkady L. Shane <ashejn@yandex-team.ru>
+- adapted for Russian Fedora 11 again
+
+* 0.6.1 - Fri Mar 13 2009 Arkady L. Shane <ashejn@yandex-team.ru>
+- fix ks for install media
+- add xl2tpd
+
+* 0.6 - Thu Mar 12 2009 Arkady L. Shane <ashejn@yandex-team.ru>
+- added rawhide configuration
+- adapted for Russian Fedora 11
+
+* 0.5 - Tue Feb 24 2009 Arkady L. Shane <ashejn@yandex-team.ru>
+- many fixes
+
+* 0.4 - Wed Feb 18 2009 Arkady L. Shane <ashejn@yandex-team.ru>
+- remove nvidia-beta drivers from install media .ks
+
+* 0.3 - Wed Feb 18 2009 Arkady L. Shane <ashejn@yandex-team.ru>
+- exclude kde*4.1* in russianfedora repo in install .ks
+- update live .kses
+
+* 0.2 - Fri Feb  6 2009 Arkady L. Shane <ashejn@yandex-team.ru>
+- Add ks for KDE and GNOME CDs
+
+* 0.1
+- Add LiveDVD ks for russian Fedora
