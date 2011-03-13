@@ -1,3 +1,7 @@
+* 14.1.6 - Fri Mar 11 2011 Arkady L. Shane <ashejn@yandex-team.ru>
+- remove kdeaccessibility from livecd
+- yumex is default package manager for LXDE
+
 * 14.1.5 - Thu Mar 10 2011 Arkady L. Shane <ashejn@yandex-team.ru>
 - exclude subversion and qt from everything repo
 - added rt3090, rt3062 and nvidia-96xx kernel modules
