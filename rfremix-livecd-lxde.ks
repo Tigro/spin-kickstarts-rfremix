@@ -67,8 +67,9 @@ perl-File-MimeInfo
 # needed for automatic unlocking of keyring (#643435)
 gnome-keyring-pam
 
-# make sure kpackagekit doesn't end up the LXDE live images
-gnome-packagekit*
+# Yumex default package manager
+yumex
+-gnome-packagekit*
 -kpackagekit
 
 # LXDE has lxpolkit. Make sure no other authentication agents end up in the spin.
