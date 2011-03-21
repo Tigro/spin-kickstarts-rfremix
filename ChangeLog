@@ -1,6 +1,5 @@
 * 15.0.1 - Mon Mar 21 2011 Arkady L. Shane <ashejn@yandex-team.ru>
-- disable rpmfusion-free-updates and rpmfusion-nonfree-updates
-- disable russianfedora-*-updates repos
+- disable rpmfusion-*-updates, russianfedora-*-updates and update-testing
 
 * 15.0.0 - Mon Mar 21 2011 Arkady L. Shane <ashejn@yandex-team.ru>
 - merge fedora-install-fedora.ks and rfremix-install-rfremix.ks
