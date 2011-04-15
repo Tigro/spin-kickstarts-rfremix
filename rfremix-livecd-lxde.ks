@@ -1,75 +1,74 @@
 # fedora-livecd-lxde.ks
 #
 # Description:
-# - RFRemix Live Spin with the light-weight LXDE Desktop Environment
+# - Fedora Live Spin with the light-weight LXDE Desktop Environment
 #
 # Maintainer(s):
 # - Christoph Wickert <cwickert@fedoraproject.org>
-# - Arkady L. Shane   <ashejn@yandex-team.ru>
 
 %include rfremix-live-base.ks
 %include rfremix-live-minimization.ks
 
 %packages
-# LXDE desktop
+### LXDE desktop
 @lxde-desktop
 lxlauncher
 obconf
 gdm
 
-# internet
+### internet
 firefox
-sylpheed
-lostirc
-transmission
-liferea
+java-1.6.0-openjdk-plugin
 pidgin
+sylpheed
+transmission
 
-abiword
-gnumeric
-osmo
-inkscape
+### office
+@office
 
-# graphics
+### graphics
 epdfview
 mtpaint
 
-# audio & video
-gmixer
-lxmusic
+### audio & video
+alsa-plugins-pulseaudio
 asunder
-totem
-totem-mozplugin
-gstreamer-plugins-ugly
-flash-plugin
-
+lxmusic
+gxine
+gxine-mozplugin
+pavucontrol
 # I'm looking for something smaller than
 gnomebaker
 
-# utils
+### utils
 galculator
 parcellite
 xpad
 
-# system
+### system
 gigolo
 
-# more Desktop stuff
-hal-storage-addon
-alsa-plugins-pulseaudio
-NetworkManager-gnome
-xcompmgr
-xdg-user-dirs-gtk
-# needed for xdg-open to support LXDE
-perl-File-MimeInfo
-# pam-fprint causes a segfault in LXDM when enabled
--fprintd-pam
+### more desktop stuff
+# default artwork, subject to change - cwickert 2011-03-05
+fedora-icon-theme
+
 # needed for automatic unlocking of keyring (#643435)
 gnome-keyring-pam
 
-# Yumex default package manager
+hal-storage-addon
+NetworkManager-gnome
+
+# needed for xdg-open to support LXDE
+perl-File-MimeInfo
+
+xcompmgr
+xdg-user-dirs-gtk
+
+gsmartcontrol
+
+# use yumex instead of gnome-packagekit
 yumex
--gnome-packagekit*
+-gnome-packagekit
 -kpackagekit
 
 # LXDE has lxpolkit. Make sure no other authentication agents end up in the spin.
@@ -90,33 +89,37 @@ wget
 yum-utils
 yum-presto
 
+# dictionaries are big
+-aspell-*
+-hunspell-*
+-man-pages-*
+-words
+
 # save some space
 -nss_db
 -sendmail
 ssmtp
 -acpid
 
-# No java
--java-1.6.0-openjdk*
-
 # drop some system-config things
 -system-config-boot
+#-system-config-language
+-system-config-lvm
 -system-config-network
 -system-config-rootpassword
 #-system-config-services
 -policycoreutils-gui
+-gnome-disk-utility
 
 %end
 
 %post
-# LXDE configuration
+# GDM configuration
 
-# set up timed auto-login for after 60 seconds
 cat >> /etc/gdm/custom.conf << FOE
 [daemon]
-TimedLoginEnable=true
-TimedLogin=liveuser
-TimedLoginDelay=20
+AutomaticLoginEnable=True
+AutomaticLogin=liveuser
 FOE
 
 cat >> /etc/rc.d/init.d/livesys << EOF
@@ -129,11 +132,14 @@ cat > /etc/xdg/lxsession/LXDE/autostart << FOE
 FOE
 
 # set up preferred apps 
-cat > /etc/xdg/libfm/pref-apps.conf << FOE
+cat > /etc/xdg/libfm/pref-apps.conf << FOE 
 [Preferred Applications]
 WebBrowser=mozilla-firefox.desktop
 MailClient=redhat-sylpheed.desktop
 FOE
+
+# set up auto-login for liveuser
+sed -i 's|# autologin=dgod|autologin=liveuser|g' /etc/lxdm/lxdm.conf
 
 # Show harddisk install on the desktop
 sed -i -e 's/NoDisplay=true/NoDisplay=false/' /usr/share/applications/liveinst.desktop
@@ -146,9 +152,6 @@ cp /usr/share/applications/fedora-parcellite.desktop /etc/xdg/autostart
 # this goes at the end after all other changes.
 chown -R liveuser:liveuser /home/liveuser
 restorecon -R /home/liveuser
-
-# turn off rfremixconf script
-chkconfig --level 345 rfremixconf off 2>/dev/null
 
 EOF
 
