@@ -8,15 +8,13 @@
 
 %packages
 # First, no office
--libreoffice-*
 -planner
 
 # Temporary list of things removed from comps but not synced yet
 -specspo
 
-# Drop the Java plugin
--java-1.6.0-openjdk-plugin
--java-1.6.0-openjdk
+# Java plugin
+java-1.6.0-openjdk-plugin
 
 # Drop things that pull in perl
 -linux-atm
