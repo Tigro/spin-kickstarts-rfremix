@@ -14,7 +14,6 @@
 -autofs
 # smartcards won't really work on the livecd.
 -coolkey
--ccid
 
 # qlogic firmwares
 -ql2100-firmware

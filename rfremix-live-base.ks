@@ -1,6 +1,6 @@
-# rfemix-live-base.ks
+# fedora-live-base.ks
 #
-# Defines the basics for all kickstarts in the russianfedora-live branch
+# Defines the basics for all kickstarts in the fedora-live branch
 # Does not include package selection (other then mandatory)
 # Does not include localization packages or configuration
 #
@@ -18,19 +18,14 @@ part / --size 3072 --fstype ext4
 services --enabled=NetworkManager --disabled=network,sshd
 
 # To compose against the current release tree, use the following "repo" (enabled by default)
-repo --name=russianfedora --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-russianfedora-14&arch=$basearch
-repo --name=russianfedora-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-russianfedora-updates-14&arch=$basearch
-#repo --name=russianfedora-updates-testing --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-russianfedora-updates-testing-14&arch=$basearch
-repo --name=rpmfusion-free --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-rpmfusion-free-14&arch=$basearch
-repo --name=rpmfusion-free-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-rpmfusion-free-updates-14&arch=$basearch
-repo --name=rpmfusion-nonfree --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-rpmfusion-nonfree-14&arch=$basearch
-repo --name=rpmfusion-nonfree-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-rpmfusion-nonfree-updates-14&arch=$basearch
-repo --name=russianfedora-free --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=free-fedora-14&arch=$basearch
-repo --name=russianfedora-free-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=free-fedora-updates-released-14&arch=$basearch
-repo --name=russianfedora-nonfree --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=nonfree-fedora-14&arch=$basearch
-repo --name=russianfedora-nonfree-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=nonfree-fedora-updates-released-14&arch=$basearch
-repo --name=russianfedora-fixes --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=fixes-fedora-14&arch=$basearch
-repo --name=russianfedora-fixes-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=fixes-fedora-updates-released-14&arch=$basearch
+repo --name=russianfedora --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-russianfedora-15&arch=$basearch
+repo --name=russianfedora-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-russianfedora-updates-15&arch=$basearch
+#repo --name=russianfedora-updates-testing --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-russianfedora-updates-testing-15&arch=$basearch
+repo --name=rpmfusion-free --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-rpmfusion-free-15&arch=$basearch
+repo --name=rpmfusion-nonfree --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-rpmfusion-nonfree-15&arch=$basearch
+repo --name=russianfedora-free --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=free-fedora-15&arch=$basearch
+repo --name=russianfedora-nonfree --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=nonfree-fedora-15&arch=$basearch
+repo --name=russianfedora-fixes --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=fixes-fedora-15&arch=$basearch
 
 %packages
 @base-x
@@ -49,10 +44,13 @@ ibus-pinyin-db-android
 # Explicitly specified here:
 # <notting> walters: because otherwise dependency loops cause yum issues.
 kernel
+
 # This was added a while ago, I think it falls into the category of
 # "Diagnosis/recovery tool useful from a Live OS image".  Leaving this untouched
-# for now
+# for now.
 memtest86+
+
+# some packages
 mc
 wget
 
@@ -60,20 +58,30 @@ wget
 anaconda
 isomd5sum
 
--samba-common
--samba-client
+# fpaste is very useful for debugging and very small
+fpaste
 
-# precompiled modules
-kmod-wl
-kmod-rt2860
-kmod-rt2870
-kmod-rt3062
-kmod-rt3070
-kmod-rt3090
+# wifi cards modules
+#kmod-wl
+#kmod-rt2860
+#kmod-rt2870
+#kmod-rt3062
+#kmod-rt3070
+#kmod-rt3090
 
 %end
 
 %post
+
+# Some new rules for GConf
+if [ -x /usr/bin/gconftool-2 ]; then
+    gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t bool /apps/nautilus/preferences/always_use_browser true
+    gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t bool /apps/gnome-terminal/global/use_menu_accelerators false
+    gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t string /desktop/gnome/interface/toolbar_style "both-horiz"
+    gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t list --list-type=string /apps/gedit-2/preferences/encodings/auto_detected "[UTF-8,CURRENT,WINDOWS-1251,KOI8R,ISO-8859-5]"
+    gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t bool /desktop/gnome/interface/menus_have_icons true
+fi
+
 # FIXME: it'd be better to get this installed from a package
 cat > /etc/rc.d/init.d/livesys << EOF
 #!/bin/bash
@@ -99,6 +107,9 @@ exists() {
 }
 
 touch /.liveimg-configured
+
+# Make sure we don't mangle the hardware clock on shutdown
+ln -sf /dev/null /etc/systemd/system/hwclock-save.service
 
 # mount live image
 if [ -b \`readlink -f /dev/live\` ]; then
@@ -196,9 +207,6 @@ fi
 action "Adding live user" useradd \$USERADDARGS -c "Live System User" liveuser
 passwd -d liveuser > /dev/null
 
-# turn off rfremixconf script
-chkconfig --level 345 rfremixconf off 2>/dev/null
-
 # turn off firstboot for livecd boots
 chkconfig --level 345 firstboot off 2>/dev/null
 # We made firstboot a native systemd service, so it can no longer be turned
@@ -210,40 +218,27 @@ chkconfig --level 345 firstboot off 2>/dev/null
 echo "RUN_FIRSTBOOT=NO" > /etc/sysconfig/firstboot
 
 # don't start yum-updatesd for livecd boots
-chkconfig --level 345 yum-updatesd off 2>/dev/null
+chkconfig --level 345 yum-updatesd off 2>/dev/null || :
 
 # turn off mdmonitor by default
-chkconfig --level 345 mdmonitor off 2>/dev/null
+chkconfig --level 345 mdmonitor off 2>/dev/null || :
 
 # turn off setroubleshoot on the live image to preserve resources
-chkconfig --level 345 setroubleshoot off 2>/dev/null
+chkconfig --level 345 setroubleshoot off 2>/dev/null || :
 
-# don't do packagekit checking by default
-gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t string /apps/gnome-packagekit/update-icon/frequency_get_updates never >/dev/null
-gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t string /apps/gnome-packagekit/update-icon/frequency_get_upgrades never >/dev/null
-gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t string /apps/gnome-packagekit/update-icon/frequency_refresh_cache never >/dev/null
-gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t bool /apps/gnome-packagekit/update-icon/notify_available false >/dev/null
-gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t bool /apps/gnome-packagekit/update-icon/notify_distro_upgrades false >/dev/null
-gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t bool /apps/gnome-packagekit/enable_check_firmware false >/dev/null
-gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t bool /apps/gnome-packagekit/enable_check_hardware false >/dev/null
-gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t bool /apps/gnome-packagekit/enable_codec_helper false >/dev/null
-gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t bool /apps/gnome-packagekit/enable_font_helper false >/dev/null
-gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t bool /apps/gnome-packagekit/enable_mime_type_helper false >/dev/null
+# turn off rfremixconf script
+chkconfig --level 345 rfremixconf off 2>/dev/null || :
 
+# don't enable the gnome-settings-daemon packagekit plugin
+gsettings set org.gnome.settings-daemon.plugins.updates active 'false' || :
 
 # don't start cron/at as they tend to spawn things which are
 # disk intensive that are painful on a live image
-chkconfig --level 345 crond off 2>/dev/null
-chkconfig --level 345 atd off 2>/dev/null
-chkconfig --level 345 anacron off 2>/dev/null
-chkconfig --level 345 readahead_early off 2>/dev/null
-chkconfig --level 345 readahead_later off 2>/dev/null
+chkconfig --level 345 crond off 2>/dev/null || :
+chkconfig --level 345 atd off 2>/dev/null || :
 
 # Stopgap fix for RH #217966; should be fixed in HAL instead
 touch /media/.hal-mtab
-
-# workaround clock syncing on shutdown that we don't want (#297421)
-sed -i -e 's/hwclock/no-such-hwclock/g' /etc/rc.d/init.d/halt
 
 # and hack so that we eject the cd on shutdown if we're using a CD...
 if strstr "\`cat /proc/cmdline\`" CDLABEL= ; then
@@ -261,14 +256,6 @@ if strstr "\`cat /proc/cmdline\`" CDLABEL= ; then
 #read -t 30 < /dev/console
 FOE
 chmod +x /sbin/halt.local
-fi
-
-# disable SELinux notification as it permissive
-if [ -f /etc/selinux/config ]; then
-    . /etc/selinux/config
-    if [ "$SELINUX" != "enforcing" ] ; then
-        rm -f /etc/xdg/autostart/sealertauto.desktop
-    fi
 fi
 
 EOF
@@ -321,13 +308,11 @@ fi
 if [ -n "\$xdriver" ]; then
    cat > /etc/X11/xorg.conf.d/00-xdriver.conf <<FOE
 Section "Device"
-        Identifier      "Videocard0"
-        Driver  "\$xdriver"
+	Identifier	"Videocard0"
+	Driver	"\$xdriver"
 EndSection
 FOE
 fi
-
-sed -i 's!Fedora!RFRemix!g' /etc/fedora-release
 
 # adding keyboard switchers
 if [ -f /etc/sysconfig/keyboard ]; then
@@ -355,9 +340,11 @@ chmod 755 /etc/rc.d/init.d/livesys-late
 
 # work around for poor key import UI in PackageKit
 rm -f /var/lib/rpm/__db*
-rpm --import `find /etc/pki/rpm-gpg/ -type f`
+rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-fedora
 echo "Packages within this LiveCD"
 rpm -qa
+# Note that running rpm recreates the rpm db files which aren't needed or wanted
+rm -f /var/lib/rpm/__db*
 
 # go ahead and pre-make the man -k cache (#455968)
 /usr/bin/mandb
@@ -368,8 +355,7 @@ rm -f /boot/initramfs*
 rm -f /core*
 
 # convince readahead not to collect
-rm -f /.readahead_collect
-touch /var/lib/readahead/early.sorted
+# FIXME: for systemd
 
 %end
 

@@ -15,3 +15,13 @@ timezone Europe/Moscow
 -kde-i18n-Russian
 hunspell-ru
 %end
+
+%post
+# make kdm russian
+if [ -f /etc/kde/kdm/kdmrc ]; then
+        if [ "\`echo \$LANG | awk -F_ '{print \$1}'\`" == "ru" ]; then
+                sed -i 's!#Language=de_DE!Language=ru_RU!' /etc/kde/kdm/kdmrc
+        fi
+fi
+
+%end
