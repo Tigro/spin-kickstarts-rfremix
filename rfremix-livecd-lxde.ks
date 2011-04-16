@@ -141,7 +141,7 @@ FOE
 cat > /etc/xdg/libfm/pref-apps.conf << FOE 
 [Preferred Applications]
 WebBrowser=mozilla-firefox.desktop
-MailClient=thunderbird.desktop
+MailClient=mozilla-thunderbird.desktop
 FOE
 
 # Show harddisk install on the desktop
