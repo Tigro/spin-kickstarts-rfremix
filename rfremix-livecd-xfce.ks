@@ -14,27 +14,18 @@
 
 %packages
 
-# login
-gdm
-pulseaudio-gdm-hooks
-#lxdm
-
 # Office
 @office
 
 # Graphics
-evince
--evince-dvi
--evince-djvu
+epdfview
+-evince
 
 # development
 geany
-vim-enhanced
 
 # Internet
 firefox
-# Add the midori browser as a lighter alternative
-#midori
 thunderbird
 liferea
 pidgin
@@ -53,46 +44,54 @@ parole
 parole-mozplugin
 xfburn
 
+# System
+gparted
+-gnome-disk-utility
+gigolo
+setroubleshoot
+
+# Accessories
+catfish
+galculator
+seahorse
+
 # More Desktop stuff
 # java plugin
-java-1.6.0-openjdk-plugin
+icedtea-web
 NetworkManager-vpnc
 NetworkManager-openvpn
 NetworkManager-gnome
 NetworkManager-pptp
-catfish
 desktop-backgrounds-compat
-gcalctool
-gparted
--gnome-disk-utility
 gnome-bluetooth
 gsmartcontrol
 xscreensaver
-seahorse
-setroubleshoot
 xdg-user-dirs-gtk
-# no longer required, but needed for compatibility - cwickert 2011-02-11
+
+# default artwork
 fedora-icon-theme
+adwaita-cursor-theme
+adwaita-gtk2-theme
+adwaita-gtk3-theme
 
 # Command line
+irssi
+mutt
 ntfs-3g
 powertop
 rtorrent
+vim-enhanced
 wget
-irssi
-mutt
 yum-utils
 
-# xfce packages
+# Xfce packages
 @xfce-desktop
 Terminal
 gtk-xfce-engine
 orage
 ristretto
-hal-storage-addon
 thunar-volman
 thunar-media-tags-plugin
-gigolo
 xarchiver
 xfce4-battery-plugin
 # we already have thunar-volman
@@ -116,8 +115,6 @@ xfce4-quicklauncher-plugin
 xfce4-screenshooter-plugin
 xfce4-sensors-plugin
 xfce4-smartbookmark-plugin
-# disabled for now, doesn't work with 4.8 - kevin 2011-01-14
-#xfce4-stopwatch-plugin
 xfce4-systemload-plugin
 xfce4-taskmanager
 xfce4-time-out-plugin
@@ -127,10 +124,7 @@ xfce4-verve-plugin
 #xfce4-wavelan-plugin
 xfce4-weather-plugin
 xfce4-websearch-plugin
-# this one a compatibility layer for GNOME applets and depends on it
-#xfce4-xfapplet-plugin
-# requires gdm which we're not using in this build
-#xfce4-xfswitch-plugin
+xfce4-xfswitch-plugin
 xfce4-xkb-plugin
 # system-config-printer does printer management better
 #xfprint
@@ -163,10 +157,10 @@ xfwm4-themes
 %post
 # xfce configuration
 
-mkdir -p /root/.config/xfce4
+# create /etc/sysconfig/desktop (needed for installation)
 
-cat > /root/.config/xfce4/helpers.rc <<EOF
-MailReader=sylpheed-claws
+cat > /etc/sysconfig/desktop <<EOF
+PREFERRED=/usr/bin/startxfce4
 EOF
 
 cat >> /etc/rc.d/init.d/livesys << EOF
@@ -174,21 +168,33 @@ cat >> /etc/rc.d/init.d/livesys << EOF
 mkdir -p /home/liveuser/.config/xfce4
 
 cat > /home/liveuser/.config/xfce4/helpers.rc << FOE
-MailReader=sylpheed-claws
+MailReader=thunderbird
+FileManager=Thunar
 FOE
 
-# disable screensaver locking
+# disable screensaver locking (#674410)
 cat >> /home/liveuser/.xscreensaver << FOE
 mode:           off
 lock:           False
 dpmsEnabled:    False
 FOE
+
+# deactivate xfconf-migration (#683161)
+rm -f /etc/xdg/autostart/xfconf-migration-4.6.desktop || :
+
+# deactivate xfce4-panel first-run dialog (#693569)
+mkdir -p /home/liveuser/.config/xfce4/xfconf/xfce-perchannel-xml
+cp /etc/xdg/xfce4/panel/default.xml /home/liveuser/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml
+
+# change icon theme to gnome
+sed -i '/IconThemeName/ s!Fedora!gnome!g' /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml
+
 # set up timed auto-login for after 60 seconds
 cat >> /etc/gdm/custom.conf << FOE
 [daemon]
 TimedLoginEnable=true
 TimedLogin=liveuser
-#TimedLoginDelay=20
+TimedLoginDelay=20
 FOE
 
 # Show harddisk install on the desktop
@@ -203,4 +209,3 @@ restorecon -R /home/liveuser
 EOF
 
 %end
-
