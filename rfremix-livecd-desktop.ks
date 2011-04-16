@@ -67,6 +67,13 @@ java-1.6.0-openjdk-plugin
 -system-config-services
 -policycoreutils-gui
 
+# save some space
+-flite
+-orca
+-fbreader
+-shutter
+-gnome-speech
+
 %end
 
 %post
