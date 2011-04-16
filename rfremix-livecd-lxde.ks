@@ -20,7 +20,7 @@ gdm
 firefox
 java-1.6.0-openjdk-plugin
 pidgin
-sylpheed
+thunderbird
 transmission
 
 ### office
