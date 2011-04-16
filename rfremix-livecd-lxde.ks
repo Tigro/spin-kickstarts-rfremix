@@ -18,7 +18,7 @@ gdm
 
 ### internet
 firefox
-java-1.6.0-openjdk-plugin
+icedtea-web
 pidgin
 thunderbird
 transmission
@@ -28,6 +28,7 @@ transmission
 
 ### graphics
 epdfview
+-evince
 mtpaint
 
 ### audio & video
@@ -114,15 +115,20 @@ ssmtp
 %end
 
 %post
-# GDM configuration
+cat >> /etc/rc.d/init.d/livesys << EOF
 
+# GDM configuration
 cat >> /etc/gdm/custom.conf << FOE
 [daemon]
 AutomaticLoginEnable=True
 AutomaticLogin=liveuser
 FOE
 
-cat >> /etc/rc.d/init.d/livesys << EOF
+# create /etc/sysconfig/desktop (needed for installation)
+cat > /etc/sysconfig/desktop <<EOF
+PREFERRED=/usr/bin/startlxde
+EOF
+
 # disable screensaver locking and make sure gamin gets started
 cat > /etc/xdg/lxsession/LXDE/autostart << FOE
 /usr/libexec/gam_server
@@ -135,11 +141,8 @@ FOE
 cat > /etc/xdg/libfm/pref-apps.conf << FOE 
 [Preferred Applications]
 WebBrowser=mozilla-firefox.desktop
-MailClient=redhat-sylpheed.desktop
+MailClient=thunderbird.desktop
 FOE
-
-# set up auto-login for liveuser
-sed -i 's|# autologin=dgod|autologin=liveuser|g' /etc/lxdm/lxdm.conf
 
 # Show harddisk install on the desktop
 sed -i -e 's/NoDisplay=true/NoDisplay=false/' /usr/share/applications/liveinst.desktop
