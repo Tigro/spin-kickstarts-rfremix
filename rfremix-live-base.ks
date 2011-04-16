@@ -20,7 +20,7 @@ services --enabled=NetworkManager --disabled=network,sshd
 # To compose against the current release tree, use the following "repo" (enabled by default)
 repo --name=russianfedora --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-russianfedora-15&arch=$basearch
 repo --name=russianfedora-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-russianfedora-updates-15&arch=$basearch
-#repo --name=russianfedora-updates-testing --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-russianfedora-updates-testing-15&arch=$basearch
+repo --name=russianfedora-updates-testing --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-russianfedora-updates-testing-15&arch=$basearch
 repo --name=rpmfusion-free --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-rpmfusion-free-15&arch=$basearch
 repo --name=rpmfusion-nonfree --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-rpmfusion-nonfree-15&arch=$basearch
 repo --name=russianfedora-free --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=free-fedora-15&arch=$basearch
