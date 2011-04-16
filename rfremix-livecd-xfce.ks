@@ -188,13 +188,14 @@ cp /etc/xdg/xfce4/panel/default.xml /home/liveuser/.config/xfce4/xfconf/xfce-per
 
 # change icon theme to gnome
 sed -i '/IconThemeName/ s!Fedora!gnome!g' /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml
+# hint style slight
+sed -i '/HintStyle/ s!hintfull!hintslight!g' /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml
 
 # set up timed auto-login for after 60 seconds
 cat >> /etc/gdm/custom.conf << FOE
 [daemon]
-TimedLoginEnable=true
-TimedLogin=liveuser
-TimedLoginDelay=20
+AutomaticLoginEnable=True
+AutomaticLogin=liveuser
 FOE
 
 # Show harddisk install on the desktop
