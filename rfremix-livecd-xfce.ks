@@ -15,9 +15,9 @@
 %packages
 
 # login
--gdm
--pulseaudio-gdm-hooks
-lxdm
+gdm
+pulseaudio-gdm-hooks
+#lxdm
 
 # Office
 @office
@@ -34,23 +34,8 @@ vim-enhanced
 # Internet
 firefox
 # Add the midori browser as a lighter alternative
-midori
-claws-mail
-claws-mail-plugins-archive
-claws-mail-plugins-att-remover
-claws-mail-plugins-attachwarner
-claws-mail-plugins-bogofilter
-claws-mail-plugins-cachesaver
-claws-mail-plugins-fetchinfo
-claws-mail-plugins-mailmbox
-claws-mail-plugins-newmail
-claws-mail-plugins-notification
-claws-mail-plugins-pgp
-claws-mail-plugins-rssyl
-claws-mail-plugins-smime
-claws-mail-plugins-spam-report
-claws-mail-plugins-tnef
-claws-mail-plugins-vcalendar
+#midori
+thunderbird
 liferea
 pidgin
 remmina
