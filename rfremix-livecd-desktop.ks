@@ -73,6 +73,7 @@ java-1.6.0-openjdk-plugin
 -fbreader
 -shutter
 -gnome-speech
+-mplayer*
 
 %end
 
