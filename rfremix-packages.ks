@@ -218,18 +218,18 @@ akmod-nvidia-96xx
 akmod-nvidia-173xx
 akmod-catalyst
 
-kmod-wl
-kmod-kqemu
-kmod-rt2860
-kmod-rt2870
-kmod-rt3062
-kmod-rt3070
-kmod-rt3090
-kmod-VirtualBox-OSE
-kmod-nvidia
-kmod-nvidia-96xx
-kmod-nvidia-173xx
-kmod-catalyst
+#kmod-wl
+#kmod-kqemu
+#kmod-rt2860
+#kmod-rt2870
+#kmod-rt3062
+#kmod-rt3070
+#kmod-rt3090
+#kmod-VirtualBox-OSE
+#kmod-nvidia
+#kmod-nvidia-96xx
+#kmod-nvidia-173xx
+#kmod-catalyst
 
 broadcom-wl
 kqemu
