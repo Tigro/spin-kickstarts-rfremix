@@ -148,10 +148,6 @@ Start Nepomuk=false
 autostart=false
 NEPOMUK_EOF
 
-# make sure to set the right permissions and selinux contexts
-chown -R liveuser:liveuser /home/liveuser/
-restorecon -R /home/liveuser/
-
 # don't use prelink on a running KDE live image
 sed -i 's/PRELINKING=yes/PRELINKING=no/' /etc/sysconfig/prelink
 
@@ -194,6 +190,10 @@ cp /etc/xdg/xfce4/panel/default.xml /home/liveuser/.config/xfce4/xfconf/xfce-per
 sed -i '/IconThemeName/ s!Fedora!gnome!g' /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml
 # hint style slight
 sed -i '/HintStyle/ s!hintfull!hintslight!g' /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml
+
+# make sure to set the right permissions and selinux contexts
+chown -R liveuser:liveuser /home/liveuser/
+restorecon -R /home/liveuser/
 
 EOF
 
