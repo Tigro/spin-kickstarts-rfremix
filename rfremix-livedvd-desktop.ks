@@ -114,6 +114,10 @@ soundconverter
 thoggen
 liveusb-creator
 
+# for XFCE and LXDE
+gnome-themes
+fedora-icon-theme
+
 %end
 
 %post
