@@ -52,6 +52,7 @@ gigolo
 ### more desktop stuff
 # default artwork, subject to change - cwickert 2011-03-05
 fedora-icon-theme
+gnome-themes
 
 # needed for automatic unlocking of keyring (#643435)
 gnome-keyring-pam
