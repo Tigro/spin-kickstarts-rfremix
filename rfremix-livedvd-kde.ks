@@ -103,7 +103,7 @@ kvirc
 kvkbd
 lastfm
 lmms
-psi-plus
+psi
 psimedia
 qtcurve-kde4
 smb4k
