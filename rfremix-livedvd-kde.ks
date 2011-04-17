@@ -70,8 +70,8 @@ scribus		### scribus is too big for the live images
 # Useful additional KDE3 applications
 amarok
 arora
-avidemux-qt
-avidemux-plugins
+#avidemux-qt
+#avidemux-plugins
 compiz-kde
 djview4
 fwbuilder
