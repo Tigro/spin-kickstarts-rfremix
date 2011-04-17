@@ -6,6 +6,7 @@
 # Maintainer(s):
 # - Arkady L. Shane <ashejn@yandex-team.ru>
 
+%include rfremix-live-desktop.ks
 %include rfremix-live-base.ks
 
 part / --size 6096 --fstype ext4
@@ -117,40 +118,9 @@ liveusb-creator
 
 %post
 # apply new gnome configs
-gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t bool /apps/nautilus/preferences/always_use_browser true
 gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t bool /apps/gnome-terminal/global/use_menu_accelerators false
-gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t string /desktop/gnome/interface/toolbar_style "both-horiz"
-gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t list --list-type=string /apps/gedit-2/preferences/encodings/auto_detected "[UTF-8,CURRENT,WINDOWS-1251,KOI8R,ISO-8859-5]"
-gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t bool /desktop/gnome/interface/menus_have_icons true
-#gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t bool /apps/bluetooth-manager/show_icon false
-
-# mount all partitions by default
-#if [ -f /usr/bin/polkit-action ]; then
-#    /usr/bin/polkit-action --set-defaults-active \
-#        org.freedesktop.hal.storage.mount-fixed yes
-#fi
 
 cat >> /etc/rc.d/init.d/livesys << EOF
-# disable screensaver locking
-gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t bool /apps/gnome-screensaver/lock_enabled false >/dev/null
-
-# set up timed auto-login for after 60 seconds
-cat >> /etc/gdm/custom.conf << FOE
-[daemon]
-TimedLoginEnable=true
-TimedLogin=liveuser
-TimedLoginDelay=20
-FOE
-
-# add liveinst.desktop to favorites menu
-mkdir -p /home/liveuser/.kde/share/config/
-cat > /home/liveuser/.kde/share/config/kickoffrc << MENU_EOF
-[Favorites]
-FavoriteURLs=/usr/share/applications/kde4/konqbrowser.desktop,/usr/share/applications/kde4/dolphin.desktop,/usr/share/applications/kde4/systemsettings.desktop,/usr/share/applications/liveinst.desktop
-MENU_EOF
-
-# show liveinst.desktop on and in menu
-sed -i 's/NoDisplay=true/NoDisplay=false/' /usr/share/applications/liveinst.desktop
 
 # Disable the update notifications of kpackagekit
 cat > /home/liveuser/.kde/share/config/KPackageKit << KPACKAGEKIT_EOF
@@ -163,11 +133,67 @@ notifyLongTasks=2
 notifyUpdates=0
 KPACKAGEKIT_EOF
 
-# make sure to set the right permissions
-chown -R liveuser:liveuser /home/liveuser/.kde
+# Disable kres-migrator
+cat > /home/liveuser/.kde/share/config/kres-migratorrc << KRES_EOF
+[Migration]
+Enabled=false
+KRES_EOF
 
-# turn off rfremixconf script
-chkconfig --level 345 rfremixconf off 2>/dev/null
+# Disable nepomuk
+cat > /home/liveuser/.kde/share/config/nepomukserverrc << NEPOMUK_EOF
+[Basic Settings]
+Start Nepomuk=false
+
+[Service-nepomukstrigiservice]
+autostart=false
+NEPOMUK_EOF
+
+# make sure to set the right permissions and selinux contexts
+chown -R liveuser:liveuser /home/liveuser/
+restorecon -R /home/liveuser/
+
+# don't use prelink on a running KDE live image
+sed -i 's/PRELINKING=yes/PRELINKING=no/' /etc/sysconfig/prelink
+
+# small hack to enable plasma-netbook workspace on boot
+if strstr "\`cat /proc/cmdline\`" netbook ; then
+   mv /usr/share/autostart/plasma-desktop.desktop /usr/share/autostart/plasma-netbook.desktop
+   sed -i 's/desktop/netbook/g' /usr/share/autostart/plasma-netbook.desktop
+fi
+
+# disable screensaver locking and make sure gamin gets started
+cat > /etc/xdg/lxsession/LXDE/autostart << FOE
+/usr/libexec/gam_server
+@lxpanel --profile LXDE
+@pcmanfm --desktop --profile lxde
+@pulseaudio -D
+FOE
+
+# set up preferred apps 
+cat > /etc/xdg/libfm/pref-apps.conf << FOE
+[Preferred Applications]
+WebBrowser=mozilla-firefox.desktop
+MailClient=mozilla-thunderbird.desktop
+FOE
+
+mkdir -p /home/liveuser/.config/xfce4
+
+cat > /home/liveuser/.config/xfce4/helpers.rc << FOE
+MailReader=thunderbird
+FileManager=Thunar
+FOE
+
+# deactivate xfconf-migration (#683161)
+rm -f /etc/xdg/autostart/xfconf-migration-4.6.desktop || :
+
+# deactivate xfce4-panel first-run dialog (#693569)
+mkdir -p /home/liveuser/.config/xfce4/xfconf/xfce-perchannel-xml
+cp /etc/xdg/xfce4/panel/default.xml /home/liveuser/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml
+
+# change icon theme to gnome
+sed -i '/IconThemeName/ s!Fedora!gnome!g' /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml
+# hint style slight
+sed -i '/HintStyle/ s!hintfull!hintslight!g' /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml
 
 EOF
 
