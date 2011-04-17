@@ -36,4 +36,10 @@ dejavu-serif-fonts
 # what we need
 system-config-lvm
 
+# codecs
+gstreamer-plugins-ugly
+gstreamer-plugins-bad-free
+gstreamer-plugins-bad-nonfree
+gstreamer-ffmpeg
+
 %end
