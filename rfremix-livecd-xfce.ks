@@ -153,6 +153,12 @@ xfwm4-themes
 #-system-config-services
 -policycoreutils-gui
 
+# codecs
+gstreamer-plugins-ugly
+gstreamer-plugins-bad-free
+gstreamer-plugins-bad-nonfree
+gstreamer-ffmpeg
+
 %end
 
 %post
