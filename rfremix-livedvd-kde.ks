@@ -80,7 +80,7 @@ k3b
 k3b-extras-freeworld
 k9copy
 kchmviewer
-kdenlive
+#kdenlive
 kdiff3
 keepassx
 kmediafactory
