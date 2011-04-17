@@ -74,13 +74,13 @@ avidemux-qt
 avidemux-plugins
 compiz-kde
 djview4
-filelight
 fwbuilder
 k3b
 k3b-extras-freeworld
 k9copy
 kchmviewer
 #kdenlive
+kdeutils
 kdiff3
 keepassx
 kmediafactory
