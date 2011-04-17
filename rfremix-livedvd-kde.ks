@@ -65,14 +65,6 @@ scribus		### scribus is too big for the live images
 -xscreensaver-gl-extras
 
 # Other applications
-koffice-filters
-koffice-karbon
-koffice-kchart
-koffice-kplato
-koffice-kpresenter
-koffice-krita
-koffice-kspread
-koffice-kword
 @office
 
 # Useful additional KDE3 applications
