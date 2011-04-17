@@ -39,10 +39,6 @@ gxine
 gxine-mozplugin
 # codecs
 xine-lib-extras-freeworld
-gstreamer-plugins-ugly
-gstreamer-plugins-bad-free
-gstreamer-plugins-bad-nonfree
-gstreamer-ffmpeg
 pavucontrol
 # I'm looking for something smaller than
 gnomebaker
