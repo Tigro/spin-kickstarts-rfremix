@@ -109,6 +109,7 @@ qtcurve-kde4
 smb4k
 tellico
 twinkle
+vacuum
 vlc
 phonon-backend-vlc
 kde-partitionmanager
