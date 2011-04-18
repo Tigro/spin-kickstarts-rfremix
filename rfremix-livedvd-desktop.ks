@@ -21,6 +21,7 @@ qmmp-plugins-freeworld
 kdebase-runtime-flags
 @xfce-desktop
 @lxde-desktop
+-lxpolkit
 @java
 nss-mdns
 NetworkManager-vpnc
