@@ -120,9 +120,6 @@ fedora-icon-theme
 %end
 
 %post
-# apply new gnome configs
-gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t bool /apps/gnome-terminal/global/use_menu_accelerators false
-
 cat >> /etc/rc.d/init.d/livesys << EOF
 
 # Disable the update notifications of kpackagekit

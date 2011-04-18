@@ -23,6 +23,13 @@ nss-mdns
 
 %post
 cat >> /etc/rc.d/init.d/livesys << EOF
+
+# do not use menu accelerators in gnome terminal
+if [ -x /usr/bin/gconftool-2 ]; then
+gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s \
+  -t bool /apps/gnome-terminal/global/use_menu_accelerators false
+fi
+
 # disable screensaver locking
 cat >> /usr/share/glib-2.0/schemas/org.gnome.desktop.screensaver.gschema.override << FOE
 [org.gnome.desktop.screensaver]
