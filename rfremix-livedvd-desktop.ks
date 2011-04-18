@@ -189,7 +189,7 @@ cp /etc/xdg/xfce4/panel/default.xml /home/liveuser/.config/xfce4/xfconf/xfce-per
 # hint style slight
 sed -i '/HintStyle/ s!hintfull!hintslight!g' /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml
 
-cat >> /etc/gdm/custom.conf << FOE
+cat > /etc/gdm/custom.conf << FOE
 [daemon]
 TimedLoginEnable=true
 TimedLogin=liveuser
