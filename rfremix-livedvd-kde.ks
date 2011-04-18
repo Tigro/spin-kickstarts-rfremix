@@ -7,7 +7,6 @@
 # - Arkady L. Shane <ashejn@yandex-team.ru>
 
 %include rfremix-live-kde-base.ks
-%include rfremix-live-base.ks
 
 part / --size 5096 --fstype ext4
 
