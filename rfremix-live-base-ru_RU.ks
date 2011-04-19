@@ -42,4 +42,6 @@ gstreamer-plugins-bad-free
 gstreamer-plugins-bad-nonfree
 gstreamer-ffmpeg
 
+flash-plugin
+
 %end
