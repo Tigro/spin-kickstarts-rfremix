@@ -118,6 +118,9 @@ liveusb-creator
 
 # save some space (from @base)
 -autofs
+
+-evince*
+
 %end
 
 %post
