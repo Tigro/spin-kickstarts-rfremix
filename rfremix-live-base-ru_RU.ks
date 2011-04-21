@@ -44,4 +44,6 @@ gstreamer-ffmpeg
 
 flash-plugin
 
+bash-completion
+
 %end
