@@ -101,7 +101,7 @@ metromap
 rdesktop
 fbreader
 midori
-arora
+rekonq
 btanks
 frozen-bubble
 

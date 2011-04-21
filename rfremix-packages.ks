@@ -5,7 +5,7 @@ AcetoneISO2
 apcupsd
 apcupsd-gui
 aria2
-arora
+rekonq
 arptables_jf
 audacious
 audacious-plugin*

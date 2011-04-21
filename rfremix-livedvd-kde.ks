@@ -7,6 +7,7 @@
 # - Arkady L. Shane <ashejn@yandex-team.ru>
 
 %include rfremix-live-kde-base.ks
+%include rfremix-live-minimization.ks
 
 part / --size 5096 --fstype ext4
 
@@ -68,7 +69,7 @@ scribus		### scribus is too big for the live images
 
 # Useful additional KDE3 applications
 amarok
-arora
+rekonq
 #avidemux-qt
 #avidemux-plugins
 compiz-kde
