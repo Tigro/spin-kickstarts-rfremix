@@ -46,4 +46,10 @@ flash-plugin
 
 bash-completion
 
+# multimedia
+paman
+paprefs
+pavucontrol
+pavumeter
+
 %end
