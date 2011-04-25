@@ -41,6 +41,7 @@ gstreamer-plugins-ugly
 gstreamer-plugins-bad-free
 gstreamer-plugins-bad-nonfree
 gstreamer-ffmpeg
+libva-freeworld
 
 flash-plugin
 
