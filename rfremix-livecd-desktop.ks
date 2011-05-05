@@ -62,7 +62,6 @@ java-1.6.0-openjdk-plugin
 
 # Drop some system-config things
 -system-config-boot
--system-config-network
 -system-config-rootpassword
 -system-config-services
 -policycoreutils-gui

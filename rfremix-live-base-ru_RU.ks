@@ -33,9 +33,6 @@ dejavu-serif-fonts
 -kasumi
 -libhangul
 
-# what we need
-system-config-lvm
-
 # codecs
 gstreamer-plugins-ugly
 gstreamer-plugins-bad-free
@@ -52,5 +49,10 @@ paman
 paprefs
 pavucontrol
 pavumeter
+
+# usability
+system-config-printer
+system-config-network
+system-config-lvm
 
 %end
