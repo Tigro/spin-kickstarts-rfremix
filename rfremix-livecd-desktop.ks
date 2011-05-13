@@ -14,8 +14,7 @@
 -specspo
 
 # Java plugin
-java-1.6.0-openjdk-plugin
-
+icedtea-web
 # Drop things that pull in perl
 -linux-atm
 -perf

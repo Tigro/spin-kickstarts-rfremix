@@ -110,8 +110,6 @@ nautilus-image-converter
 nautilus-sendto
 empathy
 pidgin
-java-1.6.0-openjdk-plugin
-mesa-dri-drivers-experimental
 kmod-open-vm-tools
 
 %end
