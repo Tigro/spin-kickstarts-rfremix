@@ -73,6 +73,9 @@ icedtea-web
 -gnome-speech
 -mplayer*
 
+# utility
+gparted
+
 %end
 
 %post

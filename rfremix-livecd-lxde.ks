@@ -69,6 +69,7 @@ xcompmgr
 xdg-user-dirs-gtk
 
 gsmartcontrol
+gparted
 
 # use yumex instead of gnome-packagekit
 yumex

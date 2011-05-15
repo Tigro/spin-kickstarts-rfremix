@@ -57,6 +57,5 @@ system-config-lvm
 
 # utility
 testdisk
-gparted
 
 %end
