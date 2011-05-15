@@ -55,4 +55,7 @@ system-config-printer
 system-config-network
 system-config-lvm
 
+# utility
+testdisk
+
 %end
