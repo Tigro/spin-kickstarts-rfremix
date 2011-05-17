@@ -58,7 +58,4 @@ system-config-lvm
 # utility
 testdisk
 
-# VirtualBox guest
-VirtualBox-OSE-guest
-
 %end
