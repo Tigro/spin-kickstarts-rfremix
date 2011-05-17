@@ -42,12 +42,6 @@ cat >> /usr/share/glib-2.0/schemas/org.gnome.settings-daemon.plugins.updates.gsc
 active=false
 FOE
 
-# enable icons in menu
-cat >> /usr/share/glib-2.0/schemas/org.gnome.desktop.interface.gschema.override << FOE
-[org.gnome.desktop.interface]
-menus-have-icons=true
-FOE
-
 # make the installer show up
 if [ -f /usr/share/applications/liveinst.desktop ]; then
   # Show harddisk install in shell dash
