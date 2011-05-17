@@ -81,6 +81,7 @@ mutt
 ntfs-3g
 powertop
 rtorrent
+vim-enhanced
 wget
 yum-utils
 
