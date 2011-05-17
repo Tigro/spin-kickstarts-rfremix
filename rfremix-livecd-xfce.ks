@@ -81,7 +81,6 @@ mutt
 ntfs-3g
 powertop
 rtorrent
-vim-enhanced
 wget
 yum-utils
 
@@ -150,6 +149,9 @@ xfwm4-themes
 -system-config-rootpassword
 #-system-config-services
 -policycoreutils-gui
+
+# save space
+-planner
 
 %end
 
