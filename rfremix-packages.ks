@@ -145,7 +145,6 @@ qtcurve-*
 qtoctave
 qt-recordmydesktop
 qutim
-qutim-plugins
 rekonq
 rhythmbox-lirc
 rtorrent
