@@ -114,7 +114,6 @@ mencoder
 metromap
 mkvtoolnix
 mkvtoolnix-gui
-mozilla-vlc
 mpd
 mpg321
 mtr-gtk
