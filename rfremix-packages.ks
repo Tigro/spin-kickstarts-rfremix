@@ -37,7 +37,6 @@ fbreader
 fdupes
 filezilla
 fluxbox
-fluxconf
 fmtools
 fvwm
 gajim
