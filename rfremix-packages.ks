@@ -188,7 +188,6 @@ youtube-dl
 # XFCE
 @xfce-desktop
 orage
-screenlets
 Terminal
 thunar-*-plugin
 xfburn
