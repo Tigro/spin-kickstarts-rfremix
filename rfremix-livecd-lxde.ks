@@ -54,7 +54,9 @@ gigolo
 ### more desktop stuff
 # default artwork, subject to change - cwickert 2011-03-05
 fedora-icon-theme
-gnome-themes
+adwaita-cursor-theme
+adwaita-gtk2-theme
+adwaita-gtk3-theme
 
 # needed for automatic unlocking of keyring (#643435)
 gnome-keyring-pam
@@ -136,7 +138,7 @@ EOF
 cat > /etc/xdg/lxsession/LXDE/autostart << FOE
 /usr/libexec/gam_server
 @lxpanel --profile LXDE
-@pcmanfm --desktop --profile lxde
+@pcmanfm --desktop --profile LXDE
 @pulseaudio -D
 FOE
 
