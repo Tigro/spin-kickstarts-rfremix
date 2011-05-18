@@ -171,6 +171,7 @@ trickle
 tvtime
 uniconvertor
 upx
+vacuum
 valknut
 whatmask
 WindowMaker
