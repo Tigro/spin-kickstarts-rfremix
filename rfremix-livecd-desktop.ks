@@ -69,7 +69,6 @@ icedtea-web
 -flite
 -orca
 -fbreader
--shutter
 -gnome-speech
 -mplayer*
 
