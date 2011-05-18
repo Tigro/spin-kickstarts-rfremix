@@ -165,6 +165,7 @@ subtitlecomposer
 system-config-vsftpd
 system-switch-mail*
 telnet-server
+testdisk
 texmaker
 totem-lirc
 transmission
