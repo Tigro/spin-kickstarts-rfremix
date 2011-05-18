@@ -108,7 +108,7 @@ lshw-gui
 lsscsi
 mail-notification
 mail-notification-evolution-plugin
-mandvd
+2mandvd
 mencoder
 metromap
 mkvtoolnix
