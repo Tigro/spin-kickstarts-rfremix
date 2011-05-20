@@ -14,7 +14,8 @@
 @lxde-desktop
 lxlauncher
 obconf
-gdm
+-gdm
+lightdm-gtk-greeter
 
 ### internet
 firefox
