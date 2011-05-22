@@ -72,6 +72,7 @@ icedtea-web
 -shutter
 -gnome-speech
 -mplayer*
+-gnome-games
 
 # utility
 gparted
