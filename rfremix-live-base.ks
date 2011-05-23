@@ -18,14 +18,19 @@ part / --size 3072 --fstype ext4
 services --enabled=NetworkManager --disabled=network,sshd
 
 # To compose against the current release tree, use the following "repo" (enabled by default)
-repo --name=russianfedora --mirrorlist=http://localhost/mirrorlist?repo=build-russianfedora-15&arch=$basearch --exclude gnome-background-standard
-repo --name=russianfedora-updates --mirrorlist=http://localhost/mirrorlist?repo=build-russianfedora-updates-15&arch=$basearch
-#repo --name=russianfedora-updates-testing --mirrorlist=http://localhost/mirrorlist?repo=build-russianfedora-updates-testing-15&arch=$basearch
-repo --name=rpmfusion-free --mirrorlist=http://localhost/mirrorlist?repo=build-rpmfusion-free-15&arch=$basearch
-repo --name=rpmfusion-nonfree --mirrorlist=http://localhost/mirrorlist?repo=build-rpmfusion-nonfree-15&arch=$basearch
-repo --name=russianfedora-free --mirrorlist=http://localhost/mirrorlist?repo=free-fedora-15&arch=$basearch
-repo --name=russianfedora-nonfree --mirrorlist=http://localhost/mirrorlist?repo=nonfree-fedora-15&arch=$basearch
-repo --name=russianfedora-fixes --mirrorlist=http://localhost/mirrorlist?repo=fixes-fedora-15&arch=$basearch
+repo --name=russianfedora --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-russianfedora-15&arch=$basearch --exclude gnome-background-standard
+repo --name=russianfedora-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-russianfedora-updates-15&arch=$basearch
+#repo --name=russianfedora-updates-testing --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-russianfedora-updates-testing-15&arch=$basearch
+repo --name=rpmfusion-free --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-rpmfusion-free-$releasever&arch=$basearch
+repo --name=rpmfusion-free-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-rpmfusion-free-updates-$releasever&arch=$basearch
+repo --name=rpmfusion-nonfree --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-rpmfusion-nonfree-$releasever&arch=$basearch
+repo --name=rpmfusion-nonfree-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-rpmfusion-nonfree-updates-$releasever&arch=$basearch
+repo --name=russianfedora-free --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=free-fedora-$releasever&arch=$basearch
+repo --name=russianfedora-free-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=free-fedora-updates-released-$releasever&arch=$basearch
+repo --name=russianfedora-nonfree --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=nonfree-fedora-$releasever&arch=$basearch
+repo --name=russianfedora-nonfree-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=nonfree-fedora-updates-released-$releasever&arch=$basearch
+repo --name=russianfedora-fixes --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=fixes-fedora-$releasever&arch=$basearch
+repo --name=russianfedora-fixes-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=fixes-fedora-updates-released-$releasever&arch=$basearch
 
 %packages
 @base-x
