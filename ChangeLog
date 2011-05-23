@@ -1,10 +1,15 @@
-* 15.0.1 - Mon May 23 2011 Arkady L. Shane <ashejn@yandex-team.ru>
+* 15.0.2 - Mon May 23 2011 Arkady L. Shane <ashejn@yandex-team.ru>
+- drop rfremix-install-rawhide-rfremix.ks
+- added prebuild kmods
+- many fixes
+- drop gnome-games
+
+* 15.0.1 - Mon Apr 18 2011 Arkady L. Shane <ashejn@yandex-team.ru>
 - added full LibreOffice to GNOME Live
 - update KDE Live
 - update XFCE Live
 - update LXDE Live
 - install only akmod-* for 15-Beta
-- drop rfremix-install-rawhide-rfremix.ks
 
 * 15.0.0 - Mon Mar 21 2011 Arkady L. Shane <ashejn@yandex-team.ru>
 - merge fedora-install-fedora.ks and rfremix-install-rfremix.ks
