@@ -35,10 +35,7 @@ mtpaint
 alsa-plugins-pulseaudio
 asunder
 lxmusic
-gxine
-gxine-mozplugin
-# codecs
-xine-lib-extras-freeworld
+gnome-mplayer
 pavucontrol
 # I'm looking for something smaller than
 gnomebaker
