@@ -71,6 +71,9 @@ wqy-microhei-fonts	# a compact CJK font, to replace:
 
 ## avoid serious bugs by omitting broken stuff
 
+# save space
+-argyllcms
+
 %end
 
 %post

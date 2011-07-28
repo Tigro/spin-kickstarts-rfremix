@@ -77,6 +77,9 @@ icedtea-web
 # utility
 gparted
 
+# save space
+-argyllcms
+
 %end
 
 %post

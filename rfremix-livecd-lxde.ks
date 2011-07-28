@@ -105,6 +105,7 @@ yum-presto
 -sendmail
 ssmtp
 -acpid
+-argyllcms
 
 # drop some system-config things
 -system-config-boot

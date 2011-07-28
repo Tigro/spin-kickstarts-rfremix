@@ -68,10 +68,10 @@ fpaste
 
 # wifi cards modules
 kmod-wl
-kmod-rt2860
-kmod-rt2870
-kmod-rt3062
-kmod-rt3070
+#kmod-rt2860
+#kmod-rt2870
+#kmod-rt3062
+#kmod-rt3070
 #kmod-rt3090
 
 %end
@@ -306,10 +306,12 @@ done
 if strstr "\`cat /proc/cmdline\`" liveinst ; then
    plymouth --quit
    /usr/sbin/liveinst \$ks
+   /sbin/reboot
 fi
 if strstr "\`cat /proc/cmdline\`" textinst ; then
    plymouth --quit
    /usr/sbin/liveinst --text \$ks
+   /sbin/reboot
 fi
 
 # configure X, allowing user to override xdriver
