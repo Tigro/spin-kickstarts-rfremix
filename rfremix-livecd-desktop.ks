@@ -73,13 +73,14 @@ icedtea-web
 -gnome-speech
 -mplayer*
 -gnome-games
+-argyllcms
+-foo2*
+-eog
+-seahorse
+-gucharmap
 
 # utility
 gparted
-
-# save space
--argyllcms
--foo2*
 
 %end
 
