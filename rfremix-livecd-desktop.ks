@@ -79,6 +79,7 @@ gparted
 
 # save space
 -argyllcms
+-foo2*
 
 %end
 

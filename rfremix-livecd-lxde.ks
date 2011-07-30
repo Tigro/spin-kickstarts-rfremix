@@ -106,6 +106,7 @@ yum-presto
 ssmtp
 -acpid
 -argyllcms
+-foo2*
 
 # drop some system-config things
 -system-config-boot

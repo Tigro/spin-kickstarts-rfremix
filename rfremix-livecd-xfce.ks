@@ -154,6 +154,7 @@ xfwm4-themes
 # save space
 -planner
 -argyllcms
+-foo2*
 
 %end
 
