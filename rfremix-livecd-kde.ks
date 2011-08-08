@@ -15,6 +15,7 @@
 # unwanted packages from @kde-desktop
 # don't include these for now to fit on a cd
 -desktop-backgrounds-basic
+kde-partitionmanager
 -kdeaccessibility*
 -kdeedu*			# kdeedu is too big for the live images
 -scribus			# scribus is too big for the live images
