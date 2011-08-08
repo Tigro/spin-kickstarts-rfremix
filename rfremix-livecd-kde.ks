@@ -21,7 +21,7 @@ kde-partitionmanager
 -scribus			# scribus is too big for the live images
 -kdeartwork-screensavers	# screensavers are not needed on live images
 #-ktorrent			# kget has also basic torrent features (~3 megs)
-#-digikam			# digikam has duplicate functionality with gwenview (~28 megs)
+-digikam			# digikam has duplicate functionality with gwenview (~28 megs)
 -amarok 			# amarok has duplicate functionality with juk (~23 megs)
 -kipi-plugins			# ~8 megs
 -konq-plugins			# ~2 megs
