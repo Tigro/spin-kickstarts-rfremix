@@ -205,6 +205,7 @@ xfwm4-themes
 # Hardware stuff
 akmod-wl
 #akmod-kqemu
+akmod-brcm80211
 akmod-rt2860
 akmod-rt2870
 akmod-rt3062
@@ -218,28 +219,28 @@ akmod-catalyst
 
 kmod-wl
 #kmod-kqemu
+kmod-brcm80211
 kmod-rt2860
 kmod-rt2870
 kmod-rt3062
 kmod-rt3070
-#kmod-rt3090
+kmod-rt3090
 kmod-VirtualBox-OSE
 kmod-nvidia
-#kmod-nvidia-96xx
-#kmod-nvidia-173xx
+kmod-nvidia-173xx
 kmod-catalyst
 
 broadcom-wl
+brcm80211-common
 #kqemu
 rt2860
 rt2870
 rt3062
 rt3070
-#rt3090
+rt3090
 VirtualBox-OSE
 xorg-x11-drv-nvidia
-#xorg-x11-drv-nvidia-96xx
-#xorg-x11-drv-nvidia-173xx
+xorg-x11-drv-nvidia-173xx
 xorg-x11-drv-catalyst
 
 # do not install this packages
