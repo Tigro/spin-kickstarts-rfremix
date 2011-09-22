@@ -246,4 +246,9 @@ xfwm4-themes
 ## do not install this packages
 #-freetype-freeworld
 
+# no jdk 1.7.0
+-java*1.7.0*
+-*VirtualBox*
+-*VirtualBox-OSE*
+
 %end
