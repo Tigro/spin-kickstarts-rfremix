@@ -1,3 +1,6 @@
+* 16.0.0 - ??? Oct ?? 2011 Arkady L. Shane <ashejn@yandex-team.ru>
+- sync with upstream
+
 * 15.0.2 - Mon May 23 2011 Arkady L. Shane <ashejn@yandex-team.ru>
 - drop rfremix-install-rawhide-rfremix.ks
 - added prebuild kmods
