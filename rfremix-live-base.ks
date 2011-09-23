@@ -67,7 +67,7 @@ isomd5sum
 fpaste
 
 # wifi cards modules
-kmod-wl
+#kmod-wl
 #kmod-rt2860
 #kmod-rt2870
 #kmod-rt3062
