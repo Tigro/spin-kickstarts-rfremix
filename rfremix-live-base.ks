@@ -18,8 +18,8 @@ part / --size 3072 --fstype ext4
 services --enabled=NetworkManager --disabled=network,sshd
 
 # To compose against the current release tree, use the following "repo" (enabled by default)
-repo --name=russianfedora --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-russianfedora-$releasever&arch=$basearch --exclude gnome-background-standard
-repo --name=russianfedora-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-russianfedora-updates-$releasever&arch=$basearch
+repo --name=russianfedora --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-russianfedora-$releasever&arch=$basearch --exclude gnome-background-standard --exclude java*1.7.0*
+repo --name=russianfedora-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-russianfedora-updates-$releasever&arch=$basearch --exclude java*1.7.0*
 #repo --name=russianfedora-updates-testing --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-russianfedora-updates-testing-$releasever&arch=$basearch
 repo --name=rpmfusion-free --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-rpmfusion-free-$releasever&arch=$basearch
 #repo --name=rpmfusion-free-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-rpmfusion-free-updates-$releasever&arch=$basearch
