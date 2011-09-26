@@ -78,6 +78,7 @@ icedtea-web
 -eog
 -seahorse
 -gucharmap
+-aisleriot
 
 # utility
 gparted
