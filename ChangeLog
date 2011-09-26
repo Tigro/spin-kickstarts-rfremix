@@ -1,5 +1,9 @@
-* 16.0.0 - ??? Oct ?? 2011 Arkady L. Shane <ashejn@yandex-team.ru>
+* 16.0.0 - Mon Sep 26 2011 Arkady L. Shane <ashejn@yandex-team.ru>
 - sync with upstream
+- drop kmod-wl in Beta
+- exclude java 1.7.0
+- enable updates-testing
+- drop aisleriot
 
 * 15.0.2 - Mon May 23 2011 Arkady L. Shane <ashejn@yandex-team.ru>
 - drop rfremix-install-rawhide-rfremix.ks
