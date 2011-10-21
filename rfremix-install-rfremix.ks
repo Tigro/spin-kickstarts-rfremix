@@ -188,4 +188,6 @@ wireshark-gnome
 -*javadoc*
 -frysk
 -*gcj*
+
+@desktop-minimal
 %end
