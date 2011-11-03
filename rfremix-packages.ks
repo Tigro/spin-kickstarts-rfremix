@@ -206,6 +206,10 @@ akmod-nvidia
 kmod-nvidia
 xorg-x11-drv-nvidia
 
+-kmod-nvidia-3.1.0-0.rc10.git0.1.fc16.x86_64
+-kmod-nvidia-3.1.0-1.fc16.x86_64
+-kmod-nvidia-3.1.0-5.fc16.x86_64
+
 ## do not install this packages
 #-freetype-freeworld
 
