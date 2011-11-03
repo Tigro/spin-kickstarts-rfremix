@@ -140,7 +140,6 @@ psi
 psimedia
 pulseaudio-module-lirc
 qbittorrent
-qmmp-plugins-freeworld
 qtcurve-*
 qtoctave
 qt-recordmydesktop
@@ -151,7 +150,6 @@ rtorrent
 scidavis
 scons
 scribus
-seamonkey
 skanlite
 smplayer
 socat
