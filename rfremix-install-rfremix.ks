@@ -17,8 +17,8 @@ repo --name=russianfedora-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorl
 #repo --name=russianfedora-updates-testing --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-russianfedora-updates-testing-$releasever&arch=$basearch --exclude kernel-PAE*  --exclude java*1.7.0*
 repo --name=rpmfusion-free --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-rpmfusion-free-$releasever&arch=$basearch --exclude kmod*PAE*
 repo --name=rpmfusion-free-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-rpmfusion-free-updates-$releasever&arch=$basearch --exclude kmod*PAE*
-repo --name=rpmfusion-nonfree --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-rpmfusion-nonfree-$releasever&arch=$basearch  --exclude kmod*PAE*
-repo --name=rpmfusion-nonfree-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-rpmfusion-nonfree-updates-$releasever&arch=$basearch --exclude kmod*PAE*
+repo --name=rpmfusion-nonfree --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-rpmfusion-nonfree-$releasever&arch=$basearch  --exclude kmod*PAE* --exclude kmod-nvidia-3.1.0-0* --exclude kmod-nvidia-3.1.0-1* --exclude kmod-nvidia-3.1.0-5*
+repo --name=rpmfusion-nonfree-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-rpmfusion-nonfree-updates-$releasever&arch=$basearch --exclude kmod*PAE* --exclude kmod-nvidia-3.1.0-0* --exclude kmod-nvidia-3.1.0-1* --exclude kmod-nvidia-3.1.0-5*
 repo --name=russianfedora-free --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=free-fedora-$releasever&arch=$basearch  --exclude kmod*PAE*
 repo --name=russianfedora-free-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=free-fedora-updates-released-$releasever&arch=$basearch --exclude kmod*PAE*
 repo --name=russianfedora-nonfree --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=nonfree-fedora-$releasever&arch=$basearch  --exclude kmod*PAE*
