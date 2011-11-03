@@ -22,7 +22,7 @@ epdfview
 -evince
 
 # development
-geany
+-geany
 
 # Internet
 firefox
@@ -53,7 +53,7 @@ setroubleshoot
 # Accessories
 catfish
 galculator
-seahorse
+-seahorse
 
 # More Desktop stuff
 # java plugin
@@ -77,10 +77,10 @@ adwaita-gtk3-theme
 
 # Command line
 irssi
-mutt
+-mutt
 ntfs-3g
 powertop
-rtorrent
+-rtorrent
 -vim-enhanced
 wget
 yum-utils
