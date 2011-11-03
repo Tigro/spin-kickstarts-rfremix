@@ -35,6 +35,10 @@ repo --name=local --baseurl=ftp://localhost/pub
 tcsh
 kernel*
 dracut-*
+# grub-efi and grub2 and efibootmgr so anaconda can use the right one on install. 
+grub-efi
+grub2
+efibootmgr
 # Desktop Packages
 @kde-desktop
 @lxde-desktop
