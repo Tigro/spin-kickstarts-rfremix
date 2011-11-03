@@ -45,6 +45,8 @@ ibus-pinyin-db-android
 @dial-up
 @hardware-support
 @printing
+-ubuntu-font-family
+-paratype-pt-sans*
 
 # Explicitly specified here:
 # <notting> walters: because otherwise dependency loops cause yum issues.
