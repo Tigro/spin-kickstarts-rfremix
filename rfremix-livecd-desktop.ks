@@ -80,6 +80,8 @@ icedtea-web
 -gucharmap
 -aisleriot
 
+-deja-dup
+
 # utility
 gparted
 
