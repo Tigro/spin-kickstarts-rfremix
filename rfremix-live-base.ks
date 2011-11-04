@@ -64,6 +64,10 @@ wget
 # The point of a live image is to install
 anaconda
 isomd5sum
+# grub-efi and grub2 and efibootmgr so anaconda can use the right one on install. 
+grub-efi
+grub2
+efibootmgr
 
 # fpaste is very useful for debugging and very small
 fpaste
