@@ -93,7 +93,6 @@ krusader
 kopete-cryptography
 kvirc
 kvkbd
-lastfm
 lmms
 psi
 psimedia
@@ -103,7 +102,6 @@ twinkle
 vacuum
 vlc
 phonon-backend-vlc
-kde-partitionmanager
 transmission-qt
 
 # some extras
