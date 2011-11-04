@@ -9,12 +9,12 @@
 %include rfremix-live-kde-base.ks
 %include rfremix-live-minimization.ks
 
-part / --size 5096 --fstype ext4
+part / --size 5296 --fstype ext4
 
 %packages
 
-# make kpackagekit the default on the kde live images
-kpackagekit
+# make apper the default on the kde live images
+apper
 -gnome-packagekit
 
 # use system-config-printer-kde instead of system-config-printer
