@@ -64,6 +64,8 @@ ktorrent 		### kget has also basic torrent features (~3 megs)
 scribus		### scribus is too big for the live images
 -xscreensaver-gl-extras
 
+kde-wallpapers
+
 # Other applications
 @office
 
