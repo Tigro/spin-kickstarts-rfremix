@@ -84,6 +84,7 @@ powertop
 -vim-enhanced
 wget
 yum-utils
+-foomatic*
 
 # Xfce packages
 @xfce-desktop
