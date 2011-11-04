@@ -123,7 +123,7 @@ fedora-icon-theme
 %post
 cat >> /etc/rc.d/init.d/livesys << EOF
 
-# Disable the update notifications of kpackagekit
+# Disable the update notifications of apper
 cat > /home/liveuser/.kde/share/config/KPackageKit << KPACKAGEKIT_EOF
 [CheckUpdate]
 autoUpdate=0

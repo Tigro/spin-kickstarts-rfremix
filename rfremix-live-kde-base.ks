@@ -87,7 +87,7 @@ cp /usr/share/icons/gnome/48x48/apps/system-software-install.png /usr/share/icon
 cp /usr/share/icons/gnome/256x256/apps/system-software-install.png /usr/share/icons/hicolor/256x256/apps/
 touch /usr/share/icons/hicolor/
 
-# Disable the update notifications of kpackagekit
+# Disable the update notifications of apper
 cat > /home/liveuser/.kde/share/config/KPackageKit << KPACKAGEKIT_EOF
 [CheckUpdate]
 autoUpdate=0
