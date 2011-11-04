@@ -81,6 +81,8 @@ icedtea-web
 -aisleriot
 
 -deja-dup
+-brasero
+-brasero-nautilus
 
 # utility
 gparted
