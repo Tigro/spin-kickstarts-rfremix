@@ -98,7 +98,6 @@ lmms
 psi
 psimedia
 qtcurve-kde4
-smb4k
 tellico
 twinkle
 vacuum
