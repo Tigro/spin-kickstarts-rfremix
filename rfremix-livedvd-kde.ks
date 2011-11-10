@@ -9,7 +9,7 @@
 %include rfremix-live-kde-base.ks
 %include rfremix-live-minimization.ks
 
-part / --size 5296 --fstype ext4
+part / --size 5120 --fstype ext4
 
 %packages
 
