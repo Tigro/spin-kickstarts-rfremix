@@ -121,6 +121,23 @@ upower
 %end
 
 %post
+# fix sort order
+mkdir -p /etc/skel/.config/pcmanfm/LXDE/
+
+cat > /etc/skel/.config/pcmanfm/LXDE/pcmanfm.conf << EOF
+[ui]
+always_show_tabs=0
+max_tab_chars=32
+win_width=946
+win_height=694
+splitter_pos=150
+side_pane_mode=1
+view_mode=0
+show_hidden=1
+sort_type=0
+sort_by=2
+EOF
+
 cat >> /etc/rc.d/init.d/livesys << EOF
 
 # GDM configuration
