@@ -125,6 +125,24 @@ upower
 mkdir -p /etc/skel/.config/pcmanfm/LXDE/
 
 cat > /etc/skel/.config/pcmanfm/LXDE/pcmanfm.conf << EOF
+[config]
+bm_open_method=0
+su_cmd=
+
+[volume]
+mount_on_startup=1
+mount_removable=1
+autorun=1
+
+[desktop]
+wallpaper_mode=1
+vallpaper=/usr/share/backgrounds/images/default.png
+desktop_bg=#2e3552
+desktop_fg=#ffffff
+desktop_shadow=#000000
+desktop_font=Sans 12
+show_menu=0
+
 [ui]
 always_show_tabs=0
 max_tab_chars=32
@@ -133,7 +151,7 @@ win_height=694
 splitter_pos=150
 side_pane_mode=1
 view_mode=0
-show_hidden=1
+show_hidden=0
 sort_type=0
 sort_by=2
 EOF
