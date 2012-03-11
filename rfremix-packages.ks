@@ -20,6 +20,7 @@ btanks
 ccsm
 cdrskin
 choqok
+chromium
 cups-pdf
 ddclient
 deluge
