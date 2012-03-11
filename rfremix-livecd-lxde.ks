@@ -121,6 +121,10 @@ upower
 %end
 
 %post
+# enable screensaver
+sed -i 's|OnlyShowIn=GNOME;|OnlyShowIn=GNOME;LXDE;|g' \
+    /etc/xdg/autostart/xscreensaver-autostart.desktop
+
 # fix sort order
 mkdir -p /etc/skel/.config/pcmanfm/LXDE/
 
@@ -157,6 +161,9 @@ sort_by=2
 EOF
 
 cat >> /etc/rc.d/init.d/livesys << EOF
+# disable screensaver on live
+sed -i 's|OnlyShowIn=GNOME;LXDE;|OnlyShowIn=GNOME;|g' \
+    /etc/xdg/autostart/xscreensaver-autostart.desktop
 
 # GDM configuration
 cat >> /etc/gdm/custom.conf << FOE
