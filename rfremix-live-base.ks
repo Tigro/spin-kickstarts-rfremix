@@ -81,6 +81,9 @@ fpaste
 #kmod-rt3090
 kmod-staging
 
+-cairo-freeworld
+-freetype-infinality
+
 %end
 
 %post
