@@ -12,17 +12,17 @@
 %include rfremix-packages.ks
 
 # Add the repos you wish to use to compose here.  At least one of them needs group data.
-repo --name=russianfedora --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-russianfedora-$releasever&arch=$basearch --exclude kernel*debug* --exclude kernel-kdump* --exclude kernel-PAE* --exclude syslog-ng --exclude java-1.5.0-gcj-devel --exclude astronomy-bookmarks --exclude generic* --exclude java-1.5.0-gcj-javadoc --exclude GConf2-dbus* --exclude bluez-gnome --exclude gnome-background-standard --exclude java*1.7.0* --exclude banshee --exclude banshee-musicbrainz --exclude kernel --exclude konsole --exclude libguestfs --exclude openmpi --exclude perl --exclude perl-CGI --exclude perl-ExtUtils-MakeMaker --exclude perl-libs --exclude kalgebra --exclude ksysguard* --exclude libkworkspace --exclude yofrankie-bge
-repo --name=russianfedora-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-russianfedora-updates-$releasever&arch=$basearch --exclude kernel-PAE* --exclude java*1.7.0* --exclude yofrankie-bge
-#repo --name=russianfedora-updates-testing --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-russianfedora-updates-testing-$releasever&arch=$basearch --exclude kernel-PAE*  --exclude java*1.7.0*
+repo --name=russianfedora --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-russianfedora-$releasever&arch=$basearch --exclude kernel*debug* --exclude kernel-kdump* --exclude syslog-ng --exclude java-1.5.0-gcj-devel --exclude astronomy-bookmarks --exclude generic* --exclude java-1.5.0-gcj-javadoc --exclude GConf2-dbus* --exclude bluez-gnome --exclude gnome-background-standard --exclude java*1.7.0* --exclude banshee --exclude banshee-musicbrainz --exclude kernel --exclude konsole --exclude libguestfs --exclude openmpi --exclude perl --exclude perl-CGI --exclude perl-ExtUtils-MakeMaker --exclude perl-libs --exclude kalgebra --exclude ksysguard* --exclude libkworkspace --exclude yofrankie-bge
+repo --name=russianfedora-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-russianfedora-updates-$releasever&arch=$basearch --exclude java*1.7.0* --exclude yofrankie-bge
+#repo --name=russianfedora-updates-testing --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-russianfedora-updates-testing-$releasever&arch=$basearch --exclude java*1.7.0*
 repo --name=rpmfusion-free --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-rpmfusion-free-$releasever&arch=$basearch --exclude kmod*
-repo --name=rpmfusion-free-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-rpmfusion-free-updates-$releasever&arch=$basearch --exclude kmod*PAE*
+repo --name=rpmfusion-free-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-rpmfusion-free-updates-$releasever&arch=$basearch
 repo --name=rpmfusion-nonfree --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-rpmfusion-nonfree-$releasever&arch=$basearch  --exclude kmod*
-repo --name=rpmfusion-nonfree-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-rpmfusion-nonfree-updates-$releasever&arch=$basearch --exclude kmod*PAE* 
+repo --name=rpmfusion-nonfree-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-rpmfusion-nonfree-updates-$releasever&arch=$basearch
 repo --name=russianfedora-free --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=free-fedora-$releasever&arch=$basearch  --exclude kmod*
-repo --name=russianfedora-free-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=free-fedora-updates-released-$releasever&arch=$basearch --exclude kmod*PAE*
+repo --name=russianfedora-free-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=free-fedora-updates-released-$releasever&arch=$basearch
 repo --name=russianfedora-nonfree --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=nonfree-fedora-$releasever&arch=$basearch  --exclude kmod* --exclude java*sun*
-repo --name=russianfedora-nonfree-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=nonfree-fedora-updates-released-$releasever&arch=$basearch --exclude kmod*PAE* --exclude java*sun*
+repo --name=russianfedora-nonfree-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=nonfree-fedora-updates-released-$releasever&arch=$basearch
 repo --name=russianfedora-fixes --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=fixes-fedora-$releasever&arch=$basearch
 repo --name=russianfedora-fixes-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=fixes-fedora-updates-released-$releasever&arch=$basearch
 
