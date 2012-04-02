@@ -173,6 +173,7 @@ PREFERRED=/usr/bin/startlxde
 DISPLAYMANAGER=/usr/sbin/lxdm
 EOF
 
+cat >> /etc/rc.d/init.d/livesys << EOF
 # disable screensaver locking and make sure gamin gets started
 cat > /etc/xdg/lxsession/LXDE/autostart << FOE
 /usr/libexec/gam_server
