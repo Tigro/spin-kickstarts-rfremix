@@ -29,11 +29,7 @@
 
 # Additional packages that are not default in kde-desktop but useful
 k3b				# ~15 megs
--koffice-suite			# don't include whole koffice-suite, just parts of it
-koffice-kword
-koffice-kspread			# ~1 megs
-koffice-kpresenter		# ~3 megs
-koffice-filters
+@office
 #kdeartwork			# only include some parts of kdeartwork
 #twinkle			# (~10 megs)
 fuse
