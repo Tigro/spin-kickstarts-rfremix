@@ -10,7 +10,7 @@ selinux --permissive
 firewall --enabled --service=mdns
 xconfig --startxonboot
 part / --size 4096 --fstype ext4
-services --enabled=NetworkManager,messagebus --disabled=network,sshd
+services --enabled=NetworkManager,messagebus,avahi-daemon --disabled=network,sshd,iscsi,iscsid,lldpad
 
 repo --name=russianfedora --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-russianfedora-15&arch=$basearch
 repo --name=russianfedora-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-russianfedora-updates-15&arch=$basearch
@@ -34,6 +34,11 @@ repo --name=russianfedora-fixes-updates --mirrorlist=http://mirrors.rfremix.ru/m
 kernel
 memtest86+
 
+# grub-efi and grub2 and efibootmgr so anaconda can use the right one on install.
+grub-efi
+grub2
+efibootmgr
+
 # implicitly include the fonts we want
 liberation-mono-fonts
 liberation-sans-fonts
@@ -53,7 +58,6 @@ pulseaudio-module-x11
 pulseaudio-utils
 
 # Remove default base packages we don't want
--ccid
 -coolkey
 -dos2unix
 -dump
@@ -67,11 +71,9 @@ pulseaudio-utils
 -nano
 -nc
 -nfs-utils
--nss_db
 -nss_ldap
 -numactl
 -pcmciautils
--perf
 -pm-utils
 -rdate
 -rdist
@@ -79,7 +81,6 @@ pulseaudio-utils
 -rsync
 -sendmail
 -sos
--specspo
 -stunnel
 -system-config-firewall-tui
 -system-config-network-tui
@@ -131,8 +132,6 @@ avahi
 
 # Remove sendmail: this needs to be explicit
 -sendmail
-# But hopefully there shouldn't be deps so this shouldn't need to be there
-#ssmtp
 
 %end
 
@@ -162,6 +161,9 @@ exists() {
 }
 
 touch /.liveimg-configured
+
+# Make sure we don't mangle the hardware clock on shutdown
+ln -sf /dev/null /etc/systemd/system/hwclock-save.service
 
 # mount live image
 if [ -b \`readlink -f /dev/live\` ]; then
@@ -251,28 +253,29 @@ mount -t tmpfs tmp /tmp
 mount -t tmpfs vartmp /var/tmp
 [ -x /sbin/restorecon ] && /sbin/restorecon /var/cache/yum /tmp /var/tmp >/dev/null 2>&1
 
-if [ -n "\$configdone" ]; then
-  exit 0
-fi
+# comment to fix sugar startup
+#if [ -n "\$configdone" ]; then
+#  exit 0
+#fi
 
 # add fedora user with no passwd
 action "Adding live user" useradd \$USERADDARGS -c "Live System User" liveuser
 passwd -d liveuser > /dev/null
 
 # turn off firstboot for livecd boots
-chkconfig --level 345 firstboot off 2>/dev/null
+systemctl --no-reload disable firstboot-text.service 2> /dev/null || :
+systemctl --no-reload disable firstboot-graphical.service 2> /dev/null || :
+systemctl stop firstboot-text.service 2> /dev/null || :
+systemctl stop firstboot-graphical.service 2> /dev/null || :
 
-# The above doesn't works so we need to do this... GRR systemctl
-echo "RUN_FIRSTBOOT=NO" > /etc/sysconfig/firstboot
-
-# don't start yum-updatesd for livecd boots
-chkconfig --level 345 yum-updatesd off 2>/dev/null
+# don't use prelink on a running live image
+sed -i 's/PRELINKING=yes/PRELINKING=no/' /etc/sysconfig/prelink &>/dev/null || :
 
 # turn off mdmonitor by default
-chkconfig --level 345 mdmonitor off 2>/dev/null
-
-# turn off setroubleshoot on the live image to preserve resources
-chkconfig --level 345 setroubleshoot off 2>/dev/null
+systemctl --no-reload disable mdmonitor.service 2> /dev/null || :
+systemctl --no-reload disable mdmonitor-takeover.service 2> /dev/null || :
+systemctl stop mdmonitor.service 2> /dev/null || :
+systemctl stop mdmonitor-takeover.service 2> /dev/null || :
 
 # don't do packagekit checking by default
 gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t string /apps/gnome-packagekit/frequency_get_updates never >/dev/null
@@ -289,16 +292,10 @@ gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults
 
 # don't start cron/at as they tend to spawn things which are
 # disk intensive that are painful on a live image
-chkconfig --level 345 crond off 2>/dev/null
-chkconfig --level 345 atd off 2>/dev/null
-chkconfig --level 345 readahead_early off 2>/dev/null
-chkconfig --level 345 readahead_later off 2>/dev/null
-
-# Stopgap fix for RH #217966; should be fixed in HAL instead
-touch /media/.hal-mtab
-
-# workaround clock syncing on shutdown that we don't want (#297421)
-sed -i -e 's/hwclock/no-such-hwclock/g' /etc/rc.d/init.d/halt
+systemctl --no-reload disable crond.service 2> /dev/null || :
+systemctl --no-reload disable atd.service 2> /dev/null || :
+systemctl stop crond.service 2> /dev/null || :
+systemctl stop atd.service 2> /dev/null || :
 
 # and hack so that we eject the cd on shutdown if we're using a CD...
 if strstr "\`cat /proc/cmdline\`" CDLABEL= ; then
@@ -337,8 +334,6 @@ exists() {
     \$*
 }
 
-touch /.liveimg-late-configured
-
 # read some variables out of /proc/cmdline
 for o in \`cat /proc/cmdline\` ; do
     case \$o in
@@ -371,6 +366,8 @@ EndSection
 FOE
 fi
 
+touch /.liveimg-late-configured
+
 EOF
 
 chmod 755 /etc/rc.d/init.d/livesys
@@ -384,6 +381,8 @@ chmod 755 /etc/rc.d/init.d/livesys-late
 # work around for poor key import UI in PackageKit
 rm -f /var/lib/rpm/__db*
 rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-fedora
+# Note that running rpm recreates the rpm db files which aren't needed or wanted
+rm -f /var/lib/rpm/__db*
 
 # go ahead and pre-make the man -k cache (#455968)
 /usr/bin/mandb
@@ -394,13 +393,11 @@ rm -f /boot/initrd*
 rm -f /core*
 
 # convince readahead not to collect
-rm -f /.readahead_collect
-touch /var/lib/readahead/early.sorted
+# FIXME: for systemd
 
 %end
 
-
-%post
+%post --nochroot
 cp $INSTALL_ROOT/usr/share/doc/*-release-*/GPL $LIVE_ROOT/GPL
 
 # only works on x86, x86_64
