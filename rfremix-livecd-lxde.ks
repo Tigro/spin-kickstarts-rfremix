@@ -100,7 +100,6 @@ yum-presto
 -words
 
 # save some space
--nss_db
 -sendmail
 ssmtp
 -acpid
@@ -168,6 +167,7 @@ FOE
 # create /etc/sysconfig/desktop (needed for installation)
 cat > /etc/sysconfig/desktop <<EOF
 PREFERRED=/usr/bin/startlxde
+DISPLAYMANAGER=/usr/sbin/lxdm
 EOF
 
 # disable screensaver locking and make sure gamin gets started
@@ -181,9 +181,12 @@ FOE
 # set up preferred apps 
 cat > /etc/xdg/libfm/pref-apps.conf << FOE 
 [Preferred Applications]
-WebBrowser=mozilla-firefox.desktop
+WebBrowser=firefox.desktop
 MailClient=mozilla-thunderbird.desktop
 FOE
+
+# set up auto-login for liveuser
+sed -i 's|# autologin=dgod|autologin=liveuser|g' /etc/lxdm/lxdm.conf
 
 # Show harddisk install on the desktop
 sed -i -e 's/NoDisplay=true/NoDisplay=false/' /usr/share/applications/liveinst.desktop
