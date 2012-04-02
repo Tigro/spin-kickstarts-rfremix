@@ -79,7 +79,7 @@ fpaste
 #kmod-rt3062
 #kmod-rt3070
 #kmod-rt3090
-kmod-staging
+#kmod-staging
 
 -cairo-freeworld
 -freetype-infinality
