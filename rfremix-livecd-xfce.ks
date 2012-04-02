@@ -143,7 +143,6 @@ xfwm4-themes
 
 # save some space
 -autofs
--nss_db
 -acpid
 
 # drop some system-config things
@@ -191,8 +190,6 @@ rm -f /etc/xdg/autostart/xfconf-migration-4.6.desktop || :
 mkdir -p /home/liveuser/.config/xfce4/xfconf/xfce-perchannel-xml
 cp /etc/xdg/xfce4/panel/default.xml /home/liveuser/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml
 
-## change icon theme to gnome
-#sed -i '/IconThemeName/ s!Fedora!gnome!g' /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml
 # hint style slight
 sed -i '/HintStyle/ s!hintfull!hintslight!g' /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml
 
