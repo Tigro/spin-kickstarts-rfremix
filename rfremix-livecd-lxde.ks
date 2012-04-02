@@ -158,15 +158,7 @@ sort_type=0
 sort_by=2
 EOF
 
-cat >> /etc/rc.d/init.d/livesys << EOF
-
-# GDM configuration
-cat >> /etc/gdm/custom.conf << FOE
-[daemon]
-AutomaticLoginEnable=True
-AutomaticLogin=liveuser
-FOE
-
+# LXDE and LXDM configuration
 # create /etc/sysconfig/desktop (needed for installation)
 cat > /etc/sysconfig/desktop <<EOF
 PREFERRED=/usr/bin/startlxde
