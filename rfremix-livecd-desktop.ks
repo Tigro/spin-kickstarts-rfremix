@@ -69,20 +69,17 @@ icedtea-web
 -flite
 -orca
 -fbreader
--shutter
+shutter
 -gnome-speech
 -mplayer*
 -gnome-games
 -argyllcms
 -foo2*
 -eog
--seahorse
 -gucharmap
 -aisleriot
 
 -deja-dup
--brasero
--brasero-nautilus
 
 # utility
 gparted
