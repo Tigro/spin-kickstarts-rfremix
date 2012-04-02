@@ -55,6 +55,9 @@ adwaita-cursor-theme
 adwaita-gtk2-theme
 adwaita-gtk3-theme
 
+# pam-fprint causes a segfault in LXDM when enabled
+-fprintd-pam
+
 # needed for automatic unlocking of keyring (#643435)
 gnome-keyring-pam
 
