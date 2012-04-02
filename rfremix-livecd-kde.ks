@@ -64,7 +64,6 @@ wqy-microhei-fonts	# a compact CJK font, to replace:
 
 # save some space (from @base)
 -make
--nss_db
 
 ## avoid serious bugs by omitting broken stuff
 
