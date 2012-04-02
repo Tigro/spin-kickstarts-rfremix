@@ -14,7 +14,7 @@
 @lxde-desktop
 lxlauncher
 obconf
-gdm
+lxdm
 
 ### internet
 firefox
