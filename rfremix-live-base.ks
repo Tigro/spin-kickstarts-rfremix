@@ -18,8 +18,8 @@ part / --size 3072 --fstype ext4
 services --enabled=NetworkManager --disabled=network,sshd
 
 # To compose against the current release tree, use the following "repo" (enabled by default)
-repo --name=russianfedora --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-russianfedora-$releasever&arch=$basearch --exclude gnome-background-standard --exclude java*1.7.0*
-repo --name=russianfedora-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-russianfedora-updates-$releasever&arch=$basearch --exclude java*1.7.0*
+repo --name=russianfedora --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-russianfedora-$releasever&arch=$basearch
+repo --name=russianfedora-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-russianfedora-updates-$releasever&arch=$basearch
 #repo --name=russianfedora-updates-testing --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-russianfedora-updates-testing-$releasever&arch=$basearch
 repo --name=rpmfusion-free --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-rpmfusion-free-$releasever&arch=$basearch
 repo --name=rpmfusion-free-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-rpmfusion-free-updates-$releasever&arch=$basearch
@@ -80,6 +80,10 @@ fpaste
 #kmod-rt3070
 #kmod-rt3090
 kmod-staging
+
+-cairo-freeworld
+-freetype-infinality
+-freetype-freeworld
 
 %end
 
@@ -234,9 +238,6 @@ systemctl --no-reload disable mdmonitor-takeover.service 2> /dev/null || :
 systemctl stop mdmonitor.service 2> /dev/null || :
 systemctl stop mdmonitor-takeover.service 2> /dev/null || :
 
-# turn off rfremixconf script
-chkconfig --level 345 rfremixconf off 2>/dev/null || :
-
 # don't enable the gnome-settings-daemon packagekit plugin
 gsettings set org.gnome.settings-daemon.plugins.updates active 'false' || :
 
@@ -246,6 +247,9 @@ systemctl --no-reload disable crond.service 2> /dev/null || :
 systemctl --no-reload disable atd.service 2> /dev/null || :
 systemctl stop crond.service 2> /dev/null || :
 systemctl stop atd.service 2> /dev/null || :
+
+# turn off rfremixconf script
+chkconfig --level 345 rfremixconf off 2>/dev/null || :
 
 # and hack so that we eject the cd on shutdown if we're using a CD...
 if strstr "\`cat /proc/cmdline\`" CDLABEL= ; then
