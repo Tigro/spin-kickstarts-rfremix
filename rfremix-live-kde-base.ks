@@ -22,9 +22,6 @@ alsa-utils
 # make sure gnome-packagekit doesn't end up the KDE live images
 -gnome-packagekit*
 
-# pull in adwaita-gtk3-theme as long as we don't have native GTK+ 3 theming
-adwaita-gtk3-theme
-
 %end
 
 
@@ -34,13 +31,6 @@ adwaita-gtk3-theme
 cat > /etc/sysconfig/desktop <<EOF
 DESKTOP="KDE"
 DISPLAYMANAGER="KDE"
-EOF
-
-# make oxygen-gtk the default GTK+ 2 theme for root (see #683855, #689070)
-cat > /root/.gtkrc-2.0 << EOF
-include "/usr/share/themes/oxygen-gtk/gtk-2.0/gtkrc"
-include "/etc/gtk-2.0/gtkrc"
-gtk-theme-name="oxygen-gtk"
 EOF
 
 # add initscript
@@ -87,16 +77,19 @@ cp /usr/share/icons/gnome/48x48/apps/system-software-install.png /usr/share/icon
 cp /usr/share/icons/gnome/256x256/apps/system-software-install.png /usr/share/icons/hicolor/256x256/apps/
 touch /usr/share/icons/hicolor/
 
-# Disable the update notifications of apper
-cat > /home/liveuser/.kde/share/config/KPackageKit << KPACKAGEKIT_EOF
+# Set akonadi backend
+mkdir -p /home/liveuser/.config/akonadi
+cat > /home/liveuser/.config/akonadi/akonadiserverrc << AKONADI_EOF
+[%General]
+Driver=QSQLITE3
+AKONADI_EOF
+
+# Disable the update notifications of apper 
+cat > /home/liveuser/.kde/share/config/apper << APPER_EOF
 [CheckUpdate]
 autoUpdate=0
 interval=0
-
-[Notify]
-notifyLongTasks=2
-notifyUpdates=0
-KPACKAGEKIT_EOF
+APPER_EOF
 
 # Disable kres-migrator
 cat > /home/liveuser/.kde/share/config/kres-migratorrc << KRES_EOF
@@ -104,8 +97,11 @@ cat > /home/liveuser/.kde/share/config/kres-migratorrc << KRES_EOF
 Enabled=false
 KRES_EOF
 
-# Disable strigi
+# Disable nepomuk
 cat > /home/liveuser/.kde/share/config/nepomukserverrc << NEPOMUK_EOF
+[Basic Settings]
+Start Nepomuk=false
+
 [Service-nepomukstrigiservice]
 autostart=false
 NEPOMUK_EOF
