@@ -30,7 +30,6 @@ thunderbird
 liferea
 pidgin
 remmina
-remmina-plugins-rdp
 remmina-plugins-vnc
 transmission
 
