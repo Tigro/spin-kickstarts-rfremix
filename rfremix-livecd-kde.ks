@@ -70,6 +70,7 @@ wqy-microhei-fonts	# a compact CJK font, to replace:
 # save space
 -argyllcms
 -foo2*
+-evince*
 
 %end
 
