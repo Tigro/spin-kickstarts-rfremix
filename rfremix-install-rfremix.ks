@@ -40,7 +40,9 @@ grub2
 efibootmgr
 # Desktop Packages
 @kde-desktop
+@xfce-desktop
 @lxde-desktop
+@sugar-desktop
 kdewebdev
 echo-icon-theme
 tracker
@@ -92,14 +94,13 @@ wireshark-gnome
 @belarusian-support
 @bengali-support
 @bhutanese-support
-@burmese-support
 @bosnian-support
 @brazilian-support
 @breton-support
 @british-support
 @bulgarian-support
+@burmese-support
 @catalan-support
-@chinese-support
 @croatian-support
 @czech-support
 @danish-support
@@ -154,6 +155,7 @@ wireshark-gnome
 @russian-support
 @samoan-support
 @serbian-support
+@simplified-chinese-support
 @sindhi-support
 @sinhala-support
 @slovak-support
@@ -170,6 +172,7 @@ wireshark-gnome
 @thai-support
 @tibetan-support
 @tonga-support
+@traditional-chinese-support
 @tsonga-support
 @tswana-support
 @turkish-support
@@ -181,6 +184,17 @@ wireshark-gnome
 @welsh-support
 @xhosa-support
 @zulu-support
+# Langpacks
+aspell-*
+autocorr-*
+eclipse-nls-*
+hunspell-*
+hyphen-*
+kde-l10n-*
+kde-i18n-*
+libreoffice-langpack-*
+man-pages-*
+mythes-*
 # Size removals
 -gimp-help
 -java-1.6.0-openjdk-src
