@@ -118,6 +118,7 @@ if strstr "\`cat /proc/cmdline\`" netbook ; then
    mv /usr/share/autostart/plasma-desktop.desktop /usr/share/autostart/plasma-netbook.desktop
    sed -i 's/desktop/netbook/g' /usr/share/autostart/plasma-netbook.desktop
 fi
+
 EOF
 
 %end

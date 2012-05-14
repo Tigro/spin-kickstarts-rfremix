@@ -138,7 +138,7 @@ autorun=1
 
 [desktop]
 wallpaper_mode=1
-vallpaper=/usr/share/backgrounds/images/default.png
+wallpaper=/usr/share/backgrounds/beefy-miracle/default/standard/beefy-miracle.png
 desktop_bg=#2e3552
 desktop_fg=#ffffff
 desktop_shadow=#000000
