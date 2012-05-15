@@ -17,8 +17,8 @@ repo --name=russianfedora-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorl
 #repo --name=russianfedora-updates-testing --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-russianfedora-updates-testing-$releasever&arch=$basearch --exclude kernel*debug* --exclude kernel-kdump* --exclude syslog-ng* --exclude java-1.5.0-gcj-devel --exclude astronomy-bookmarks --exclude generic* --exclude java-1.5.0-gcj-javadoc --exclude btanks* --exclude GConf2-dbus* --exclude bluez-gnome
 repo --name=rpmfusion-free --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-rpmfusion-free-$releasever&arch=$basearch
 repo --name=rpmfusion-free-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-rpmfusion-free-updates-$releasever&arch=$basearch
-repo --name=rpmfusion-nonfree --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-rpmfusion-nonfree-$releasever&arch=$basearch --exclude kmod-nvidia-3.1.0-0* --exclude kmod-nvidia-3.1.0-1* --exclude kmod-nvidia-3.1.0-5*
-repo --name=rpmfusion-nonfree-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-rpmfusion-nonfree-updates-$releasever&arch=$basearch --exclude kmod-nvidia-3.1.0-0* --exclude kmod-nvidia-3.1.0-1* --exclude kmod-nvidia-3.1.0-5*
+repo --name=rpmfusion-nonfree --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-rpmfusion-nonfree-$releasever&arch=$basearch --exclude kmod-nvidia-3.3.0* --exclude kmod-nvidia-3.3.1* --exclude kmod-nvidia-3.3.4-3*
+repo --name=rpmfusion-nonfree-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-rpmfusion-nonfree-updates-$releasever&arch=$basearch --exclude kmod-nvidia-3.3.0* --exclude kmod-nvidia-3.3.1* --exclude kmod-nvidia-3.3.4-3*
 repo --name=russianfedora-free --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=free-fedora-$releasever&arch=$basearch
 repo --name=russianfedora-free-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=free-fedora-updates-released-$releasever&arch=$basearch
 repo --name=russianfedora-nonfree --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=nonfree-fedora-$releasever&arch=$basearch
