@@ -38,6 +38,8 @@ dracut-*
 grub-efi
 grub2
 efibootmgr
+# mactel-boot needs to be on the DVD for successful installation to intel macs.
+mactel-boot
 # Desktop Packages
 @kde-desktop
 @xfce-desktop
