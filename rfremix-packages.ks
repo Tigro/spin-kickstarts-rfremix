@@ -155,8 +155,6 @@ skanlite
 smplayer
 socat
 soundconverter
-stellarium
-streamtuner
 subtitlecomposer
 system-config-vsftpd
 system-switch-mail*
