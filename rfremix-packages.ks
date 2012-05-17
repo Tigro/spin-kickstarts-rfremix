@@ -150,7 +150,6 @@ rhythmbox-lirc
 rtorrent
 scidavis
 scons
-scribus
 skanlite
 smplayer
 socat
