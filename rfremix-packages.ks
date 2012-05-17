@@ -207,6 +207,7 @@ akmod-nvidia
 kmod-nvidia
 xorg-x11-drv-nvidia
 kmod-staging
+kmod-staging-PAE
 
 -kmod-nvidia-3.1.0-0.rc10.git0.1.fc16.x86_64
 -kmod-nvidia-3.1.0-1.fc16.x86_64
@@ -216,7 +217,6 @@ kmod-staging
 #-freetype-freeworld
 
 # no jdk 1.7.0
--java*1.7.0*
 -*VirtualBox*
 -*VirtualBox-OSE*
 
