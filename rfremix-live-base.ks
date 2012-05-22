@@ -48,6 +48,10 @@ ibus-pinyin-db-android
 -ubuntu-font-family
 -paratype-pt-sans*
 
+# to decrypt ubuntu partitions
+fuse-encfs
+tcplay
+
 # Explicitly specified here:
 # <notting> walters: because otherwise dependency loops cause yum issues.
 kernel
