@@ -51,6 +51,7 @@ ibus-pinyin-db-android
 # to decrypt ubuntu partitions
 fuse-encfs
 tcplay
+realcrypt
 
 # Explicitly specified here:
 # <notting> walters: because otherwise dependency loops cause yum issues.
