@@ -74,6 +74,9 @@ grub-efi
 grub2
 efibootmgr
 
+# grub utility
+grub-customizer
+
 # fpaste is very useful for debugging and very small
 fpaste
 
