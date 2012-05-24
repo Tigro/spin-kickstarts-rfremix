@@ -14,7 +14,7 @@
 # Add the repos you wish to use to compose here.  At least one of them needs group data.
 repo --name=russianfedora --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-russianfedora-$releasever&arch=$basearch --exclude kernel*debug* --exclude kernel-kdump* --exclude syslog-ng* --exclude java-1.5.0-gcj-devel --exclude astronomy-bookmarks --exclude generic* --exclude java-1.5.0-gcj-javadoc --exclude btanks* --exclude GConf2-dbus* --exclude bluez-gnome
 repo --name=russianfedora-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-russianfedora-updates-$releasever&arch=$basearch --exclude kernel*debug* --exclude kernel-kdump* --exclude syslog-ng* --exclude java-1.5.0-gcj-devel --exclude astronomy-bookmarks --exclude generic* --exclude java-1.5.0-gcj-javadoc --exclude btanks* --exclude GConf2-dbus* --exclude bluez-gnome
-#repo --name=russianfedora-updates-testing --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-russianfedora-updates-testing-$releasever&arch=$basearch --exclude kernel*debug* --exclude kernel-kdump* --exclude syslog-ng* --exclude java-1.5.0-gcj-devel --exclude astronomy-bookmarks --exclude generic* --exclude java-1.5.0-gcj-javadoc --exclude btanks* --exclude GConf2-dbus* --exclude bluez-gnome
+repo --name=russianfedora-updates-testing --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-russianfedora-updates-testing-$releasever&arch=$basearch --exclude kernel*debug* --exclude kernel-kdump* --exclude syslog-ng* --exclude java-1.5.0-gcj-devel --exclude astronomy-bookmarks --exclude generic* --exclude java-1.5.0-gcj-javadoc --exclude btanks* --exclude GConf2-dbus* --exclude bluez-gnome
 repo --name=rpmfusion-free --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-rpmfusion-free-$releasever&arch=$basearch
 repo --name=rpmfusion-free-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-rpmfusion-free-updates-$releasever&arch=$basearch
 repo --name=rpmfusion-nonfree --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-rpmfusion-nonfree-$releasever&arch=$basearch --exclude kmod-nvidia-3.3.0* --exclude kmod-nvidia-3.3.1* --exclude kmod-nvidia-3.3.4-3*
@@ -23,8 +23,8 @@ repo --name=russianfedora-free --mirrorlist=http://mirrors.rfremix.ru/mirrorlist
 repo --name=russianfedora-free-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=free-fedora-updates-released-$releasever&arch=$basearch
 repo --name=russianfedora-nonfree --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=nonfree-fedora-$releasever&arch=$basearch --exclude=java*sun*
 repo --name=russianfedora-nonfree-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=nonfree-fedora-updates-released-$releasever&arch=$basearch
-repo --name=russianfedora-fixes --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=fixes-fedora-$releasever&arch=$basearch --exclude lorax --exclude anaconda
-repo --name=russianfedora-fixes-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=fixes-fedora-updates-released-$releasever&arch=$basearch --exclude lorax --exclude anaconda
+repo --name=russianfedora-fixes --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=fixes-fedora-$releasever&arch=$basearch
+repo --name=russianfedora-fixes-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=fixes-fedora-updates-released-$releasever&arch=$basearch
 
 # Package manifest for the compose.  Uses repo group metadata to translate groups.
 # (@base is added by default unless you add --nobase to %packages)
