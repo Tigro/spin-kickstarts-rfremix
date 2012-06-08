@@ -182,6 +182,7 @@ if ! strstr "\`cat /proc/cmdline\`" noswap && [ -n "\$swaps" ] ; then
 fi
 if ! strstr "\`cat /proc/cmdline\`" noswap && [ -f /run/initramfs/live/\${livedir}/swap.img ] ; then
   action "Enabling swap file" swapon /run/initramfs/live/\${livedir}/swap.img
+fi
 
 mountPersistentHome() {
   # support label/uuid
