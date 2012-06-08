@@ -20,6 +20,7 @@ btanks
 ccsm
 cdrskin
 choqok
+chromium
 cups-pdf
 ddclient
 deluge
@@ -108,7 +109,7 @@ lshw-gui
 lsscsi
 mail-notification
 mail-notification-evolution-plugin
-mandvd
+2mandvd
 mencoder
 metromap
 mkvtoolnix
@@ -140,7 +141,6 @@ psi
 psimedia
 pulseaudio-module-lirc
 qbittorrent
-qmmp-plugins-freeworld
 qtcurve-*
 qtoctave
 qt-recordmydesktop
@@ -150,14 +150,10 @@ rhythmbox-lirc
 rtorrent
 scidavis
 scons
-scribus
-seamonkey
 skanlite
 smplayer
 socat
 soundconverter
-stellarium
-streamtuner
 subtitlecomposer
 system-config-vsftpd
 system-switch-mail*
@@ -202,47 +198,23 @@ xfwm4-themes
 # Feeble
 @window-managers
 
-# Hardware stuff
-#akmod-wl
-#akmod-kqemu
-#akmod-rt2860
-#akmod-rt2870
-#akmod-rt3062
-#akmod-rt3070
-#akmod-rt3090
-#akmod-VirtualBox-OSE
-#akmod-nvidia
-#akmod-nvidia-96xx
-#akmod-nvidia-173xx
-#akmod-catalyst
-
-#kmod-wl
-#kmod-kqemu
-#kmod-rt2860
-#kmod-rt2870
-#kmod-rt3062
-#kmod-rt3070
-#kmod-rt3090
-kmod-VirtualBox-OSE
+## Hardware stuff
+kmodtool
+akmod-nvidia
 kmod-nvidia
-#kmod-nvidia-96xx
-#kmod-nvidia-173xx
-kmod-catalyst
-
-#broadcom-wl
-#kqemu
-#rt2860
-#rt2870
-#rt3062
-#rt3070
-#rt3090
-VirtualBox-OSE
 xorg-x11-drv-nvidia
-#xorg-x11-drv-nvidia-96xx
-#xorg-x11-drv-nvidia-173xx
-xorg-x11-drv-catalyst
+kmod-staging
+kmod-staging-PAE
 
-# do not install this packages
--freetype-freeworld
+-kmod-nvidia-3.1.0-0.rc10.git0.1.fc16.x86_64
+-kmod-nvidia-3.1.0-1.fc16.x86_64
+-kmod-nvidia-3.1.0-5.fc16.x86_64
+
+## do not install this packages
+#-freetype-freeworld
+
+# no jdk 1.7.0
+-*VirtualBox*
+-*VirtualBox-OSE*
 
 %end

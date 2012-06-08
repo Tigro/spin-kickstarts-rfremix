@@ -14,18 +14,23 @@ auth --useshadow --enablemd5
 selinux --enforcing
 firewall --enabled --service=mdns
 xconfig --startxonboot
-part / --size 3072 --fstype ext4
+part / --size 5072 --fstype ext4
 services --enabled=NetworkManager --disabled=network,sshd
 
 # To compose against the current release tree, use the following "repo" (enabled by default)
-repo --name=russianfedora --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-russianfedora-15&arch=$basearch --exclude gnome-background-standard
-repo --name=russianfedora-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-russianfedora-updates-15&arch=$basearch
-#repo --name=russianfedora-updates-testing --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-russianfedora-updates-testing-15&arch=$basearch
-repo --name=rpmfusion-free --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-rpmfusion-free-15&arch=$basearch
-repo --name=rpmfusion-nonfree --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-rpmfusion-nonfree-15&arch=$basearch
-repo --name=russianfedora-free --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=free-fedora-15&arch=$basearch
-repo --name=russianfedora-nonfree --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=nonfree-fedora-15&arch=$basearch
-repo --name=russianfedora-fixes --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=fixes-fedora-15&arch=$basearch
+repo --name=russianfedora --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-russianfedora-$releasever&arch=$basearch
+repo --name=russianfedora-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-russianfedora-updates-$releasever&arch=$basearch
+#repo --name=russianfedora-updates-testing --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-russianfedora-updates-testing-$releasever&arch=$basearch
+repo --name=rpmfusion-free --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-rpmfusion-free-$releasever&arch=$basearch
+repo --name=rpmfusion-free-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-rpmfusion-free-updates-$releasever&arch=$basearch
+repo --name=rpmfusion-nonfree --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-rpmfusion-nonfree-$releasever&arch=$basearch
+repo --name=rpmfusion-nonfree-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-rpmfusion-nonfree-updates-$releasever&arch=$basearch
+repo --name=russianfedora-free --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=free-fedora-$releasever&arch=$basearch
+repo --name=russianfedora-free-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=free-fedora-updates-released-$releasever&arch=$basearch
+repo --name=russianfedora-nonfree --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=nonfree-fedora-$releasever&arch=$basearch --exclude=java*sun*
+repo --name=russianfedora-nonfree-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=nonfree-fedora-updates-released-$releasever&arch=$basearch --exclude=java*sun*
+repo --name=russianfedora-fixes --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=fixes-fedora-$releasever&arch=$basearch
+repo --name=russianfedora-fixes-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=fixes-fedora-updates-released-$releasever&arch=$basearch
 
 %packages
 @base-x
@@ -40,6 +45,13 @@ ibus-pinyin-db-android
 @dial-up
 @hardware-support
 @printing
+-ubuntu-font-family
+-paratype-pt-sans*
+
+# to decrypt ubuntu partitions
+fuse-encfs
+tcplay
+realcrypt
 
 # Explicitly specified here:
 # <notting> walters: because otherwise dependency loops cause yum issues.
@@ -57,6 +69,13 @@ wget
 # The point of a live image is to install
 anaconda
 isomd5sum
+# grub-efi and grub2 and efibootmgr so anaconda can use the right one on install. 
+grub-efi
+grub2
+efibootmgr
+
+# grub utility
+grub-customizer
 
 # fpaste is very useful for debugging and very small
 fpaste
@@ -68,6 +87,11 @@ fpaste
 #kmod-rt3062
 #kmod-rt3070
 #kmod-rt3090
+#kmod-staging
+
+-cairo-freeworld
+-freetype-infinality
+-freetype-freeworld
 
 %end
 
@@ -111,12 +135,6 @@ touch /.liveimg-configured
 # Make sure we don't mangle the hardware clock on shutdown
 ln -sf /dev/null /etc/systemd/system/hwclock-save.service
 
-# mount live image
-if [ -b \`readlink -f /dev/live\` ]; then
-   mkdir -p /mnt/live
-   mount -o ro /dev/live /mnt/live 2>/dev/null || mount /dev/live /mnt/live
-fi
-
 livedir="LiveOS"
 for arg in \`cat /proc/cmdline\` ; do
   if [ "\${arg##live_dir=}" != "\${arg}" ]; then
@@ -132,8 +150,8 @@ if ! strstr "\`cat /proc/cmdline\`" noswap && [ -n "\$swaps" ] ; then
     action "Enabling swap partition \$s" swapon \$s
   done
 fi
-if ! strstr "\`cat /proc/cmdline\`" noswap && [ -f /mnt/live/\${livedir}/swap.img ] ; then
-  action "Enabling swap file" swapon /mnt/live/\${livedir}/swap.img
+if ! strstr "\`cat /proc/cmdline\`" noswap && [ -f /run/initramfs/live/\${livedir}/swap.img ] ; then
+  action "Enabling swap file" swapon /run/initramfs/live/\${livedir}/swap.img
 fi
 
 mountPersistentHome() {
@@ -148,8 +166,8 @@ mountPersistentHome() {
     mountopts="-t jffs2"
   elif [ ! -b "\$homedev" ]; then
     loopdev=\`losetup -f\`
-    if [ "\${homedev##/mnt/live}" != "\${homedev}" ]; then
-      action "Remounting live store r/w" mount -o remount,rw /mnt/live
+    if [ "\${homedev##/run/initramfs/live}" != "\${homedev}" ]; then
+      action "Remounting live store r/w" mount -o remount,rw /run/initramfs/live
     fi
     losetup \$loopdev \$homedev
     homedev=\$loopdev
@@ -183,8 +201,8 @@ findPersistentHome() {
 
 if strstr "\`cat /proc/cmdline\`" persistenthome= ; then
   findPersistentHome
-elif [ -e /mnt/live/\${livedir}/home.img ]; then
-  homedev=/mnt/live/\${livedir}/home.img
+elif [ -e /run/initramfs/live/\${livedir}/home.img ]; then
+  homedev=/run/initramfs/live/\${livedir}/home.img
 fi
 
 # if we have a persistent /home, then we want to go ahead and mount it
@@ -208,40 +226,32 @@ action "Adding live user" useradd \$USERADDARGS -c "Live System User" liveuser
 passwd -d liveuser > /dev/null
 
 # turn off firstboot for livecd boots
-chkconfig --level 345 firstboot off 2>/dev/null
-# We made firstboot a native systemd service, so it can no longer be turned
-# off with chkconfig. It should be possible to turn it off with systemctl, but
-# that doesn't work right either. For now, this is good enough: the firstboot
-# service will start up, but this tells it not to run firstboot. I suspect the
-# other services 'disabled' below are not actually getting disabled properly,
-# with systemd, but we can look into that later. - AdamW 2010/08 F14Alpha
-echo "RUN_FIRSTBOOT=NO" > /etc/sysconfig/firstboot
+systemctl --no-reload disable firstboot-text.service 2> /dev/null || :
+systemctl --no-reload disable firstboot-graphical.service 2> /dev/null || :
+systemctl stop firstboot-text.service 2> /dev/null || :
+systemctl stop firstboot-graphical.service 2> /dev/null || :
 
 # don't use prelink on a running live image
 sed -i 's/PRELINKING=yes/PRELINKING=no/' /etc/sysconfig/prelink &>/dev/null || :
 
-# don't start yum-updatesd for livecd boots
-chkconfig --level 345 yum-updatesd off 2>/dev/null || :
-
 # turn off mdmonitor by default
-chkconfig --level 345 mdmonitor off 2>/dev/null || :
-
-# turn off setroubleshoot on the live image to preserve resources
-chkconfig --level 345 setroubleshoot off 2>/dev/null || :
-
-# turn off rfremixconf script
-chkconfig --level 345 rfremixconf off 2>/dev/null || :
+systemctl --no-reload disable mdmonitor.service 2> /dev/null || :
+systemctl --no-reload disable mdmonitor-takeover.service 2> /dev/null || :
+systemctl stop mdmonitor.service 2> /dev/null || :
+systemctl stop mdmonitor-takeover.service 2> /dev/null || :
 
 # don't enable the gnome-settings-daemon packagekit plugin
 gsettings set org.gnome.settings-daemon.plugins.updates active 'false' || :
 
 # don't start cron/at as they tend to spawn things which are
 # disk intensive that are painful on a live image
-chkconfig --level 345 crond off 2>/dev/null || :
-chkconfig --level 345 atd off 2>/dev/null || :
+systemctl --no-reload disable crond.service 2> /dev/null || :
+systemctl --no-reload disable atd.service 2> /dev/null || :
+systemctl stop crond.service 2> /dev/null || :
+systemctl stop atd.service 2> /dev/null || :
 
-# Stopgap fix for RH #217966; should be fixed in HAL instead
-touch /media/.hal-mtab
+# turn off rfremixconf script
+chkconfig --level 345 rfremixconf off 2>/dev/null || :
 
 # and hack so that we eject the cd on shutdown if we're using a CD...
 if strstr "\`cat /proc/cmdline\`" CDLABEL= ; then
@@ -254,7 +264,7 @@ if strstr "\`cat /proc/cmdline\`" CDLABEL= ; then
 # io errors due to not being able to get files...
 #cat /sbin/halt > /dev/null
 #cat /sbin/reboot > /dev/null
-#/usr/sbin/eject -p -m \$(readlink -f /dev/live) >/dev/null 2>&1
+#/usr/sbin/eject -p -m \$(readlink -f /run/initramfs/livedev) >/dev/null 2>&1
 #echo "Please remove the CD from your drive and press Enter to finish restarting"
 #read -t 30 < /dev/console
 FOE
@@ -301,10 +311,12 @@ done
 if strstr "\`cat /proc/cmdline\`" liveinst ; then
    plymouth --quit
    /usr/sbin/liveinst \$ks
+   /sbin/reboot
 fi
 if strstr "\`cat /proc/cmdline\`" textinst ; then
    plymouth --quit
    /usr/sbin/liveinst --text \$ks
+   /sbin/reboot
 fi
 
 # configure X, allowing user to override xdriver

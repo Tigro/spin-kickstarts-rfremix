@@ -83,7 +83,6 @@ man-pages-ru
 -evolution-help
 -gnome-games
 -gnome-games-help
--nss_db
 vino
 -isdn4k-utils
 -dasher

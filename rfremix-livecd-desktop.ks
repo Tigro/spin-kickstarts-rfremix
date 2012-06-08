@@ -37,7 +37,6 @@ icedtea-web
 -*backgrounds-extras
 
 # Legacy cmdline things we don't want
--nss_db
 -krb5-auth-dialog
 -krb5-workstation
 -pam_krb5
@@ -69,9 +68,17 @@ icedtea-web
 -flite
 -orca
 -fbreader
--shutter
+shutter
 -gnome-speech
 -mplayer*
+-gnome-games
+-argyllcms
+-foo2*
+-eog
+-gucharmap
+-aisleriot
+
+-deja-dup
 
 # utility
 gparted

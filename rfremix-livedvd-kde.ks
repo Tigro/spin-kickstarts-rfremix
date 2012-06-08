@@ -9,12 +9,12 @@
 %include rfremix-live-kde-base.ks
 %include rfremix-live-minimization.ks
 
-part / --size 5096 --fstype ext4
+part / --size 5120 --fstype ext4
 
 %packages
 
-# make kpackagekit the default on the kde live images
-kpackagekit
+# make apper the default on the kde live images
+apper
 -gnome-packagekit
 
 # use system-config-printer-kde instead of system-config-printer
@@ -64,6 +64,8 @@ ktorrent 		### kget has also basic torrent features (~3 megs)
 scribus		### scribus is too big for the live images
 -xscreensaver-gl-extras
 
+kde-wallpapers
+
 # Other applications
 @office
 
@@ -93,18 +95,15 @@ krusader
 kopete-cryptography
 kvirc
 kvkbd
-lastfm
 lmms
 psi
 psimedia
 qtcurve-kde4
-smb4k
 tellico
 twinkle
 vacuum
 vlc
 phonon-backend-vlc
-kde-partitionmanager
 transmission-qt
 
 # some extras

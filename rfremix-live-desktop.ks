@@ -19,6 +19,10 @@ nss-mdns
 # This one needs to be kicked out of @base
 -smartmontools
 
+# The gnome-shell team does not want extensions in the default spin;
+# ibus support in gnome-shell will be integrated in GNOME 3.4
+-ibus-gnome3
+
 %end
 
 %post
@@ -36,6 +40,12 @@ cat >> /usr/share/glib-2.0/schemas/org.gnome.desktop.screensaver.gschema.overrid
 lock-enabled=false
 FOE
 
+# and hide the lock screen option
+cat >> /usr/share/glib-2.0/schemas/org.gnome.desktop.lockdown.gschema.override << FOE
+[org.gnome.desktop.lockdown]
+disable-lock-screen=true
+FOE
+
 # disable updates plugin
 cat >> /usr/share/glib-2.0/schemas/org.gnome.settings-daemon.plugins.updates.gschema.override << FOE
 [org.gnome.settings-daemon.plugins.updates]
@@ -51,36 +61,22 @@ if [ -f /usr/share/applications/liveinst.desktop ]; then
 
   cat >> /usr/share/glib-2.0/schemas/org.gnome.shell.gschema.override << FOE
 [org.gnome.shell]
-favorite-apps=['mozilla-firefox.desktop', 'evolution.desktop', 'empathy.desktop', 'rhythmbox.desktop', 'shotwell.desktop', 'openoffice.org-writer.desktop', 'nautilus.desktop', 'anaconda.desktop']
+favorite-apps=['firefox.desktop', 'evolution.desktop', 'empathy.desktop', 'rhythmbox.desktop', 'shotwell.desktop', 'openoffice.org-writer.desktop', 'nautilus.desktop', 'anaconda.desktop']
 FOE
 
-  # add installer to user menu
-  mkdir -p ~liveuser/.local/share/gnome-shell/extensions/Installer@shell-extensions.fedoraproject.org
-  cat >> ~liveuser/.local/share/gnome-shell/extensions/Installer@shell-extensions.fedoraproject.org/metadata.json << FOE
-{"shell-version": ["2.91.91"], "uuid": "Installer@shell-extensions.fedoraproject.org", "name": "Installer", "description": "Install OS from user menu"}
-FOE
-
-  cat >> ~liveuser/.local/share/gnome-shell/extensions/Installer@shell-extensions.fedoraproject.org/extension.js << FOE
-const PopupMenu = imports.ui.popupMenu;
-const Shell = imports.gi.Shell;
-const Main = imports.ui.main;
-const Util = imports.misc.util;
-
-function main() {
-    let app = Shell.AppSystem.get_default().get_app('anaconda.desktop');
-    let item = new PopupMenu.PopupMenuItem(app.get_name());
-    item.connect('activate', function() { app.activate(-1); });
-
-    Main.panel._statusmenu.menu.addMenuItem(item, Main.panel._statusmenu.menu._getMenuItems().length - 1);
-}
-FOE
-
+  # Make the welcome screen show up
+  if [ -f /usr/share/anaconda/gnome/fedora-welcome.desktop ]; then
+    mkdir -p ~liveuser/.config/autostart
+    cp /usr/share/anaconda/gnome/fedora-welcome.desktop /usr/share/applications/
+    cp /usr/share/anaconda/gnome/fedora-welcome.desktop ~liveuser/.config/autostart/
+    chown -R liveuser:liveuser /home/liveuser/.config/
+  fi
 fi
 
 # rebuild schema cache with any overrides we installed
 glib-compile-schemas /usr/share/glib-2.0/schemas
 
-# set up timed auto-login for after 60 seconds
+# set up auto-login
 cat >> /etc/gdm/custom.conf << FOE
 [daemon]
 AutomaticLoginEnable=True

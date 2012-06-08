@@ -14,7 +14,7 @@
 @lxde-desktop
 lxlauncher
 obconf
-gdm
+lxdm
 
 ### internet
 firefox
@@ -35,10 +35,7 @@ mtpaint
 alsa-plugins-pulseaudio
 asunder
 lxmusic
-gxine
-gxine-mozplugin
-# codecs
-xine-lib-extras-freeworld
+gnome-mplayer
 pavucontrol
 # I'm looking for something smaller than
 gnomebaker
@@ -58,10 +55,12 @@ adwaita-cursor-theme
 adwaita-gtk2-theme
 adwaita-gtk3-theme
 
+# pam-fprint causes a segfault in LXDM when enabled
+-fprintd-pam
+
 # needed for automatic unlocking of keyring (#643435)
 gnome-keyring-pam
 
-hal-storage-addon
 NetworkManager-gnome
 
 # needed for xdg-open to support LXDE
@@ -77,7 +76,7 @@ gparted
 # use yumex instead of gnome-packagekit
 yumex
 -gnome-packagekit
--kpackagekit
+-apper
 
 # LXDE has lxpolkit. Make sure no other authentication agents end up in the spin.
 -polkit-gnome
@@ -104,10 +103,11 @@ yum-presto
 -words
 
 # save some space
--nss_db
 -sendmail
 ssmtp
 -acpid
+-argyllcms
+-foo2*
 
 # drop some system-config things
 -system-config-boot
@@ -117,37 +117,72 @@ ssmtp
 -policycoreutils-gui
 -gnome-disk-utility
 
+# we need UPower for suspend and hibernate
+upower
+
 %end
 
 %post
-cat >> /etc/rc.d/init.d/livesys << EOF
+# fix sort order
+mkdir -p /etc/skel/.config/pcmanfm/LXDE/
 
-# GDM configuration
-cat >> /etc/gdm/custom.conf << FOE
-[daemon]
-AutomaticLoginEnable=True
-AutomaticLogin=liveuser
-FOE
+cat > /etc/skel/.config/pcmanfm/LXDE/pcmanfm.conf << EOF
+[config]
+bm_open_method=0
+su_cmd=
 
+[volume]
+mount_on_startup=1
+mount_removable=1
+autorun=1
+
+[desktop]
+wallpaper_mode=1
+wallpaper=/usr/share/backgrounds/beefy-miracle/default/standard/beefy-miracle.png
+desktop_bg=#2e3552
+desktop_fg=#ffffff
+desktop_shadow=#000000
+desktop_font=Sans 12
+show_menu=0
+
+[ui]
+always_show_tabs=0
+max_tab_chars=32
+win_width=946
+win_height=694
+splitter_pos=150
+side_pane_mode=1
+view_mode=0
+show_hidden=0
+sort_type=0
+sort_by=2
+EOF
+
+# LXDE and LXDM configuration
 # create /etc/sysconfig/desktop (needed for installation)
 cat > /etc/sysconfig/desktop <<EOF
 PREFERRED=/usr/bin/startlxde
+DISPLAYMANAGER=/usr/sbin/lxdm
 EOF
 
+cat >> /etc/rc.d/init.d/livesys << EOF
 # disable screensaver locking and make sure gamin gets started
 cat > /etc/xdg/lxsession/LXDE/autostart << FOE
 /usr/libexec/gam_server
 @lxpanel --profile LXDE
 @pcmanfm --desktop --profile LXDE
-@pulseaudio -D
+/usr/libexec/notification-daemon
 FOE
 
 # set up preferred apps 
 cat > /etc/xdg/libfm/pref-apps.conf << FOE 
 [Preferred Applications]
-WebBrowser=mozilla-firefox.desktop
+WebBrowser=firefox.desktop
 MailClient=mozilla-thunderbird.desktop
 FOE
+
+# set up auto-login for liveuser
+sed -i 's|# autologin=dgod|autologin=liveuser|g' /etc/lxdm/lxdm.conf
 
 # Show harddisk install on the desktop
 sed -i -e 's/NoDisplay=true/NoDisplay=false/' /usr/share/applications/liveinst.desktop
