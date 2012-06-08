@@ -205,7 +205,21 @@ touch $CFG_FILE
 cat > $CFG_FILE << MENU_EOF
 [General]
 ColorScheme=QtCurve
+XftAntialias=true
+XftHintStyle=hintfull
+XftSubPixel=rgb
+desktopFont=Liberation Mono,10,-1,5,50,0,0,0,0,0
+fixed=Liberation Mono,10,-1,5,50,0,0,0,0,0
+font=Liberation Mono,10,-1,5,50,0,0,0,0,0
+menuFont=Liberation Mono,10,-1,5,50,0,0,0,0,0
+shadeSortColumn=true
+smallestReadableFont=Liberation Mono,8,-1,5,50,0,0,0,0,0
+taskbarFont=Liberation Mono,9,-1,5,50,0,0,0,0,0
+toolBarFont=Liberation Mono,10,-1,5,50,0,0,0,0,0
 widgetStyle=qtcurve
+
+[WM]
+activeFont=Liberation Mono,9,-1,5,50,1,0,0,0,0
 MENU_EOF
 
 # set kwin3 style
