@@ -6,7 +6,9 @@
 %include rfremix-live-minimization.ks
 
 %packages --default
-# core
+-@base-x
+-@base
+-@core
 kernel
 -kernel*debug*
 -kernel-kdump*
@@ -15,98 +17,249 @@ kernel
 -kernel-headers*
 -kernel-doc*
 -kernel-tools*
--syslog-ng*
--plymouth*
 
-# grub-efi and grub2 and efibootmgr so anaconda can use the right one on install. 
-grub-efi
-grub2
-efibootmgr
-
+# Things needed for installation
+@anaconda-tools
 # mactel-boot needs to be on the DVD for successful installation to intel macs.
 -mactel-boot
+
+# like @base:
+NetworkManager
+at
+bc
+bind-utils
+bzip2
+crontabs
+#cyrus-sasl-plain
+dbus
+ed
+logrotate
+#lsof
+#mailcap
+man-db
+ntsysv
+pciutils
+psacct
+#quota
+#tmpwatch
+#traceroute
+#PackageKit-yum-plugin
+acpid
+bash-completion
+#bridge-utils
+#btrfs-progs
+#cifs-utils
+#coolkey
+#cryptsetup
+#dmraid
+#dos2unix
+#dosfstools
+#dump
+eject
+ethtool
+fedora-release-notes
+#finger
+#fprintd-pam
+#ftp
+gnupg2
+gpm
+#hunspell
+iptstate
+#irda-utils
+irqbalance
+#jwhois
+#krb5-workstation
+#lftp
+man-pages
+mc
+#mcelog
+#mdadm
+microcode_ctl
+#mlocate
+#mtr
+#nc
+#nfs-utils
+ntfs-3g
+#ntfsprogs
+#numactl
+#openssh-clients
+#pam_krb5
+pam_pkcs11
+passwdqc
+#pcmciautils
+#pinfo
+#plymouth
+pm-utils
+#prelink
+#rdate
+#rdist
+#rng-tools
+#rsh
+#rsync
+#sendmail
+setuptool
+#smartmontools
+#sos
+#sssd
+#stunnel
+sudo
+symlinks
+#system-config-firewall-tui
+#system-config-network-tui
+#talk
+tcp_wrappers
+#tcpdump
+telnet
+#time
+#tree
+unzip
+usbutils
+vconfig
+wget
+which
+wireless-tools
+#words
+#ypbind
+yum-langpacks
+yum-presto
+yum-utils
+zip
+
+# like @base-x
+xorg-x11-server-Xorg
+xorg-x11-xauth
+xorg-x11-xinit
+#desktop-backgrounds-basic
+firstboot
+glx-utils
+mesa-dri-drivers
+mesa-libGL
+mesa-libGLU
+xorg-x11-drv-ast
+xorg-x11-drv-ati
+xorg-x11-drv-cirrus
+xorg-x11-drv-dummy
+xorg-x11-drv-evdev
+xorg-x11-drv-fbdev
+xorg-x11-drv-intel
+xorg-x11-drv-mga
+xorg-x11-drv-nouveau
+xorg-x11-drv-openchrome
+xorg-x11-drv-qxl
+xorg-x11-drv-synaptics
+xorg-x11-drv-vesa
+xorg-x11-drv-vmmouse
+xorg-x11-drv-vmware
+xorg-x11-drv-void
+xorg-x11-drv-wacom
+xorg-x11-drv-v4l
+xorg-x11-utils
+xorg-x11-drivers
+xorg-x11-drv-keyboard
+#xorg-x11-xkb-utils
+#xorg-x11-apps
+
+# like @core:
+acl
+attr
+audit
+basesystem
+bash
+biosdevname
+coreutils
+cpio
+cronie
+cronie-anacron
+dhclient
+e2fsprogs
+file
+filesystem
+glibc
+hostname
+initscripts
+iproute
+iptables
+iputils
+kbd
+libgcc
+#ncurses
+#parted
+passwd
+#plymouth
+#policycoreutils
+procps
+#readline
+rfremix-release
+rootfiles
+rpm
+rpmfusion-free-release
+rpmfusion-nonfree-release
+rsyslog
+russianfedora-fixes-release
+russianfedora-free-release
+russianfedora-nonfree-release
+selinux-policy-targeted
+setserial
+setup
+shadow-utils
+sudo
+util-linux
+#vim-minimal
+yum
+systemd
 
 # Desktop Packages
 @dial-up
 
-# Devel packages
-
 # Server packages
-#@network-server
-#@server-cfg
 -@samba*
 -cifs-utils*
-# Keep dap off the install media, makes Eng & Sci show up
--dap-server-cgi
-#  groups
--@MySQL*
 
-# Things needed for installation
-@anaconda-tools
-
-# Languages
-@russian-support
-# Langpacks
-aspell-ru*
-autocorr-ru*
-man-pages
-man-pages-ru
-hunspell-ru*
-hyphen-ru*
-
-# KDE
+# KDE base
 kdm
+sane-backends-libs
 kde-workspace
-kde-l10n-*ru*
-kde-i18n-*ru*
+konsole
 apper
 qtcurve-kde4
 
 # apps
 k3b
-@system-tools
 mc
 htop
-konsole
 fpaste
-wget
 system-config-firewall
-system-config-network
 system-config-firewall-base
 grub-customizer
 gnome-disk-utility
 NetworkManager-gnome
-psi-plus*
+psi-plus
+psi-plus-themes
 
 # Size removals
+-@system-tools
+-syslog-ng*
+-plymouth*
 -libreoffice*
 -eclipse*
 -mythes*
 -sendmail
 -gimp
 -gimp-help
--java-1.6.0-openjdk-src
--java-1.5.0-gcj-devel
--java-1.5.0-gcj-javadoc
--xorg-x11-docs
--java-1.5.0-gcj-src
+-java-*
 -astronomy-bookmarks
 -generic*
 -btanks*
--*GConf2-*
--bluez-gnome
 -libgcj-src
 -frysk
 -*gcj*
--PackageKit*
+-PackageKit-yum-plugin
 -zif
 -kde-plasma-networkmanagement*
 -gnome-packagekit
 -gdisk
--gtkam
 -digikam*
 -libgphoto2
--avahi-autoipd
 -tigervnc*
 -amarok*
 -kde-baseapps*
@@ -115,7 +268,7 @@ psi-plus*
 -kdegames*
 -kdegraphics*
 -kdeaccessibility*
--kactivities*
+#-kactivities*
 -kdeartwork*
 -kdenetwork*
 -pykde4-akonadi*
@@ -125,19 +278,11 @@ psi-plus*
 -samba*
 -libsmbclient
 -abrt*
--*mysql*
--qt-mysql*
--*MySQL*
 -festival*
--kmod*
 -openldap*
 -krusader*
 -BackupPC*
 -kcalc*
--strigi-libs
--*strigi*
--oxygen-icon-theme
--gnome-icon-theme
 -obexd
 -*obex*
 -obex-data-server
@@ -153,10 +298,8 @@ psi-plus*
 -python-nss
 -vlc*
 -phonon-backend-vlc
--*nepomuk*
 -*jack*
 -xscreensaver*
--sane-*
 -btrfs-progs
 -preupgrade
 -ktp-*
@@ -170,26 +313,48 @@ psi-plus*
 -ftp
 -mcelog
 -rdesktop
--dhclient
--dhcp*
 -meanwhile
 -dirac-libs*
--redland*
 -fcoe-utils
 -json*
 -cln
 -polkit-qt
 -scribus-*
 -vim-*
--llvm-libs*
 -ktorrent*
--slang
 -ghostscript*
 -zsh
 -dejavu-*
--authconfig-gtk
 -gstreamer-plugins-bad-free
 -echo-icon-theme
+-ORBit2
+-NetworkManager-openconnect
+-gsettings-desktop-schemas
+-ntsysv
+-lcms
+-pinfo
+-selinux-policy-devel
+-policycoreutils-python
+-policycoreutils-sandbox
+-openssh-server
+-python-IPy
+-foo2xqx
+-foo2hp
+-foo2qpdl
+-foo2lava
+-foo2hiperc
+-foo2slx
+-foo2zjs
+-smartmontools
+-paratype-pt-sans-fonts
+-screen
+-sssd-*
+-c-ares
+-avahi
+-nmap
+-trousers
+-sane-backends-drivers-*
+-sane-backends
 %end
 
 %post
@@ -249,6 +414,9 @@ Driver=QSQLITE3
 [QMYSQL]
 StartServer=false
 AKONADI_EOF
+
+# disable Zeitgeist autostart
+mv /etc/xdg/autostart/zeitgeist-datahub.desktop /etc/xdg/autostart/zeitgeist-datahub.desktop.saved
 
 # create /etc/sysconfig/desktop (needed for installation)
 cat > /etc/sysconfig/desktop <<EOF
@@ -312,7 +480,7 @@ cp /usr/share/icons/gnome/48x48/apps/system-software-install.png /usr/share/icon
 cp /usr/share/icons/gnome/256x256/apps/system-software-install.png /usr/share/icons/hicolor/256x256/apps/
 touch /usr/share/icons/hicolor/
 
-# Disable the update notifications of apper 
+# Disable the update notifications of apper
 cat > /home/liveuser/.kde/share/config/apper << APPER_EOF
 [CheckUpdate]
 autoUpdate=0
