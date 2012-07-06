@@ -90,7 +90,7 @@ passwdqc
 #pinfo
 #plymouth
 pm-utils
-#prelink
+prelink
 #rdate
 #rdist
 #rng-tools
