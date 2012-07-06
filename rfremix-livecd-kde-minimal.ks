@@ -217,7 +217,10 @@ systemd
 
 # KDE base
 kdm
+## this packages for choice the dependence with less package size
 sane-backends-libs
+phonon-backend-gstreamer
+##
 kde-workspace
 konsole
 apper
@@ -260,7 +263,6 @@ psi-plus-themes
 -gdisk
 -digikam*
 -libgphoto2
--tigervnc*
 -amarok*
 -kde-baseapps*
 -kdepim*
@@ -296,8 +298,6 @@ psi-plus-themes
 -xterm
 -nss*
 -python-nss
--vlc*
--phonon-backend-vlc
 -*jack*
 -xscreensaver*
 -btrfs-progs
@@ -355,6 +355,9 @@ psi-plus-themes
 -trousers
 -sane-backends-drivers-*
 -sane-backends
+-phonon-backend-vlc
+-vlc-core
+-tigervnc-server-*
 %end
 
 %post
