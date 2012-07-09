@@ -75,7 +75,7 @@ mc
 #mcelog
 #mdadm
 microcode_ctl
-#mlocate
+mlocate
 #mtr
 #nc
 #nfs-utils
@@ -110,7 +110,7 @@ symlinks
 tcp_wrappers
 #tcpdump
 telnet
-#time
+time
 #tree
 unzip
 usbutils
@@ -358,6 +358,7 @@ psi-plus-themes
 -phonon-backend-vlc
 -vlc-core
 -tigervnc-server-*
+-gstreamer-plugins-bad*
 %end
 
 %post
