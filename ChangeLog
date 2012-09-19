@@ -1,5 +1,7 @@
-* 18.0.0 - Mon Sep 17 2012 Arkady L. Shane <ashejn@yandex-team.ru>
+* 18.0.0 - Wed Sep 19 2012 Arkady L. Shane <ashejn@yandex-team.ru>
+- rewrite install ks for new repo metadata
 - new branch
+
 
 * 16.0.0 - Thu Nov 10 2011 Arkady L. Shane <ashejn@yandex-team.ru>
 - sync with upstream
