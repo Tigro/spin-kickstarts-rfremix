@@ -148,4 +148,8 @@ mythes-*
 # Removals
 -PackageKit-zif
 -zif
+
+# RFRemix
+@chromium
+
 %end
