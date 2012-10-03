@@ -7,7 +7,7 @@
 
 %packages --default
 -@base-x
--@base
+-@standard
 -@core
 kernel
 -kernel*debug*
