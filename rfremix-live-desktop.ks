@@ -7,16 +7,17 @@
 part / --size 4096
 
 %packages
-@graphical-internet
-@sound-and-video
+@firefox
 @gnome-desktop
 @office
+@gnome-apps
+@gnome-media
 
 # FIXME; apparently the glibc maintainers dislike this, but it got put into the
 # desktop image at some point.  We won't touch this one for now.
 nss-mdns
 
-# This one needs to be kicked out of @base
+# This one needs to be kicked out of @standard
 -smartmontools
 
 # The gnome-shell team does not want extensions in the default spin;
