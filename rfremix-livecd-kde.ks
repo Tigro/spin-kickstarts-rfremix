@@ -15,9 +15,7 @@
 # unwanted packages from @kde-desktop
 # don't include these for now to fit on a cd
 -desktop-backgrounds-basic
-###kde-partitionmanager
 -kdeaccessibility*
--kdeedu*			# kdeedu is too big for the live images
 -scribus			# scribus is too big for the live images
 -kdeartwork-screensavers	# screensavers are not needed on live images
 #-ktorrent			# kget has also basic torrent features (~3 megs)
@@ -51,9 +49,10 @@ yum-presto
 
 # fonts (we make no bones about admitting we're english-only)
 wqy-microhei-fonts	# a compact CJK font, to replace:
--un-core-dotum-fonts	# Korean
+-nhn-nanum-gothic-fonts	# Korean
 -vlgothic-fonts		# Japanese
--wqy-zenhei-fonts	# Chinese
+-wqy-zenhei-fonts	# simplified Chinese
++-cjkuni-uming-fonts	# traditional Chinese
 
 -paratype-pt-sans-fonts	# Cyrillic (already supported by DejaVu), huge
 #-stix-fonts		# mathematical symbols
@@ -65,7 +64,7 @@ wqy-microhei-fonts	# a compact CJK font, to replace:
 -ibus*
 -iok
 
-# save some space (from @base)
+# save some space (from @standard)
 -make
 
 ## avoid serious bugs by omitting broken stuff
@@ -74,6 +73,7 @@ wqy-microhei-fonts	# a compact CJK font, to replace:
 -argyllcms
 -foo2*
 -evince*
+## avoid serious bugs by omitting broken stuff
 
 %end
 
