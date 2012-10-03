@@ -105,7 +105,6 @@ setuptool
 sudo
 symlinks
 #system-config-firewall-tui
-#system-config-network-tui
 #talk
 tcp_wrappers
 #tcpdump

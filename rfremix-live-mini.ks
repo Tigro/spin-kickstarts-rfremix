@@ -83,7 +83,6 @@ pulseaudio-utils
 -sos
 -stunnel
 -system-config-firewall-tui
--system-config-network-tui
 -talk
 -time
 -tree
@@ -95,7 +94,6 @@ pulseaudio-utils
 -glx-utils
 -system-config-date
 -system-config-firewall
--system-config-network
 -system-config-printer
 -system-config-services
 -system-config-users
