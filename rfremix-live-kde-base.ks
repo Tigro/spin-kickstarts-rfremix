@@ -5,22 +5,17 @@
 %include rfremix-live-base.ks
 
 %packages
+@kde-desktop
+@kde-media
+@kde-apps
 
 ### The KDE-Desktop
-
-@kde-desktop
 
 ### fixes
 
 # use system-config-printer-kde instead of system-config-printer
 -system-config-printer
 system-config-printer-kde
-
-# make sure alsaunmute is there
-alsa-utils
-
-# make sure gnome-packagekit doesn't end up the KDE live images
--gnome-packagekit*
 
 %end
 
@@ -130,7 +125,6 @@ if strstr "\`cat /proc/cmdline\`" netbook ; then
    mv /usr/share/autostart/plasma-desktop.desktop /usr/share/autostart/plasma-netbook.desktop
    sed -i 's/desktop/netbook/g' /usr/share/autostart/plasma-netbook.desktop
 fi
-
 EOF
 
 %end
