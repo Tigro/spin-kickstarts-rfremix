@@ -14,18 +14,37 @@
 
 %packages
 
-# Office
+@xfce-desktop
+@xfce-apps
+@xfce-extra-plugins
+@xfce-media
+@xfce-office
+@firefox
 @office
 
-# Graphics
-epdfview
--evince
+# dictionaries are big
+-aspell-*
+#-man-pages-*
 
-# development
--geany
+# more fun with space saving
+-gimp-help
+# not needed, but as long as there is space left, we leave this in
+#-desktop-backgrounds-basic
 
-# Internet
-firefox
+# save some space
+-autofs
+-acpid
+
+# drop some system-config things
+-system-config-boot
+-system-config-lvm
+-system-config-network
+-system-config-rootpassword
+#-system-config-services
+-policycoreutils-gui
+
+# some stuff
+
 thunderbird
 liferea
 pidgin
@@ -34,69 +53,14 @@ remmina-plugins-vnc
 transmission
 
 # multimedia
-alsa-plugins-pulseaudio
-asunder
 cheese
-quodlibet
 pavucontrol
-parole
-parole-mozplugin
-xfburn
 
 # System
 gparted
--gnome-disk-utility
-gigolo
-setroubleshoot
 
-# Accessories
-catfish
-galculator
--seahorse
-
-# More Desktop stuff
 # java plugin
 icedtea-web
-NetworkManager-vpnc
-NetworkManager-openvpn
-NetworkManager-gnome
-NetworkManager-pptp
-desktop-backgrounds-compat
-gnome-bluetooth
-gsmartcontrol
-xscreensaver
-xdg-user-dirs-gtk
-
-# default artwork
-fedora-icon-theme
-gnome-themes
-adwaita-cursor-theme
-adwaita-gtk2-theme
-adwaita-gtk3-theme
-
-# Command line
-irssi
--mutt
-ntfs-3g
-powertop
--rtorrent
--vim-enhanced
-wget
-yum-utils
--foomatic*
-
-# Xfce packages
-@xfce-desktop
-Terminal
-gtk-xfce-engine
-orage
-ristretto
-thunar-volman
-thunar-media-tags-plugin
-xarchiver
-xfce4-battery-plugin
-# we already have thunar-volman
-#xfce4-cddrive-plugin
 xfce4-cellmodem-plugin
 xfce4-clipman-plugin
 xfce4-cpugraph-plugin
@@ -121,39 +85,10 @@ xfce4-taskmanager
 xfce4-time-out-plugin
 xfce4-timer-plugin
 xfce4-verve-plugin
-# we already have nm-applet
-#xfce4-wavelan-plugin
 xfce4-weather-plugin
 xfce4-websearch-plugin
 xfce4-xfswitch-plugin
 xfce4-xkb-plugin
-# system-config-printer does printer management better
-#xfprint
-xfwm4-themes
-
-# dictionaries are big
--aspell-*
-#-man-pages-*
-
-# more fun with space saving
--gimp-help
-# not needed, but as long as there is space left, we leave this in
-#-desktop-backgrounds-basic
-
-# save some space
--autofs
--acpid
-
-# drop some system-config things
--system-config-boot
--system-config-rootpassword
-#-system-config-services
--policycoreutils-gui
-
-# save space
--planner
--argyllcms
--foo2*
 
 %end
 
@@ -164,6 +99,7 @@ xfwm4-themes
 
 cat > /etc/sysconfig/desktop <<EOF
 PREFERRED=/usr/bin/startxfce4
+DISPLAYMANAGER=/usr/sbin/lightdm
 EOF
 
 cat >> /etc/rc.d/init.d/livesys << EOF
@@ -171,7 +107,7 @@ cat >> /etc/rc.d/init.d/livesys << EOF
 mkdir -p /home/liveuser/.config/xfce4
 
 cat > /home/liveuser/.config/xfce4/helpers.rc << FOE
-MailReader=thunderbird
+MailReader=sylpheed-claws
 FileManager=Thunar
 FOE
 
@@ -189,15 +125,9 @@ rm -f /etc/xdg/autostart/xfconf-migration-4.6.desktop || :
 mkdir -p /home/liveuser/.config/xfce4/xfconf/xfce-perchannel-xml
 cp /etc/xdg/xfce4/panel/default.xml /home/liveuser/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml
 
-# hint style slight
-sed -i '/HintStyle/ s!hintfull!hintslight!g' /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml
-
-# set up timed auto-login for after 60 seconds
-cat >> /etc/gdm/custom.conf << FOE
-[daemon]
-AutomaticLoginEnable=True
-AutomaticLogin=liveuser
-FOE
+# set up lightdm autologin
+sed -i 's/^#autologin-user=/autologin-user=liveuser/' /etc/lightdm/lightdm.conf 
+sed -i 's/^#autologin-user-timeout=0/autologin-user-timeout=10/' /etc/lightdm/lightdm.conf
 
 # Show harddisk install on the desktop
 sed -i -e 's/NoDisplay=true/NoDisplay=false/' /usr/share/applications/liveinst.desktop
@@ -211,3 +141,4 @@ restorecon -R /home/liveuser
 EOF
 
 %end
+
