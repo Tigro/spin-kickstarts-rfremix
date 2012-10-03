@@ -32,7 +32,7 @@ NetworkManager-pptp
 inkscape
 istanbul
 sK1
-@office
+@libreoffice
 
 # avoid weird case where we pull in more festival stuff than we need
 festival

@@ -14,7 +14,7 @@ part / --size 6096 --fstype ext4
 @graphics
 @sound-and-video
 @gnome-desktop
-@office
+@libreoffice
 nss-mdns
 NetworkManager-vpnc
 NetworkManager-openvpn

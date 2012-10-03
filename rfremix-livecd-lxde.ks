@@ -61,7 +61,7 @@ upower
 thunderbird
 transmission
 
-@office
+@libreoffice
 pavucontrol
 
 yumex

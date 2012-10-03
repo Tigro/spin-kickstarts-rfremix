@@ -20,7 +20,7 @@
 @xfce-media
 @xfce-office
 @firefox
-@office
+@libreoffice
 
 # dictionaries are big
 -aspell-*

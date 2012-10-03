@@ -9,7 +9,7 @@ part / --size 4096
 %packages
 @firefox
 @gnome-desktop
-@office
+@libreoffice
 @gnome-apps
 @gnome-media
 

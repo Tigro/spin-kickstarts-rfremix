@@ -27,7 +27,7 @@ kdeplasma-addons		# ~16 megs
 
 # Additional packages that are not default in kde-desktop but useful
 k3b				# ~15 megs
-@office
+@libreoffice
 #kdeartwork			# only include some parts of kdeartwork
 #twinkle			# (~10 megs)
 fuse

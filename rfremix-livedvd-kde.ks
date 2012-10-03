@@ -67,7 +67,7 @@ scribus		### scribus is too big for the live images
 kde-wallpapers
 
 # Other applications
-@office
+@libreoffice
 
 # Useful additional KDE3 applications
 amarok
