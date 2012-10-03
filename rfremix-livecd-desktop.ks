@@ -10,22 +10,20 @@
 # First, no office
 -planner
 
-# Temporary list of things removed from comps but not synced yet
--specspo
-
 # Java plugin
 icedtea-web
 # Drop things that pull in perl
 -linux-atm
--perf
 
 # No printing
 -foomatic-db-ppds
 -foomatic
 
 # Dictionaries are big
+# we're going to try keeping hunspell-* after notting, davidz, and ajax voiced
+# strong preference to giving it a go on #fedora-desktop.
+# also see http://bugzilla.gnome.org/681084
 -aspell-*
--hunspell-*
 -man-pages*
 -words
 
@@ -64,24 +62,9 @@ icedtea-web
 -system-config-services
 -policycoreutils-gui
 
-# save some space
--flite
--orca
--fbreader
-shutter
--gnome-speech
--mplayer*
--gnome-games
--argyllcms
--foo2*
--eog
--gucharmap
--aisleriot
-
--deja-dup
-
 # utility
 gparted
+shutter
 
 %end
 
