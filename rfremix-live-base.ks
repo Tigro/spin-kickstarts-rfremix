@@ -34,15 +34,12 @@ repo --name=russianfedora-fixes-updates --mirrorlist=http://mirrors.rfremix.ru/m
 
 %packages
 @base-x
-@base
+@standard
 @core
 @fonts
 @input-methods
-# use a small pinyin db for live
--ibus-pinyin-db-open-phrase
-ibus-pinyin-db-android
-@admin-tools
 @dial-up
+@multimedia
 @hardware-support
 @printing
 -ubuntu-font-family
@@ -117,7 +114,7 @@ cat > /etc/rc.d/init.d/livesys << EOF
 
 . /etc/init.d/functions
 
-if ! strstr "\`cat /proc/cmdline\`" liveimg || [ "\$1" != "start" ]; then
+if ! strstr "\`cat /proc/cmdline\`" rd.live.image || [ "\$1" != "start" ]; then
     exit 0
 fi
 
