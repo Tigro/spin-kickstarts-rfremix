@@ -151,4 +151,8 @@ mythes-*
 # RFRemix
 @chromium
 
+# drop
+-cairo-freeworld
+-freetype-freeworld
+
 %end
