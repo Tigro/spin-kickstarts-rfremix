@@ -56,10 +56,9 @@ dracut-*
 ## GNOME
 @firefox
 @gnome-desktop
-@gnome-apps
-@gnome-media
 @epiphany
 @libreoffice
+@gnome-games
 
 ## KDE
 @kde-desktop
