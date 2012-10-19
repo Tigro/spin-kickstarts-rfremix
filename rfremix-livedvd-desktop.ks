@@ -44,7 +44,6 @@ festvox-slt-arctic-hts
 -gimp-help-browser
 -evolution-help
 -gnome-games
--gnome-games-help
 -vino
 -isdn4k-utils
 -dasher
