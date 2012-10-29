@@ -52,7 +52,7 @@ wqy-microhei-fonts	# a compact CJK font, to replace:
 -nhn-nanum-gothic-fonts	# Korean
 -vlgothic-fonts		# Japanese
 -wqy-zenhei-fonts	# simplified Chinese
-+-cjkuni-uming-fonts	# traditional Chinese
+-cjkuni-uming-fonts	# traditional Chinese
 
 -paratype-pt-sans-fonts	# Cyrillic (already supported by DejaVu), huge
 #-stix-fonts		# mathematical symbols
