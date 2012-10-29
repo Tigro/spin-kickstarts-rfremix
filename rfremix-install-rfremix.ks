@@ -9,7 +9,7 @@
 # Listed below is the size of a DVD if you wanted to split higher.
 #part iso --size=4998
 
-#%include rfremix-packages.ks
+%include rfremix-packages.ks
 
 # Add the repos you wish to use to compose here.  At least one of them needs group data.
 # Fedora Repos
