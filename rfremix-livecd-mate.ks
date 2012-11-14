@@ -80,12 +80,6 @@ gtk-theme=Adwaita
 icon-theme=gnome
 EOF
 
-cat > /usr/share/glib-2.0/schemas/org.gnome.desktop.interface.override <<EOF
-[org.gnome.desktop.interface]
-gtk-theme=Adwaita
-icon-theme=gnome
-EOF
-
 cat > /usr/share/glib-2.0/schemas/org.mate.marco.gschema.override <<EOF
 theme=Adwaita
 EOF
