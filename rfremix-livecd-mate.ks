@@ -119,7 +119,7 @@ sed -i 's/^#show-language-selector=false/show-language-selector=true/' /etc/ligh
 # Show harddisk install on the desktop
 sed -i -e 's/NoDisplay=true/NoDisplay=false/' /usr/share/applications/liveinst.desktop
 mkdir /home/liveuser/Desktop
-cp /usr/share/applications/liveinst.desktop /home/liveuser/Desktop
+cp /usr/share/applications/liveinst.desktop /home/liveuser/Desktop/
 
 # this goes at the end after all other changes. 
 chown -R liveuser:liveuser /home/liveuser
