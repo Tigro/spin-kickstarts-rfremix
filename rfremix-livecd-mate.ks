@@ -74,21 +74,47 @@ mateconftool-2 --direct --config-source=xml:readwrite:/etc/mateconf/mateconf.xml
 mateconftool-2 --direct --config-source=xml:readwrite:/etc/mateconf/mateconf.xml.defaults -s -t bool /desktop/mate/interface/menus_have_icons true
 
 # set up themes
-mateconftool-2 --direct --config-source=xml:readwrite:/etc/mateconf/mateconf.xml.defaults -s -t string /desktop/mate/interface/gtk_theme "Adwaita" >/dev/null
-mateconftool-2 --direct --config-source=xml:readwrite:/etc/mateconf/mateconf.xml.defaults -s -t string /desktop/mate/interface/font_name "Cantarell 11" >/dev/null
-mateconftool-2 --direct --config-source=xml:readwrite:/etc/mateconf/mateconf.xml.defaults -s -t string /desktop/mate/interface/icon_theme "gnome" >/dev/null
-mateconftool-2 --direct --config-source=xml:readwrite:/etc/mateconf/mateconf.xml.defaults -s -t string /apps/marco/general/theme "Adwaita" >/dev/null
+cat > /usr/share/glib-2.0/schemas/org.mate.interface.gschema.override <<EOF
+[org.mate.interface]
+gtk-theme=Adwaita
+icon-themei=gnome
+EOF
+
+cat > /usr/share/glib-2.0/schemas/org.gnome.desktop.interface.override <<EOF
+[org.gnome.desktop.interface]
+gtk-theme=Adwaita
+icon-themei=gnome
+EOF
+
+cat > /usr/share/glib-2.0/schemas/org.mate.marco.gschema.override <<EOF
+theme=Adwaita
+EOF
+
 
 cat >> /etc/rc.d/init.d/livesys << EOF
 
 # disable screensaver locking
-mateconftool-2 --direct --config-source=xml:readwrite:/etc/mateconf/mateconf.xml.defaults -s -t bool /apps/mate-screensaver/lock_enabled false >/dev/null
-mateconftool-2 --direct --config-source=xml:readwrite:/etc/mateconf/mateconf.xml.defaults -s -t bool /desktop/mate/lockdown/disable_lock_screen true >/dev/null
+cat > /usr/share/glib-2.0/schemas/org.mate.lockdown.gschema.override <<EOF
+[org.mate.lockdown]
+disable-lock-screen=true
+EOF
+
+cat > /usr/share/glib-2.0/schemas/org.gnome.desktop.lockdown.gschema.override <<EOF
+[org.gnome.desktop.lockdown]
+disable-lock-screen=true
+EOF
+
+cat > /usr/share/glib-2.0/schemas/org.mate.screensaver.gschema.override <<EOF
+[org.mate.screensaver]
+lock-enabled=false
+EOF
 
 # But not trash and home
-mateconftool-2 --direct --config-source=xml:readwrite:/etc/mateconf/mateconf.xml.defaults -s -t bool /apps/caja/desktop/trash_icon_visible false >/dev/null
-mateconftool-2 --direct --config-source=xml:readwrite:/etc/mateconf/mateconf.xml.defaults -s -t bool /apps/caja/desktop/home_icon_visible false >/dev/null
-
+cat > /usr/share/glib-2.0/schemas/org.mate.caja.gschema.override << EOF
+[org.mate.caja.desktop]
+trash-icon-visible=false
+home-icon-visible=false
+EOF
 
 # set up lightdm autologin
 sed -i 's/^#autologin-user=/autologin-user=liveuser/' /etc/lightdm/lightdm.conf
