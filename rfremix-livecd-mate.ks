@@ -81,6 +81,7 @@ icon-theme=gnome
 EOF
 
 cat > /usr/share/glib-2.0/schemas/org.mate.marco.gschema.override <<EOF
+[org.mate.Marco.general]
 theme=Adwaita
 EOF
 
