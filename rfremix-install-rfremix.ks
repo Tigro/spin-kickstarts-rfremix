@@ -38,6 +38,8 @@ repo --name=russianfedora-fixes-updates --mirrorlist=http://mirrors.rfremix.ru/m
 %packages --default
 # core
 kernel*
+-kernel-tools*
+-kernel-debug*
 dracut-*
 
 # Desktops
