@@ -89,27 +89,27 @@ EOF
 cat >> /etc/rc.d/init.d/livesys << EOF
 
 # disable screensaver locking
-cat > /usr/share/glib-2.0/schemas/org.mate.lockdown.gschema.override <<EOF
+cat > /usr/share/glib-2.0/schemas/org.mate.lockdown.gschema.override <<FOE
 [org.mate.lockdown]
 disable-lock-screen=true
-EOF
+FOE
 
-cat > /usr/share/glib-2.0/schemas/org.gnome.desktop.lockdown.gschema.override <<EOF
+cat > /usr/share/glib-2.0/schemas/org.gnome.desktop.lockdown.gschema.override <<FOE
 [org.gnome.desktop.lockdown]
 disable-lock-screen=true
-EOF
+FOE
 
-cat > /usr/share/glib-2.0/schemas/org.mate.screensaver.gschema.override <<EOF
+cat > /usr/share/glib-2.0/schemas/org.mate.screensaver.gschema.override <<FOE
 [org.mate.screensaver]
 lock-enabled=false
-EOF
+FOE
 
 # But not trash and home
-cat > /usr/share/glib-2.0/schemas/org.mate.caja.gschema.override << EOF
+cat > /usr/share/glib-2.0/schemas/org.mate.caja.gschema.override << FOE
 [org.mate.caja.desktop]
 trash-icon-visible=false
 home-icon-visible=false
-EOF
+FOE
 
 # set up lightdm autologin
 sed -i 's/^#autologin-user=/autologin-user=liveuser/' /etc/lightdm/lightdm.conf
@@ -119,7 +119,7 @@ sed -i 's/^#show-language-selector=false/show-language-selector=true/' /etc/ligh
 # Show harddisk install on the desktop
 sed -i -e 's/NoDisplay=true/NoDisplay=false/' /usr/share/applications/liveinst.desktop
 mkdir /home/liveuser/Desktop
-cp /usr/share/applications/liveinst.desktop /home/liveuser/Desktop/
+cp /usr/share/applications/liveinst.desktop /home/liveuser/Desktop
 
 # this goes at the end after all other changes. 
 chown -R liveuser:liveuser /home/liveuser
