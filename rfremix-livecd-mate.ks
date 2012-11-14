@@ -107,13 +107,6 @@ cat > /usr/share/glib-2.0/schemas/org.mate.screensaver.gschema.override <<FOE
 lock-enabled=false
 FOE
 
-# But not trash and home
-cat > /usr/share/glib-2.0/schemas/org.mate.caja.gschema.override << FOE
-[org.mate.caja.desktop]
-trash-icon-visible=false
-home-icon-visible=false
-FOE
-
 # set up lightdm autologin
 sed -i 's/^#autologin-user=/autologin-user=liveuser/' /etc/lightdm/lightdm.conf
 sed -i 's/^#autologin-user-timeout=0/autologin-user-timeout=30/' /etc/lightdm/lightdm.conf
