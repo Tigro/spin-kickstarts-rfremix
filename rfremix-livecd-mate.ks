@@ -76,13 +76,13 @@ mateconftool-2 --direct --config-source=xml:readwrite:/etc/mateconf/mateconf.xml
 # set up themes
 cat > /usr/share/glib-2.0/schemas/org.mate.interface.gschema.override <<EOF
 [org.mate.interface]
-gtk-theme=Adwaita
-icon-theme=gnome
+gtk-theme="Adwaita"
+icon-theme="gnome"
 EOF
 
 cat > /usr/share/glib-2.0/schemas/org.mate.marco.gschema.override <<EOF
 [org.mate.Marco.general]
-theme=Adwaita
+theme="Adwaita"
 EOF
 
 
