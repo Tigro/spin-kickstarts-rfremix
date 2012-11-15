@@ -156,5 +156,8 @@ mythes-*
 # drop
 -cairo-freeworld
 -freetype-freeworld
+-opera
+-gimp-help
+-java-1.7.0-openjdk-javadoc
 
 %end
