@@ -159,5 +159,6 @@ mythes-*
 -opera
 -gimp-help
 -java-1.7.0-openjdk-javadoc
+-kdegames
 
 %end
