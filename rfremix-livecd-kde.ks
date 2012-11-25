@@ -1,9 +1,10 @@
-# fedora-livecd-kde.ks
+# rfremix-livecd-kde.ks
 #
 # Description:
-# - Fedora Livecd Spin with the K Desktop Environment (KDE)
+# - RFRemix Livecd Spin with the K Desktop Environment (KDE)
 #
 # Maintainer(s):
+# - Arkady L. Shane <ashejn@russainfedora.ru>
 # - Sebastian Vahl <fedora@deadbabylon.de>
 # - Fedora KDE SIG, http://fedoraproject.org/wiki/SIGs/KDE, kde@lists.fedoraproject.org
 

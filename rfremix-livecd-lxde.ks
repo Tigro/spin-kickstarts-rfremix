@@ -1,10 +1,10 @@
-# fedora-livecd-lxde.ks
+# rfremix-livecd-lxde.ks
 #
 # Description:
-# - Fedora Live Spin with the light-weight LXDE Desktop Environment
+# - RFRemix Live Spin with the light-weight LXDE Desktop Environment
 #
 # Maintainer(s):
-# - Christoph Wickert <cwickert@fedoraproject.org>
+# - Arkady L. Shane   <ashejn@russianfedora.ru>
 
 %include rfremix-live-base.ks
 %include rfremix-live-minimization.ks
