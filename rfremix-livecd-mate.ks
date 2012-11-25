@@ -1,13 +1,10 @@
-# fedora-livecd-xfce.ks
+# rfremix-livecd-mate.ks
 #
 # Description:
-# - Fedora Live Spin with the light-weight XFCE Desktop Environment
+# - RFRemix Live Spin with the Mate Desktop Environment
 #
 # Maintainer(s):
-# - Rahul Sundaram    <sundaram@fedoraproject.org>
-# - Christoph Wickert <cwickert@fedoraproject.org>
-# - Kevin Fenzi       <kevin@tummy.com>
-# - Adam Miller       <maxamillion@fedoraproject.org>
+# - Arkady L. Shane   <ashejn@russianfedora.ru>
 
 %include rfremix-live-base.ks
 %include rfremix-live-minimization.ks
@@ -62,12 +59,10 @@ dconf-editor
 %end
 
 %post
-# xfce configuration
 
 # create /etc/sysconfig/desktop (needed for installation)
-
 cat > /etc/sysconfig/desktop <<EOF
-PREFERRED=/usr/bin/startxfce4
+PREFERRED=/usr/bin/mate-session
 DISPLAYMANAGER=/usr/sbin/lightdm
 EOF
 
