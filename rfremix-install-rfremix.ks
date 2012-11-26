@@ -164,5 +164,6 @@ mythes-*
 -kernel-doc
 -scribus-doc
 -mate*
+-imsettings-mate
 
 %end
