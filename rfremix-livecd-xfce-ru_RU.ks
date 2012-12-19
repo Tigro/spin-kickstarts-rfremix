@@ -11,5 +11,10 @@ keyboard ru
 timezone Europe/Moscow
 
 %packages
-@russian-support
+aspell-ru
+autocorr-ru 
+hunspell-ru 
+hyphen-ru 
+libreoffice-langpack-ru  
+mythes-ru
 %end

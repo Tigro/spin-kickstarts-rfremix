@@ -10,9 +10,10 @@ keyboard ru
 timezone Europe/Moscow
 
 %packages
-@russian-support
 -kde-i18n-Russian
+kde-l10n-Russian
 hunspell-ru
+aspell-ru
 %end
 
 %post
