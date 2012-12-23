@@ -83,8 +83,8 @@ dracut-*
 @lxde-office
 
 ## SUGAR
-@sugar-desktop
-@sugar-apps
+#@sugar-desktop
+#@sugar-apps
 
 # Web server
 @web-server
