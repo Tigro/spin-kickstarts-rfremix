@@ -152,6 +152,8 @@ mythes-*
 
 # RFRemix
 @chromium
+@gnome-desktop-minimal
+@kde-desktop-minimal
 
 # drop
 -cairo-freeworld
