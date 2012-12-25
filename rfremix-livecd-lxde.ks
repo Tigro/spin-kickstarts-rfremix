@@ -36,7 +36,6 @@ metacity
 
 # dictionaries are big
 -aspell-*
--hunspell-*
 -man-pages-*
 -words
 
