@@ -18,7 +18,6 @@
 @xfce-apps
 @xfce-extra-plugins
 @xfce-media
-@xfce-office
 @firefox
 @libreoffice
 

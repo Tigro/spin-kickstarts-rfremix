@@ -14,7 +14,7 @@
 @lxde-desktop
 @lxde-apps
 @lxde-media
-@lxde-office
+osmo
 @firefox
 
 # pam-fprint causes a segfault in LXDM when enabled
