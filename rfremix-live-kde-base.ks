@@ -13,9 +13,8 @@
 
 ### fixes
 
-# use system-config-printer-kde instead of system-config-printer
+# use kde-print-manager instead of system-config-printer
 -system-config-printer
-system-config-printer-kde
 
 %end
 
