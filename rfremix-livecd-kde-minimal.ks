@@ -2,14 +2,19 @@
 # (@base is added by default unless you add --nobase to %packages)
 # (default groups for the configured repos are added by --default)
 
-%include rfremix-live-mini.ks
+%include rfremix-live-base.ks
 %include rfremix-live-minimization.ks
 
 %packages --default
 -@base-x
 -@standard
 -@core
+-@fonts
+-@input-methods
+-@multimedia
+-@printing
 kernel
+kernel-modules-extra
 -kernel*debug*
 -kernel-kdump*
 -kernel-*PAE*
@@ -18,8 +23,6 @@ kernel
 -kernel-doc*
 -kernel-tools*
 
-# Things needed for installation
-@anaconda-tools
 # mactel-boot needs to be on the DVD for successful installation to intel macs.
 -mactel-boot
 
@@ -165,7 +168,9 @@ audit
 basesystem
 bash
 biosdevname
+binutils
 coreutils
+shadow-utils
 cpio
 cronie
 cronie-anacron
@@ -200,15 +205,20 @@ russianfedora-nonfree-release
 selinux-policy-targeted
 setserial
 setup
-shadow-utils
-sudo
 util-linux
 #vim-minimal
 yum
 systemd
+firewalld
+firewall-config
 
-# Desktop Packages
-@dial-up
+# like @fonts
+liberation-mono-fonts
+liberation-sans-fonts
+liberation-serif-fonts
+dejavu-sans-fonts
+dejavu-sans-mono-fonts
+dejavu-serif-fonts
 
 # Server packages
 -@samba*
@@ -232,9 +242,8 @@ htop
 fpaste
 system-config-firewall
 system-config-firewall-base
-grub-customizer
-gnome-disk-utility
-NetworkManager-gnome
+kde-partitionmanager
+network-manager-applet
 psi-plus
 psi-plus-themes
 
@@ -358,6 +367,11 @@ psi-plus-themes
 -vlc-core
 -tigervnc-server-*
 -gstreamer-plugins-bad*
+
+-fuse-encfs
+-tcplay
+-realcrypt
+-reiserfs-utils
 %end
 
 %post
@@ -419,7 +433,10 @@ StartServer=false
 AKONADI_EOF
 
 # disable Zeitgeist autostart
-mv /etc/xdg/autostart/zeitgeist-datahub.desktop /etc/xdg/autostart/zeitgeist-datahub.desktop.saved
+ZGFile="/etc/xdg/autostart/zeitgeist-datahub.desktop"
+if [ -f $ZGFile ] ; then
+    mv  $(ZGFile) $(ZGFile)".saved"
+fi
 
 # create /etc/sysconfig/desktop (needed for installation)
 cat > /etc/sysconfig/desktop <<EOF
