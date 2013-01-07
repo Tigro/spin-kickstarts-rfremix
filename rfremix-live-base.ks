@@ -391,4 +391,8 @@ if [ "$(uname -i)" = "i386" -o "$(uname -i)" = "x86_64" ]; then
   if [ ! -d $LIVE_ROOT/LiveOS ]; then mkdir -p $LIVE_ROOT/LiveOS ; fi
   cp /usr/bin/livecd-iso-to-disk $LIVE_ROOT/LiveOS
 fi
+
+# added vconsole.font=latarcyrheb-sun16 as kernel papameter
+# to force setup non-latin symbols in console
+sed -i 's!rhgb!rhgb vconsole.font=latarcyrheb-sun16!g' $LIVE_ROOT/isolinux/isolinux.cfg
 %end
