@@ -21,14 +21,8 @@
 @firefox
 @libreoffice
 
-# dictionaries are big
--aspell-*
-#-man-pages-*
-
-# more fun with space saving
--gimp-help
-# not needed, but as long as there is space left, we leave this in
-#-desktop-backgrounds-basic
+# unlock default keyring. FIXME: Should probably be done in comps
+gnome-keyring-pam
 
 # save some space
 -autofs
