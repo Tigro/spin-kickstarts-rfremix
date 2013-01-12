@@ -128,6 +128,8 @@ sed -i 's/^#user-session=.*/user-session=xfce/' /etc/lightdm/lightdm.conf
 sed -i -e 's/NoDisplay=true/NoDisplay=false/' /usr/share/applications/liveinst.desktop
 mkdir /home/liveuser/Desktop
 cp /usr/share/applications/liveinst.desktop /home/liveuser/Desktop
+# and mark it as executable (new Xfce security feature)
+chmod +x /home/liveuser/Desktop/liveinst.desktop
 
 # this goes at the end after all other changes. 
 chown -R liveuser:liveuser /home/liveuser
