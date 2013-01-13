@@ -78,6 +78,9 @@ gtk-theme="Adwaita"
 icon-theme="mate"
 EOF
 
+# Make proper icons in Live Installer
+sed -i '/Example=start-here/ a\\nInherits=gnome,hicolor' /usr/share/icons/mate/index.theme
+
 cat > /usr/share/glib-2.0/schemas/org.mate.marco.gschema.override <<EOF
 [org.mate.Marco.general]
 theme="Aldabra"
