@@ -4,7 +4,7 @@
 
 %include rfremix-live-base.ks
 
-part / --size 4096
+part / --size 8192
 
 %packages
 @firefox
@@ -17,10 +17,6 @@ nss-mdns
 
 # This one needs to be kicked out of @standard
 -smartmontools
-
-# The gnome-shell team does not want extensions in the default spin;
-# ibus support in gnome-shell will be integrated in GNOME 3.4
--ibus-gnome3
 
 %end
 
@@ -80,17 +76,6 @@ cat > /etc/gdm/custom.conf << FOE
 [daemon]
 AutomaticLoginEnable=True
 AutomaticLogin=liveuser
-
-[security]
-
-[xdmcp]
-
-[greeter]
-
-[chooser]
-
-[debug]
-
 FOE
 
 # Turn off PackageKit-command-not-found while uninstalled
