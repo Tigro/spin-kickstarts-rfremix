@@ -70,11 +70,7 @@ wget
 
 # The point of a live image is to install
 anaconda
-isomd5sum
-# grub-efi and grub2 and efibootmgr so anaconda can use the right one on install. 
-grub-efi
-grub2
-efibootmgr
+@anaconda-tools
 
 # grub utility
 grub-customizer
@@ -82,14 +78,8 @@ grub-customizer
 # fpaste is very useful for debugging and very small
 fpaste
 
-# wifi cards modules
-#kmod-wl
-#kmod-rt2860
-#kmod-rt2870
-#kmod-rt3062
-#kmod-rt3070
-#kmod-rt3090
-#kmod-staging
+# Make live images easy to shutdown and the like in libvirt
+qemu-guest-agent
 
 -cairo-freeworld
 -freetype-infinality
@@ -116,6 +106,9 @@ cat > /etc/rc.d/init.d/livesys << EOF
 #
 # chkconfig: 345 00 99
 # description: Init script for live image.
+### BEGIN INIT INFO
+# X-Start-Before: display-manager
+### END INIT INFO
 
 . /etc/init.d/functions
 
@@ -229,6 +222,7 @@ fi
 # add fedora user with no passwd
 action "Adding live user" useradd \$USERADDARGS -c "Live System User" liveuser
 passwd -d liveuser > /dev/null
+usermod -aG wheel liveuser > /dev/null
 
 # turn off firstboot for livecd boots
 systemctl --no-reload disable firstboot-text.service 2> /dev/null || :
@@ -289,7 +283,7 @@ cat > /etc/rc.d/init.d/livesys-late << EOF
 
 . /etc/init.d/functions
 
-if ! strstr "\`cat /proc/cmdline\`" liveimg || [ "\$1" != "start" ] || [ -e /.liveimg-late-configured ] ; then
+if ! strstr "\`cat /proc/cmdline\`" rd.live.image || [ "\$1" != "start" ] || [ -e /.liveimg-late-configured ] ; then
     exit 0
 fi
 
@@ -391,8 +385,4 @@ if [ "$(uname -i)" = "i386" -o "$(uname -i)" = "x86_64" ]; then
   if [ ! -d $LIVE_ROOT/LiveOS ]; then mkdir -p $LIVE_ROOT/LiveOS ; fi
   cp /usr/bin/livecd-iso-to-disk $LIVE_ROOT/LiveOS
 fi
-
-# added vconsole.font=latarcyrheb-sun16 as kernel papameter
-# to force setup non-latin symbols in console
-sed -i 's!rhgb!rhgb vconsole.font=latarcyrheb-sun16!g' $LIVE_ROOT/isolinux/isolinux.cfg
 %end
