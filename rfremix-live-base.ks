@@ -49,6 +49,7 @@ repo --name=russianfedora-fixes-updates --mirrorlist=http://mirrors.rfremix.ru/m
 @printing
 -ubuntu-font-family
 -paratype-pt-sans*
+-*nvidia*
 
 # to decrypt ubuntu partitions
 fuse-encfs
