@@ -13,11 +13,11 @@
 
 # Add the repos you wish to use to compose here.  At least one of them needs group data.
 # Fedora Repos
-repo --name=fedora --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=fedora-18&arch=$basearch --exclude kernel*debug* --exclude kernel-kdump* --exclude kernel-tools* --exclude syslog-ng* --exclude astronomy-bookmarks --exclude generic* --exclude btanks* --exclude GConf2-dbus* --exclude bluez-gnome --exclude fedora-release --exclude lorax
+# Add the repos you wish to use to compose here.  At least one of them needs group data.
+repo --name=fedora --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=fedora-f19&arch=$basearch --exclude kernel*debug* --exclude kernel-kdump* --exclude kernel-tools* --exclude syslog-ng* --exclude astronomy-bookmarks --exclude generic* --exclude btanks* --exclude GConf2-dbus* --exclude bluez-gnome
+repo --name=fedora-updates --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=updates-released-f19&arch=$basearch --exclude kernel*debug* --exclude kernel-kdump* --exclude kernel-tools* --exclude syslog-ng* --exclude astronomy-bookmarks --exclude generic* --exclude btanks* --exclude GConf2-dbus* --exclude bluez-gnome
+repo --name=fedora-updates-testing --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=updates-testing-f19&arch=$basearch --exclude kernel*debug* --exclude kernel-kdump* --exclude kernel-tools* --exclude syslog-ng* --exclude astronomy-bookmarks --exclude generic* --exclude btanks* --exclude GConf2-dbus* --exclude bluez-gnome
 
-#repo --name=fedora-updates --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=updates-released-f18&arch=$basearch --exclude kernel*debug* --exclude kernel-kdump* --exclude kernel-tools* --exclude syslog-ng* --exclude astronomy-bookmarks --exclude generic* --exclude btanks* --exclude GConf2-dbus* --exclude bluez-gnome --exclude fedora-release --exclude lorax
-
-#repo --name=fedora-updates-testing --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=updates-testing-f18&arch=$basearch --exclude kernel*debug* --exclude kernel-kdump* --exclude kernel-tools* --exclude syslog-ng* --exclude astronomy-bookmarks --exclude generic* --exclude btanks* --exclude GConf2-dbus* --exclude bluez-gnome --exclude fedora-release --exclude lorax
 
 # RPMFusion Repos
 repo --name=rpmfusion-free --mirrorlist=http://mirrors.rpmfusion.org/mirrorlist?repo=free-fedora-18&arch=$basearch
@@ -83,8 +83,14 @@ dracut-*
 @lxde-office
 
 ## SUGAR
-#@sugar-desktop
-#@sugar-apps
+@sugar-desktop
+@sugar-apps
+
+## MATE
+@mate-desktop
+
+## CINNAMON
+@cinnamon-desktop
 
 # Web server
 @web-server
@@ -109,6 +115,8 @@ dracut-*
 @eclipse
 @development-libs
 @development-tools
+@c-development
+@rpm-development-tools
 @fedora-packager
 @gnome-software-development
 @kde-software-development
