@@ -26,8 +26,8 @@ repo --name=fedora-updates-testing --mirrorlist=http://mirrors.fedoraproject.org
 ##repo --name=rpmfusion-nonfree-updates --mirrorlist=http://mirrors.rpmfusion.org/mirrorlist?repo=nonfree-fedora-updates-released-19&arch=$basearch
 
 # RPMFusion Work Arround
-repo --name=rpmfusion-free --baseurl=http://sower.yandex.ru/mirrors/rpmfusion-19/free/19/&arch/os/
-repo --name=rpmfusion-nonfree --baseurl=http://sower.yandex.ru/mirrors/rpmfusion-19/nonfree/19/&arch/os/
+repo --name=rpmfusion-free --baseurl=http://sower.yandex.ru/mirrors/rpmfusion-19/free/19/$basearch/os/
+repo --name=rpmfusion-nonfree --baseurl=http://sower.yandex.ru/mirrors/rpmfusion-19/nonfree/19/$basearch/os/
 
 # Russian Fedora Repos
 repo --name=russianfedora-free --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=free-fedora-19&arch=$basearch
