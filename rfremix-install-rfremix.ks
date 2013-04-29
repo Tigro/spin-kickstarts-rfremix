@@ -16,7 +16,7 @@
 # Add the repos you wish to use to compose here.  At least one of them needs group data.
 repo --name=fedora --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=fedora-19&arch=$basearch --exclude kernel*debug* --exclude kernel-kdump* --exclude kernel-tools* --exclude syslog-ng* --exclude astronomy-bookmarks --exclude generic* --exclude btanks* --exclude GConf2-dbus* --exclude bluez-gnome
 repo --name=fedora-updates --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=updates-released-f19&arch=$basearch --exclude kernel*debug* --exclude kernel-kdump* --exclude kernel-tools* --exclude syslog-ng* --exclude astronomy-bookmarks --exclude generic* --exclude btanks* --exclude GConf2-dbus* --exclude bluez-gnome
-#repo --name=fedora-updates-testing --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=updates-testing-f19&arch=$basearch --exclude kernel*debug* --exclude kernel-kdump* --exclude kernel-tools* --exclude syslog-ng* --exclude astronomy-bookmarks --exclude generic* --exclude btanks* --exclude GConf2-dbus* --exclude bluez-gnome
+repo --name=fedora-updates-testing --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=updates-testing-f19&arch=$basearch --exclude kernel*debug* --exclude kernel-kdump* --exclude kernel-tools* --exclude syslog-ng* --exclude astronomy-bookmarks --exclude generic* --exclude btanks* --exclude GConf2-dbus* --exclude bluez-gnome
 
 
 ## RPMFusion Repos
