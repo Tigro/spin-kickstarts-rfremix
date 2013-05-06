@@ -67,7 +67,12 @@ DISPLAYMANAGER=/usr/sbin/lightdm
 EOF
 
 # do not use menu accelerators in gnome terminal
-mateconftool-2 --direct --config-source=xml:readwrite:/etc/mateconf/mateconf.xml.defaults -s -t bool /apps/mate-terminal/global/use_menu_accelerators false
+
+cat > /usr/share/glib-2.0/schemas/org.mate.terminal.gschema.override <<EOF
+[org.mate.terminal.global]
+use-menu-accelerators='false'
+EOF
+
 # menu have icons
 mateconftool-2 --direct --config-source=xml:readwrite:/etc/mateconf/mateconf.xml.defaults -s -t bool /desktop/mate/interface/menus_have_icons true
 
