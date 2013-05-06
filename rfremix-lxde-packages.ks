@@ -61,5 +61,9 @@ transmission
 pavucontrol
 
 yumex
+
+# Display Manager
+lxdm
+
 %end
 
