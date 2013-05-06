@@ -11,6 +11,7 @@
 
 %include rfremix-live-base.ks
 %include rfremix-live-minimization.ks
+%include rfremix-xfce-packages.ks
 
 %post
 # xfce configuration

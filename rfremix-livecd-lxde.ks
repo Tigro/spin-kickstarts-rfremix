@@ -8,6 +8,7 @@
 
 %include rfremix-live-base.ks
 %include rfremix-live-minimization.ks
+%include rfremix-lxde-packages.ks
 
 %post
 # LXDE and LXDM configuration
