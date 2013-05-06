@@ -23,29 +23,15 @@ nss-mdns
 %post
 cat >> /etc/rc.d/init.d/livesys << EOF
 
-# do not use menu accelerators in gnome terminal
-if [ -x /usr/bin/gconftool-2 ]; then
-gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s \
-  -t bool /apps/gnome-terminal/global/use_menu_accelerators false
-fi
-
-# disable screensaver locking
-cat >> /usr/share/glib-2.0/schemas/org.gnome.desktop.screensaver.gschema.override << FOE
-[org.gnome.desktop.screensaver]
-lock-enabled=false
-FOE
-
-# and hide the lock screen option
-cat >> /usr/share/glib-2.0/schemas/org.gnome.desktop.lockdown.gschema.override << FOE
-[org.gnome.desktop.lockdown]
-disable-lock-screen=true
-FOE
-
 # disable updates plugin
 cat >> /usr/share/glib-2.0/schemas/org.gnome.settings-daemon.plugins.updates.gschema.override << FOE
 [org.gnome.settings-daemon.plugins.updates]
 active=false
 FOE
+
+# don't run gnome-initial-setup
+mkdir ~liveuser/.config
+touch ~liveuser/.config/gnome-initial-setup-done
 
 # make the installer show up
 if [ -f /usr/share/applications/liveinst.desktop ]; then
