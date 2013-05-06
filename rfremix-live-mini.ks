@@ -108,6 +108,9 @@ avahi
 # Remove sendmail: this needs to be explicit
 -sendmail
 
+# Make live images easy to shutdown and the like in libvirt
+qemu-guest-agent
+
 %end
 
 %post
@@ -119,10 +122,13 @@ cat > /etc/rc.d/init.d/livesys << EOF
 #
 # chkconfig: 345 00 99
 # description: Init script for live image.
+### BEGIN INIT INFO
+# X-Start-Before: display-manager
+### END INIT INFO
 
 . /etc/init.d/functions
 
-if ! strstr "\`cat /proc/cmdline\`" liveimg || [ "\$1" != "start" ]; then
+if ! strstr "\`cat /proc/cmdline\`" rd.live.image || [ "\$1" != "start" ]; then
     exit 0
 fi
 
@@ -142,6 +148,10 @@ ln -sf /dev/null /etc/systemd/system/hwclock-save.service
 
 livedir="LiveOS"
 for arg in \`cat /proc/cmdline\` ; do
+  if [ "\${arg##rd.live.dir=}" != "\${arg}" ]; then
+    livedir=\${arg##rd.live.dir=}
+    return
+  fi
   if [ "\${arg##live_dir=}" != "\${arg}" ]; then
     livedir=\${arg##live_dir=}
     return
@@ -229,6 +239,7 @@ mount -t tmpfs vartmp /var/tmp
 # add fedora user with no passwd
 action "Adding live user" useradd \$USERADDARGS -c "Live System User" liveuser
 passwd -d liveuser > /dev/null
+usermod -aG wheel liveuser > /dev/null
 
 # turn off firstboot for livecd boots
 systemctl --no-reload disable firstboot-text.service 2> /dev/null || :
