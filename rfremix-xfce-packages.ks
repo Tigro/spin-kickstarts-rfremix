@@ -80,6 +80,9 @@ xfce4-websearch-plugin
 xfce4-xfswitch-plugin
 xfce4-xkb-plugin
 
+# Display Manager
+lightdm-gtk
+
 %end
 
 
