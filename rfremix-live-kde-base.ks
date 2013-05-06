@@ -5,9 +5,10 @@
 %include rfremix-live-base.ks
 
 %packages
+@kde-apps
 @kde-desktop
 @kde-media
-@kde-apps
+@kde-telepathy
 
 ### The KDE-Desktop
 
@@ -15,6 +16,10 @@
 
 # use kde-print-manager instead of system-config-printer
 -system-config-printer
+# make sure mariadb lands instead of MySQL (hopefully a temporary hack)
+mariadb-embedded
+mariadb-libs
+mariadb-server
 
 %end
 
@@ -94,8 +99,21 @@ AKONADI_EOF
 cat > /home/liveuser/.kde/share/config/apper << APPER_EOF
 [CheckUpdate]
 autoUpdate=0
+distroUpgrade=0
 interval=0
 APPER_EOF
+
+# Disable (apper's) plasma-applet-updater (#948099)
+mkdir -p /home/liveuser/.kde/share/kde4/services/
+sed -e "s|^X-KDE-PluginInfo-EnabledByDefault=true|X-KDE-PluginInfo-EnabledByDefault=false|g" \
+   /usr/share/kde4/services/plasma-applet-updater.desktop > \
+   /home/liveuser/.kde/share/kde4/services/plasma-applet-updater.desktop
+
+# Disable apper kded module (#948099)
+cat > /home/liveuser/.kde/share/config/kdedrc << KDEDRC_EOF
+[Module-apperd]
+autoload=false
+KDEDRC_EOF
 
 # Disable kres-migrator
 cat > /home/liveuser/.kde/share/config/kres-migratorrc << KRES_EOF
@@ -108,16 +126,13 @@ cat > /home/liveuser/.kde/share/config/nepomukserverrc << NEPOMUK_EOF
 [Basic Settings]
 Start Nepomuk=false
 
-[Service-nepomukstrigiservice]
+[Service-nepomukfileindexer]
 autostart=false
 NEPOMUK_EOF
 
 # make sure to set the right permissions and selinux contexts
 chown -R liveuser:liveuser /home/liveuser/
 restorecon -R /home/liveuser/
-
-# don't use prelink on a running KDE live image
-sed -i 's/PRELINKING=yes/PRELINKING=no/' /etc/sysconfig/prelink
 
 # small hack to enable plasma-netbook workspace on boot
 if strstr "\`cat /proc/cmdline\`" netbook ; then
