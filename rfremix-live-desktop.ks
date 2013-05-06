@@ -23,6 +23,12 @@ nss-mdns
 %post
 cat >> /etc/rc.d/init.d/livesys << EOF
 
+# enable menu accelerator
+cat > /usr/share/glib-2.0/schemas/org.gnome.Terminal.gschema.override <<FOE
+[org.gnome.Terminal.Legacy.Settings]
+menu-accelerator-enabled='true'
+FOE
+
 # disable updates plugin
 cat >> /usr/share/glib-2.0/schemas/org.gnome.settings-daemon.plugins.updates.gschema.override << FOE
 [org.gnome.settings-daemon.plugins.updates]
