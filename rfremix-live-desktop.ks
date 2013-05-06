@@ -26,7 +26,7 @@ cat >> /etc/rc.d/init.d/livesys << EOF
 # enable menu accelerator
 cat > /usr/share/glib-2.0/schemas/org.gnome.Terminal.gschema.override <<FOE
 [org.gnome.Terminal.Legacy.Settings]
-menu-accelerator-enabled='true'
+menu-accelerator-enabled='false'
 FOE
 
 # disable updates plugin
