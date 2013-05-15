@@ -39,6 +39,7 @@ repo --name=russianfedora-fixes-updates --mirrorlist=http://mirrors.rfremix.ru/m
 kernel*
 -kernel-tools*
 -kernel-debug*
+-kernel-PAEdebug*
 dracut-*
 
 # Desktops
