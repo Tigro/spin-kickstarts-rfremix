@@ -134,7 +134,6 @@ dracut-*
 @anaconda-tools
 
 # Langpacks
-aspell-*
 autocorr-*
 eclipse-nls-*
 hunspell-*
