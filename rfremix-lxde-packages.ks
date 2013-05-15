@@ -40,6 +40,8 @@ metacity
 -sendmail
 ssmtp
 -acpid
+-stix-fonts
+-ibus-typing-booster
 
 # drop some system-config things
 -system-config-boot
