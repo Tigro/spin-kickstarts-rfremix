@@ -31,7 +31,8 @@ icedtea-web
 -gnome-user-docs
 -evolution-help
 -desktop-backgrounds-basic
--*backgrounds-extras
+-stix-fonts
+-ibus-typing-booster*backgrounds-extras
 
 # Legacy cmdline things we don't want
 -krb5-auth-dialog
