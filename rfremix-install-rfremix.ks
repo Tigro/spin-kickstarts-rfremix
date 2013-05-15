@@ -140,7 +140,6 @@ hunspell-*
 hyphen-*
 calligra-l10n-*
 kde-l10n-*
-kde-i18n-*
 libreoffice-langpack-*
 man-pages-*
 mythes-*
