@@ -103,13 +103,6 @@ dracut-*
 @mysql
 @sql-server
 
-# Infrastructure server
-@dns-server
-@ftp-server
-@mail-server
-@network-server
-@smb-server
-
 # Workstation
 @eclipse
 @development-libs
