@@ -36,7 +36,7 @@ metacity
 -man-pages-*
 -words
 
-# save some space
+# use ssmtp instead of sendmail
 -sendmail
 ssmtp
 -acpid
