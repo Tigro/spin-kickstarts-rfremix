@@ -26,12 +26,6 @@ nss-mdns
 %post
 cat >> /etc/rc.d/init.d/livesys << EOF
 
-# add us,ru layouts by default
-cat > /usr/share/glib-2.0/schemas/org.gnome.desktop.input-sources.gschema.override << EOF
-[org.gnome.desktop.input-sources]
-sources=[('xkb', 'us'), ('xkb', 'ru')]
-EOF
-
 # enable menu accelerator
 cat > /usr/share/glib-2.0/schemas/org.gnome.Terminal.gschema.override <<FOE
 [org.gnome.Terminal.Legacy.Settings]
