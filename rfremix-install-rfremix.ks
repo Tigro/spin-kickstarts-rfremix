@@ -92,18 +92,6 @@ dracut-*
 ## CINNAMON
 @cinnamon-desktop
 
-# Web server
-@web-server
-@haproxy
-@jbossas
-@mongodb
-@perl-web
-@python-web
-@php
-@rubyonrails
-@mysql
-@sql-server
-
 # Workstation
 @eclipse
 @development-libs
@@ -116,15 +104,16 @@ dracut-*
 @x-software-development
 @virtualization
 @web-server
-@jbossas
 @mongodb
 @perl-web
 @php
+@python-web
 @rubyonrails
 @mysql
 @sql-server
 @design-suite
 ## Not included yet due to space concerns
+#@jbossas
 #@milkymist
 #@mingw32
 #@ocaml
