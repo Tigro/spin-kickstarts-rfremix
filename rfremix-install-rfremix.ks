@@ -46,6 +46,8 @@ dracut-*
 
 ## common stuff
 @base-x
+@guest-desktop-agents
+@guest-agents
 @standard
 @core
 @dial-up

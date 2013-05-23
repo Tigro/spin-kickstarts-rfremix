@@ -39,6 +39,7 @@ repo --name=russianfedora-fixes-updates --mirrorlist=http://mirrors.rfremix.ru/m
 
 %packages
 @base-x
+@guest-desktop-agents
 @standard
 @core
 @fonts
