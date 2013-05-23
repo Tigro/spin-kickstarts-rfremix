@@ -272,6 +272,15 @@ FOE
 chmod +x /sbin/halt.local
 fi
 
+# disable yum langpacks plugin on live
+if [ -f /usr/lib/gnome-settings-daemon-3.0/gtk-modules/pk-gtk-module.desktop ]; then
+    rm -f /usr/lib/gnome-settings-daemon-3.0/gtk-modules/pk-gtk-module.desktop
+fi
+
+if [ -f /usr/lib64/gnome-settings-daemon-3.0/gtk-modules/pk-gtk-module.desktop ]; then
+    rm -f /usr/lib64/gnome-settings-daemon-3.0/gtk-modules/pk-gtk-module.desktop
+fi
+
 EOF
 
 # bah, hal starts way too late
