@@ -154,7 +154,6 @@ mythes-*
 -java-1.5.0-gcj-javadoc
 -kernel-doc
 -scribus-doc
--mate*
 -imsettings-mate
 
 %end
