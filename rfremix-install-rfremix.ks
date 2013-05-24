@@ -155,5 +155,6 @@ mythes-*
 -kernel-doc
 -scribus-doc
 -imsettings-mate
+-java-1.6.0-sun*
 
 %end
