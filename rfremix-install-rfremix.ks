@@ -146,7 +146,6 @@ mythes-*
 @kde-desktop-minimal
 
 # drop
--cairo-freeworld
 -freetype-freeworld
 -opera
 -gimp-help
