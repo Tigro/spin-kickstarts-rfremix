@@ -255,24 +255,6 @@ systemctl stop atd.service 2> /dev/null || :
 # turn off rfremixconf script
 chkconfig --level 345 rfremixconf off 2>/dev/null || :
 
-# and hack so that we eject the cd on shutdown if we're using a CD...
-if strstr "\`cat /proc/cmdline\`" CDLABEL= ; then
-  cat >> /sbin/halt.local << FOE
-#!/bin/bash
-# XXX: This often gets stuck during shutdown because /etc/init.d/halt
-#      (or something else still running) wants to read files from the block\
-#      device that was ejected.  Disable for now.  Bug #531924
-# we want to eject the cd on halt, but let's also try to avoid
-# io errors due to not being able to get files...
-#cat /sbin/halt > /dev/null
-#cat /sbin/reboot > /dev/null
-#/usr/sbin/eject -p -m \$(readlink -f /run/initramfs/livedev) >/dev/null 2>&1
-#echo "Please remove the CD from your drive and press Enter to finish restarting"
-#read -t 30 < /dev/console
-FOE
-chmod +x /sbin/halt.local
-fi
-
 # disable yum langpacks plugin on live
 if [ -f /usr/lib/gnome-settings-daemon-3.0/gtk-modules/pk-gtk-module.desktop ]; then
     rm -f /usr/lib/gnome-settings-daemon-3.0/gtk-modules/pk-gtk-module.desktop
