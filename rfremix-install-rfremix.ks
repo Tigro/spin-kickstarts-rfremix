@@ -56,6 +56,8 @@ dracut-*
 @multimedia
 @hardware-support
 @printing
+@admin-tools
+@basic-desktop
 
 ## GNOME
 @firefox

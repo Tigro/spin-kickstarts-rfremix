@@ -227,11 +227,8 @@ action "Adding live user" useradd \$USERADDARGS -c "Live System User" liveuser
 passwd -d liveuser > /dev/null
 usermod -aG wheel liveuser > /dev/null
 
-# turn off firstboot for livecd boots
-systemctl --no-reload disable firstboot-text.service 2> /dev/null || :
-systemctl --no-reload disable firstboot-graphical.service 2> /dev/null || :
-systemctl stop firstboot-text.service 2> /dev/null || :
-systemctl stop firstboot-graphical.service 2> /dev/null || :
+# Remove root password lock
+passwd -d root > /dev/null
 
 # don't use prelink on a running live image
 sed -i 's/PRELINKING=yes/PRELINKING=no/' /etc/sysconfig/prelink &>/dev/null || :
@@ -263,6 +260,28 @@ fi
 if [ -f /usr/lib64/gnome-settings-daemon-3.0/gtk-modules/pk-gtk-module.desktop ]; then
     rm -f /usr/lib64/gnome-settings-daemon-3.0/gtk-modules/pk-gtk-module.desktop
 fi
+
+# and hack so that we eject the cd on shutdown if we're using a CD...
+if strstr "\`cat /proc/cmdline\`" CDLABEL= ; then
+  cat >> /sbin/halt.local << FOE
+#!/bin/bash
+# XXX: This often gets stuck during shutdown because /etc/init.d/halt
+#      (or something else still running) wants to read files from the block\
+#      device that was ejected.  Disable for now.  Bug #531924
+# we want to eject the cd on halt, but let's also try to avoid
+# io errors due to not being able to get files...
+#cat /sbin/halt > /dev/null
+#cat /sbin/reboot > /dev/null
+#/usr/sbin/eject -p -m \$(readlink -f /run/initramfs/livedev) >/dev/null 2>&1
+#echo "Please remove the CD from your drive and press Enter to finish restarting"
+#read -t 30 < /dev/console
+FOE
+chmod +x /sbin/halt.local
+fi
+
+# add static hostname to work around xauth bug
+# https://bugzilla.redhat.com/show_bug.cgi?id=679486
+echo "localhost" > /etc/hostname
 
 EOF
 

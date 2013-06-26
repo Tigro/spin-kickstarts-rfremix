@@ -25,10 +25,20 @@ gnome-keyring-pam
 # save some space
 -autofs
 -acpid
+-gimp-help
+-desktop-backgrounds-basic
+-realmd                     # only seems to be used in GNOME
+-PackageKit*                # we switched to yumex, so we don't need this
+-aspell-*                   # dictionaries are big
+-gnumeric
+-stix-fonts
+-ibus-typing-booster
+#-man-pages-*
 
 # drop some system-config things
 -system-config-boot
 -system-config-lvm
+-system-config-network
 -system-config-rootpassword
 #-system-config-services
 -policycoreutils-gui
