@@ -31,6 +31,7 @@ cat >> /etc/rc.d/init.d/livesys << EOF
 cat > /usr/share/glib-2.0/schemas/org.gnome.desktop.input-sources.gschema.override << FOE
 [org.gnome.desktop.input-sources]
 sources=[('xkb', 'us'), ('xkb', 'ru')]
+xkb-options=['grp:alt_shift_toggle,grp_led:scroll']
 FOE
 
 # enable menu accelerator
