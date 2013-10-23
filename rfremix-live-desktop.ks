@@ -3,6 +3,7 @@
 # mailto:desktop@lists.fedoraproject.org
 
 %include rfremix-live-base.ks
+%include rfremix-desktop-packages.ks
 
 part / --size 8192
 
