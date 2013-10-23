@@ -17,25 +17,7 @@ xconfig --startxonboot
 part / --size 8096 --fstype ext4
 services --enabled=NetworkManager --disabled=network,sshd
 
-repo --name=fedora --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=fedora-19&arch=$basearch --exclude kernel*debug* --exclude kernel-kdump* --exclude syslog-ng* --exclude astronomy-bookmarks --exclude generic* --exclude btanks* --exclude GConf2-dbus* --exclude bluez-gnome --exclude fedora-release --exclude lorax
-
-#repo --name=fedora-updates --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=updates-released-f19&arch=$basearch --exclude kernel*debug* --exclude kernel-kdump* --exclude syslog-ng* --exclude astronomy-bookmarks --exclude generic* --exclude btanks* --exclude GConf2-dbus* --exclude bluez-gnome --exclude fedora-release --exclude lorax
-
-#repo --name=fedora-updates-testing --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=updates-testing-f19&arch=$basearch --exclude kernel*debug* --exclude kernel-kdump* --exclude syslog-ng* --exclude astronomy-bookmarks --exclude generic* --exclude btanks* --exclude GConf2-dbus* --exclude bluez-gnome --exclude fedora-release --exclude lorax
-
-# RPMFusion Repos
-repo --name=rpmfusion-free --mirrorlist=http://mirrors.rpmfusion.org/mirrorlist?repo=free-fedora-19&arch=$basearch
-#repo --name=rpmfusion-free-updates --mirrorlist=http://mirrors.rpmfusion.org/mirrorlist?repo=free-fedora-updates-released-19&arch=$basearch
-repo --name=rpmfusion-nonfree --mirrorlist=http://mirrors.rpmfusion.org/mirrorlist?repo=nonfree-fedora-19&arch=$basearch
-#repo --name=rpmfusion-nonfree-updates --mirrorlist=http://mirrors.rpmfusion.org/mirrorlist?repo=nonfree-fedora-updates-released-19&arch=$basearch
-
-# Russian Fedora Repos
-repo --name=russianfedora-free --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=free-fedora-19&arch=$basearch
-repo --name=russianfedora-free-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=free-fedora-updates-released-19&arch=$basearch
-repo --name=russianfedora-nonfree --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=nonfree-fedora-19&arch=$basearch --exclude java*sun*
-repo --name=russianfedora-nonfree-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=nonfree-fedora-updates-released-19&arch=$basearch --exclude java*sun*
-repo --name=russianfedora-fixes --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=fixes-fedora-19&arch=$basearch
-repo --name=russianfedora-fixes-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=fixes-fedora-updates-released-19&arch=$basearch
+%include rfremix-repo.ks
 
 %packages
 @base-x
@@ -92,15 +74,6 @@ qemu-guest-agent
 
 %post
 
-# Some new rules for GConf
-if [ -x /usr/bin/gconftool-2 ]; then
-    gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t bool /apps/nautilus/preferences/always_use_browser true
-    gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t bool /apps/gnome-terminal/global/use_menu_accelerators false
-    gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t string /desktop/gnome/interface/toolbar_style "both-horiz"
-    gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t list --list-type=string /apps/gedit-2/preferences/encodings/auto_detected "[UTF-8,CURRENT,WINDOWS-1251,KOI8R,ISO-8859-5]"
-    gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t bool /desktop/gnome/interface/menus_have_icons true
-fi
-
 # FIXME: it'd be better to get this installed from a package
 cat > /etc/rc.d/init.d/livesys << EOF
 #!/bin/bash
@@ -127,8 +100,6 @@ exists() {
     which \$1 >/dev/null 2>&1 || return
     \$*
 }
-
-touch /.liveimg-configured
 
 # Make sure we don't mangle the hardware clock on shutdown
 ln -sf /dev/null /etc/systemd/system/hwclock-save.service
@@ -230,6 +201,12 @@ usermod -aG wheel liveuser > /dev/null
 # Remove root password lock
 passwd -d root > /dev/null
 
+# turn off firstboot for livecd boots
+systemctl --no-reload disable firstboot-text.service 2> /dev/null || :
+systemctl --no-reload disable firstboot-graphical.service 2> /dev/null || :
+systemctl stop firstboot-text.service 2> /dev/null || :
+systemctl stop firstboot-graphical.service 2> /dev/null || :
+
 # don't use prelink on a running live image
 sed -i 's/PRELINKING=yes/PRELINKING=no/' /etc/sysconfig/prelink &>/dev/null || :
 
@@ -253,31 +230,16 @@ systemctl stop atd.service 2> /dev/null || :
 chkconfig --level 345 rfremixconf off 2>/dev/null || :
 
 # disable yum langpacks plugin on live
-if [ -f /usr/lib/gnome-settings-daemon-3.0/gtk-modules/pk-gtk-module.desktop ]; then
-    rm -f /usr/lib/gnome-settings-daemon-3.0/gtk-modules/pk-gtk-module.desktop
-fi
+#if [ -f /usr/lib/gnome-settings-daemon-3.0/gtk-modules/pk-gtk-module.desktop ]; then
+#    rm -f /usr/lib/gnome-settings-daemon-3.0/gtk-modules/pk-gtk-module.desktop
+#fi
+#
+#if [ -f /usr/lib64/gnome-settings-daemon-3.0/gtk-modules/pk-gtk-module.desktop ]; then
+#    rm -f /usr/lib64/gnome-settings-daemon-3.0/gtk-modules/pk-gtk-module.desktop
+#fi
 
-if [ -f /usr/lib64/gnome-settings-daemon-3.0/gtk-modules/pk-gtk-module.desktop ]; then
-    rm -f /usr/lib64/gnome-settings-daemon-3.0/gtk-modules/pk-gtk-module.desktop
-fi
-
-# and hack so that we eject the cd on shutdown if we're using a CD...
-if strstr "\`cat /proc/cmdline\`" CDLABEL= ; then
-  cat >> /sbin/halt.local << FOE
-#!/bin/bash
-# XXX: This often gets stuck during shutdown because /etc/init.d/halt
-#      (or something else still running) wants to read files from the block\
-#      device that was ejected.  Disable for now.  Bug #531924
-# we want to eject the cd on halt, but let's also try to avoid
-# io errors due to not being able to get files...
-#cat /sbin/halt > /dev/null
-#cat /sbin/reboot > /dev/null
-#/usr/sbin/eject -p -m \$(readlink -f /run/initramfs/livedev) >/dev/null 2>&1
-#echo "Please remove the CD from your drive and press Enter to finish restarting"
-#read -t 30 < /dev/console
-FOE
-chmod +x /sbin/halt.local
-fi
+# Mark things as configured
+touch /.liveimg-configured
 
 # add static hostname to work around xauth bug
 # https://bugzilla.redhat.com/show_bug.cgi?id=679486
@@ -323,12 +285,10 @@ done
 if strstr "\`cat /proc/cmdline\`" liveinst ; then
    plymouth --quit
    /usr/sbin/liveinst \$ks
-   /sbin/reboot
 fi
 if strstr "\`cat /proc/cmdline\`" textinst ; then
    plymouth --quit
    /usr/sbin/liveinst --text \$ks
-   /sbin/reboot
 fi
 
 # configure X, allowing user to override xdriver
@@ -339,20 +299,6 @@ Section "Device"
 	Driver	"\$xdriver"
 EndSection
 FOE
-fi
-
-# adding keyboard switchers
-if [ -f /etc/sysconfig/keyboard ]; then
-    . /etc/sysconfig/keyboard
-    # GNOME
-    LAYOUT_OPT=\$(echo \$OPTIONS | sed 's!grp:!grp\tgrp:!g;s!grp_led:!grp\tgrp_led:!g')
-
-    if [ -d /etc/gconf/gconf.xml.defaults ]; then
-        /usr/bin/gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults \
-            -s -t list --list-type=string /desktop/gnome/peripherals/keyboard/kbd/layouts "[\$LAYOUT]" > /dev/null
-        /usr/bin/gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults \
-            -s -t list --list-type=string /desktop/gnome/peripherals/keyboard/kbd/options "[\$LAYOUT_OPT]" > /dev/null
-    fi
 fi
 
 EOF
@@ -370,7 +316,7 @@ systemctl enable tmp.mount
 
 # work around for poor key import UI in PackageKit
 rm -f /var/lib/rpm/__db*
-rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-fedora
+rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-$releasever-$basearch
 echo "Packages within this LiveCD"
 rpm -qa
 # Note that running rpm recreates the rpm db files which aren't needed or wanted
