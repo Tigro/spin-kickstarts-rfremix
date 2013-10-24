@@ -1,7 +1,7 @@
 # rfremix-livecd-kde.ks
 #
 # Description:
-# - RFRemix Livecd Spin with the K Desktop Environment (KDE)
+# - RFRemix Livecd Spin with the K Desktop Environment (KDE), default 1 GiB version
 #
 # Maintainer(s):
 # - Arkady L. Shane <ashejn@russainfedora.ru>
@@ -11,6 +11,8 @@
 %include rfremix-live-kde-base.ks
 %include rfremix-live-minimization.ks
 
+# DVD payload
+part / --size=4096
 
 %packages
 # unwanted packages from @kde-desktop
@@ -21,7 +23,7 @@
 -kdeartwork-screensavers	# screensavers are not needed on live images
 #-ktorrent			# kget has also basic torrent features (~3 megs)
 digikam				# digikam has duplicate functionality with gwenview (~28 megs)
-amarok 				# amarok has duplicate functionality with juk (~23 megs)
+-amarok 			# amarok has duplicate functionality with juk (~23 megs)
 kipi-plugins			# ~8 megs
 -konq-plugins			# ~2 megs
 kdeplasma-addons		# ~16 megs
@@ -65,7 +67,8 @@ wqy-microhei-fonts	# a compact CJK font, to replace:
 # save some space (from @standard)
 -make
 
-## avoid serious bugs by omitting broken stuff
+# save space (it pulls in gdisk/udisks2/libicu)
+-gnome-disk-utility
 
 # save space
 -argyllcms
