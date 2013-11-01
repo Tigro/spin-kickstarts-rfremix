@@ -12,7 +12,7 @@
 %include rfremix-live-minimization.ks
 
 # DVD payload
-part / --size=4096
+part / --size=8192
 
 %packages
 # unwanted packages from @kde-desktop
