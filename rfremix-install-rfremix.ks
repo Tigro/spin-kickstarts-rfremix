@@ -13,17 +13,22 @@
 
 # Add the repos you wish to use to compose here.  At least one of them needs group data.
 
-## Fedora Repos
+# Fedora Repos
 repo --name=fedora --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=fedora-20&arch=$basearch
 repo --name=fedora-updates --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=updates-released-f20&arch=$basearch
 #repo --name=fedora-updates-testing --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=updates-testing-f20&arch=$basearch
 
+repo --name=fedora-source  --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=fedora-source-20&arch=$basearch
+repo --name=fedora-updates-source  --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=updates-released-source-f20&arch=$basearch
+#repo --name=fedora-updates-testing-source  --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=updates-testing-source-f20&arch=$basearch
 
-## RPMFusion Repos
+# RPMFusion Repos
 repo --name=rpmfusion-free --mirrorlist=http://mirrors.rpmfusion.org/mirrorlist?repo=free-fedora-20&arch=$basearch
-##repo --name=rpmfusion-free-updates --mirrorlist=http://mirrors.rpmfusion.org/mirrorlist?repo=free-fedora-updates-released-20&arch=$basearch
+#repo --name=rpmfusion-free-updates --mirrorlist=http://mirrors.rpmfusion.org/mirrorlist?repo=free-fedora-updates-released-20&arch=$basearch
 repo --name=rpmfusion-nonfree --mirrorlist=http://mirrors.rpmfusion.org/mirrorlist?repo=nonfree-fedora-20&arch=$basearch
-##repo --name=rpmfusion-nonfree-updates --mirrorlist=http://mirrors.rpmfusion.org/mirrorlist?repo=nonfree-fedora-updates-released-20&arch=$basearch
+#repo --name=rpmfusion-nonfree-updates --mirrorlist=http://mirrors.rpmfusion.org/mirrorlist?repo=nonfree-fedora-updates-released-20&arch=$basearch
+repo --name=rpmfusion-free-source --mirrorlist=http://mirrors.rpmfusion.org/mirrorlist?repo=free-fedora-source-20&arch=$basearch
+repo --name=rpmfusion-nonfree-source --mirrorlist=http://mirrors.rpmfusion.org/mirrorlist?repo=nonfree-fedora-source-20&arch=$basearch
 
 # Russian Fedora Repos
 repo --name=russianfedora-free --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=free-fedora-20&arch=$basearch
@@ -33,13 +38,6 @@ repo --name=russianfedora-nonfree-updates --mirrorlist=http://mirrors.rfremix.ru
 repo --name=russianfedora-fixes --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=fixes-fedora-20&arch=$basearch
 repo --name=russianfedora-fixes-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=fixes-fedora-updates-released-20&arch=$basearch
 
-repo --name=fedora-source  --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=fedora-source-20&arch=$basearch
-repo --name=fedora-updates-source  --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=updates-released-source-f20&arch=$basearch
-repo --name=fedora-updates-testing-source  --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=updates-testing-source-f20&arch=$basearch
-
-repo --name=rpmfusion-free-source --mirrorlist=http://mirrors.rpmfusion.org/mirrorlist?repo=free-fedora-source-20&arch=$basearch
-repo --name=rpmfusion-nonfree-source --mirrorlist=http://mirrors.rpmfusion.org/mirrorlist?repo=nonfree-fedora-source-20&arch=$basearch
-
 repo --name=russianfedora-fixes-source --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=fixes-fedora-source-20&arch=$basearch
 repo --name=russianfedora-fixes-updates-source --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=fixes-fedora-updates-released-source-20&arch=$basearch
 repo --name=russianfedora-free-source --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=free-fedora-source-20&arch=$basearch
@@ -47,8 +45,10 @@ repo --name=russianfedora-free-updates-source --mirrorlist=http://mirrors.rfremi
 repo --name=russianfedora-nonfree-source --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=nonfree-fedora-source-20&arch=$basearch
 repo --name=russianfedora-nonfree-updates-source --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=nonfree-fedora-updates-released-source-20&arch=$basearch
 
+
 # Package manifest for the compose.  Uses repo group metadata to translate groups.
 # (default groups for the configured repos are added by --default)
+# @base got renamed to @standard, but @base is still included by default by pungi.
 %packages --default --nobase
 
 # pungi is an inclusive depsolver so that multiple packages are brought 
@@ -68,7 +68,7 @@ repo --name=russianfedora-nonfree-updates-source --mirrorlist=http://mirrors.rfr
 -community-mysql*
 -jruby*
 
-# corei
+# core
 kernel*
 dracut-*
 
@@ -167,26 +167,9 @@ kde-l10n-*
 libreoffice-langpack-*
 man-pages-*
 mythes-*
+-gimp-help-*
 
 # Removals
 -PackageKit-zif
 -zif
-
-# RFRemix
-@chromium
-@gnome-desktop-minimal
-@kde-desktop-minimal
-
-# drop
--freetype-freeworld
--opera
--gimp-help
--java-1.7.0-openjdk-javadoc
--kdegames
--java-1.5.0-gcj-javadoc
--kernel-doc
--scribus-doc
--imsettings-mate
--java-1.6.0-sun*
-
 %end
