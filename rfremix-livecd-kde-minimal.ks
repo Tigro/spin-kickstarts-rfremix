@@ -371,6 +371,9 @@ psi-plus-themes
 -tcplay
 -realcrypt
 -reiserfs-utils
+
+# resolve http://redmine.russianfedora.ru/issues/1241
+kcm_touchpad
 %end
 
 %post
