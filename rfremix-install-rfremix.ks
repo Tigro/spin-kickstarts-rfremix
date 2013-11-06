@@ -151,7 +151,6 @@ mythes-*
 -freetype-freeworld
 -opera
 -gimp-help
--java-1.7.0-openjdk-javadoc
 -kdegames
 -java-1.5.0-gcj-javadoc
 -kernel-doc
