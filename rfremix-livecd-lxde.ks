@@ -77,6 +77,9 @@ FOE
 chown -R liveuser:liveuser /home/liveuser
 restorecon -R /home/liveuser
 
+# fix launchers
+sed -i 's@fedora-@@g' /usr/share/lxpanel/profile/LXDE/panels/panel
+
 EOF
 
 %end
