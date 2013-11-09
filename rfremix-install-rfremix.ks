@@ -147,12 +147,13 @@ mythes-*
 @gnome-desktop-minimal
 @kde-desktop-minimal
 
+java-1.7.0-openjdk-javadoc
+
 # drop
 -freetype-freeworld
 -opera
 -gimp-help
 -kdegames
--java-1.5.0-gcj-javadoc
 -kernel-doc
 -scribus-doc
 -imsettings-mate
