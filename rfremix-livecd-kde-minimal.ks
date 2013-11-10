@@ -132,7 +132,7 @@ xorg-x11-server-Xorg
 xorg-x11-xauth
 xorg-x11-xinit
 #desktop-backgrounds-basic
-firstboot
+initial-setup
 glx-utils
 mesa-dri-drivers
 mesa-libGL
