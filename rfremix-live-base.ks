@@ -230,13 +230,13 @@ systemctl stop atd.service 2> /dev/null || :
 chkconfig --level 345 rfremixconf off 2>/dev/null || :
 
 # disable yum langpacks plugin on live
-#if [ -f /usr/lib/gnome-settings-daemon-3.0/gtk-modules/pk-gtk-module.desktop ]; then
-#    rm -f /usr/lib/gnome-settings-daemon-3.0/gtk-modules/pk-gtk-module.desktop
-#fi
-#
-#if [ -f /usr/lib64/gnome-settings-daemon-3.0/gtk-modules/pk-gtk-module.desktop ]; then
-#    rm -f /usr/lib64/gnome-settings-daemon-3.0/gtk-modules/pk-gtk-module.desktop
-#fi
+if [ -f /usr/lib/gnome-settings-daemon-3.0/gtk-modules/pk-gtk-module.desktop ]; then
+    rm -f /usr/lib/gnome-settings-daemon-3.0/gtk-modules/pk-gtk-module.desktop
+fi
+
+if [ -f /usr/lib64/gnome-settings-daemon-3.0/gtk-modules/pk-gtk-module.desktop ]; then
+    rm -f /usr/lib64/gnome-settings-daemon-3.0/gtk-modules/pk-gtk-module.desktop
+fi
 
 # Mark things as configured
 touch /.liveimg-configured
