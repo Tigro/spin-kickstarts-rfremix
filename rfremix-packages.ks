@@ -13,7 +13,7 @@
 -scribus-doc
 -imsettings-mate
 -java-1.6.0-sun*
--etoys
+-etoys*
 
 # custom packages
 bash-completion
