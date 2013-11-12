@@ -1,7 +1,6 @@
 %packages
 
 # RFRemix
-@chromium
 @gnome-desktop-minimal
 @kde-desktop-minimal
 
@@ -14,11 +13,9 @@
 -scribus-doc
 -imsettings-mate
 -java-1.6.0-sun*
+-etoys
 
 # custom packages
-avidemux
-avidemux-gtk
-avidemux-plugins
 bash-completion
 easytag
 fbreader
