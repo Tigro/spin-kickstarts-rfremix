@@ -86,7 +86,6 @@ xfce4-time-out-plugin
 xfce4-timer-plugin
 xfce4-verve-plugin
 xfce4-weather-plugin
-xfce4-xfswitch-plugin
 xfce4-xkb-plugin
 
 %end
