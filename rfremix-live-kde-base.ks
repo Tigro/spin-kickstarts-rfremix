@@ -40,11 +40,12 @@ chmod a+x /home/liveuser/.xsession
 chown liveuser:liveuser /home/liveuser/.xsession
 
 # set up autologin for user liveuser
-sed -i 's/^AutoUser=.*/AutoUser=liveuser/' /etc/sddm.conf
+sed -i 's/#AutoLoginEnable=true/AutoLoginEnable=true/' /etc/kde/kdm/kdmrc
+sed -i 's/#AutoLoginUser=fred/AutoLoginUser=liveuser/' /etc/kde/kdm/kdmrc
 
 # set up user liveuser as default user and preselected user
-sed -i 's/^LastUser=.*/LastUser=liveuser/' /etc/sddm.conf
-sed -i 's/^LastSession=.*/LastSession=kde-plasma.desktop/' /etc/sddm.conf
+sed -i 's/#PreselectUser=Default/PreselectUser=Default/' /etc/kde/kdm/kdmrc
+sed -i 's/#DefaultUser=johndoe/DefaultUser=liveuser/' /etc/kde/kdm/kdmrc
 
 # add liveinst.desktop to favorites menu
 mkdir -p /home/liveuser/.kde/share/config/

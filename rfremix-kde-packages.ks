@@ -7,6 +7,10 @@
 ### The KDE-Desktop
 
 ### fixes
+# sddm->kdm, (temporary) so don't have to wait on comps changes
+-sddm
+-sddm-kcm
+kdm
 
 # use kde-print-manager instead of system-config-printer
 -system-config-printer
