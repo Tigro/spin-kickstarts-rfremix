@@ -14,6 +14,7 @@
 -imsettings-mate
 -java-1.6.0-sun*
 -etoys*
+-mypaint*
 
 # custom packages
 bash-completion
@@ -26,7 +27,6 @@ iotop
 iperf
 iptraf
 k3b-extras-freeworld
-kradio4
 libreoffice-kde
 shotwell
 simple-scan
