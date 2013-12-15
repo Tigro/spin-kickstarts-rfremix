@@ -101,20 +101,20 @@ dracut-*
 @kde-apps
 @kde-education
 @kde-media
-@kde-office
+#@kde-office
 
 ## XFCE
 @xfce-desktop
 @xfce-apps
 @xfce-extra-plugins
 @xfce-media
-@xfce-office
+#@xfce-office
 
 ## LXDE
 @lxde-desktop
 @lxde-apps
 @lxde-media
-@lxde-office
+#@lxde-office
 
 ## SUGAR
 @sugar-desktop
