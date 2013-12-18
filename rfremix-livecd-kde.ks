@@ -76,6 +76,9 @@ wqy-microhei-fonts	# a compact CJK font, to replace:
 -evince*
 ## avoid serious bugs by omitting broken stuff
 
+# fix rf#1286
+kde-partitionmanager
+
 %end
 
 %post
