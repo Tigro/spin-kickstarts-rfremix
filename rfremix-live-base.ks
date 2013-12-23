@@ -37,7 +37,7 @@ services --enabled=NetworkManager --disabled=network,sshd
 # to decrypt ubuntu partitions
 fuse-encfs
 tcplay
-realcrypt
+###realcrypt
 
 # Explicitly specified here:
 # <notting> walters: because otherwise dependency loops cause yum issues.
@@ -58,7 +58,7 @@ anaconda
 @anaconda-tools
 
 # grub utility
-grub-customizer
+#####grub-customizer
 
 # fpaste is very useful for debugging and very small
 fpaste

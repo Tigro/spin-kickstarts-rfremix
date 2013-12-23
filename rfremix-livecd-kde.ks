@@ -36,7 +36,7 @@ k3b				# ~15 megs
 fuse
 liveusb-creator
 #pavucontrol			# pavucontrol has duplicate functionality with kmix
-kaffeine*			# kaffeine has duplicate functionality with dragonplayer (~3 megs)
+####kaffeine*			# kaffeine has duplicate functionality with dragonplayer (~3 megs)
 
 # only include kdegames-minimal
 kdegames

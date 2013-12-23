@@ -34,12 +34,12 @@ dejavu-serif-fonts
 -libhangul
 
 # codecs
-gstreamer-plugins-ugly
-gstreamer-plugins-bad-free
-gstreamer-plugins-bad-nonfree
-gstreamer-ffmpeg
+###gstreamer-plugins-ugly
+###gstreamer-plugins-bad-free
+###gstreamer-plugins-bad-nonfree
+###gstreamer-ffmpeg
 
-flash-plugin
+###flash-plugin
 
 bash-completion
 
