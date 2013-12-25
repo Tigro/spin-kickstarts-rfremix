@@ -13,6 +13,6 @@ repo --name=fedora --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo
 #repo --name=russianfedora-free-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=free-fedora-updates-released-20&arch=$basearch
 #repo --name=russianfedora-nonfree --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=nonfree-fedora-20&arch=$basearch --exclude java*sun*
 #repo --name=russianfedora-nonfree-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=nonfree-fedora-updates-released-20&arch=$basearch --exclude java*sun*
-repo --name=russianfedora-fixes --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=fixes-fedora-20&arch=$basearch --exclude mutter* --exclude gnome-settings-daemon* --exclude fontconfig* --exclude freetype* --exclude lorax* --exclude unzip --exclude taglib --exclude os-prober --exclude python* --exclude plymouth*
+repo --name=russianfedora-fixes --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=fixes-fedora-20&arch=$basearch --exclude mutter* --exclude gnome-settings-daemon* --exclude fontconfig* --exclude freetype* --exclude lorax* --exclude unzip --exclude taglib --exclude os-prober --exclude python* --exclude plymouth* --exclude anaconda* --exclude grub* --exclude liveusb-creator
 
 #repo --name=russianfedora-fixes-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=fixes-fedora-updates-released-20&arch=$basearch
