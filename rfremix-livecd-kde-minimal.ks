@@ -458,6 +458,9 @@ EOF
 # add initscript
 cat >> /etc/rc.d/init.d/livesys << EOF
 
+# set system keymaps
+localectl set-x11-keymap us,ru pc105 , grp:alt_shift_toggle
+
 if [ -e /usr/share/icons/hicolor/96x96/apps/fedora-logo-icon.png ] ; then
     # use image also for kdm
     mkdir -p /usr/share/apps/kdm/faces
