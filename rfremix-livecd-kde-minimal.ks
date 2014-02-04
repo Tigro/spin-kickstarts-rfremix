@@ -234,7 +234,7 @@ fpaste
 system-config-firewall
 system-config-firewall-base
 grub-customizer
-gnome-disk-utility
+kde-partitionmanager
 NetworkManager-gnome
 psi-plus
 psi-plus-themes
