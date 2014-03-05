@@ -6,4 +6,4 @@
 #%include fedora-repo-rawhide.ks
 
 # For non-master branches the following should be uncommented
-%include rfremix-repo-not-rawhide.ks
+%include rfremix-repo-rawhide.ks
