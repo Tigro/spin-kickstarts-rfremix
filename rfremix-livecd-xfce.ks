@@ -11,158 +11,19 @@
 
 %include rfremix-live-base.ks
 %include rfremix-live-minimization.ks
-
-%packages
-
-# Office
-@office
-
-# Graphics
-epdfview
--evince
-
-# development
-geany
-
-# Internet
-firefox
-thunderbird
-liferea
-pidgin
-remmina
-remmina-plugins-rdp
-remmina-plugins-vnc
-transmission
-
-# multimedia
-alsa-plugins-pulseaudio
-asunder
-cheese
-quodlibet
-pavucontrol
-parole
-parole-mozplugin
-xfburn
-
-# System
-gparted
--gnome-disk-utility
-gigolo
-setroubleshoot
-
-# Accessories
-catfish
-galculator
-seahorse
-
-# More Desktop stuff
-# java plugin
-icedtea-web
-NetworkManager-vpnc
-NetworkManager-openvpn
-NetworkManager-gnome
-NetworkManager-pptp
-desktop-backgrounds-compat
-gnome-bluetooth
-gsmartcontrol
-xscreensaver
-xdg-user-dirs-gtk
-
-# default artwork
-fedora-icon-theme
-gnome-themes
-adwaita-cursor-theme
-adwaita-gtk2-theme
-adwaita-gtk3-theme
-
-# Command line
-irssi
-mutt
-ntfs-3g
-powertop
-rtorrent
-vim-enhanced
-wget
-yum-utils
-
-# Xfce packages
-@xfce-desktop
-Terminal
-gtk-xfce-engine
-orage
-ristretto
-thunar-volman
-thunar-media-tags-plugin
-xarchiver
-xfce4-battery-plugin
-# we already have thunar-volman
-#xfce4-cddrive-plugin
-xfce4-cellmodem-plugin
-xfce4-clipman-plugin
-xfce4-cpugraph-plugin
-xfce4-datetime-plugin
-xfce4-dict-plugin
-xfce4-diskperf-plugin
-xfce4-eyes-plugin
-xfce4-fsguard-plugin
-xfce4-genmon-plugin
-xfce4-mailwatch-plugin
-xfce4-mount-plugin
-xfce4-netload-plugin
-xfce4-notes-plugin
-xfce4-places-plugin
-xfce4-power-manager
-xfce4-quicklauncher-plugin
-xfce4-screenshooter-plugin
-xfce4-sensors-plugin
-xfce4-smartbookmark-plugin
-xfce4-systemload-plugin
-xfce4-taskmanager
-xfce4-time-out-plugin
-xfce4-timer-plugin
-xfce4-verve-plugin
-# we already have nm-applet
-#xfce4-wavelan-plugin
-xfce4-weather-plugin
-xfce4-websearch-plugin
-xfce4-xfswitch-plugin
-xfce4-xkb-plugin
-# system-config-printer does printer management better
-#xfprint
-xfwm4-themes
-
-# dictionaries are big
--aspell-*
-#-man-pages-*
-
-# more fun with space saving
--gimp-help
-# not needed, but as long as there is space left, we leave this in
-#-desktop-backgrounds-basic
-
-# save some space
--autofs
--nss_db
--acpid
-
-# drop some system-config things
--system-config-boot
--system-config-rootpassword
-#-system-config-services
--policycoreutils-gui
-
-# save space
--planner
-
-%end
+%include rfremix-xfce-packages.ks
 
 %post
 # xfce configuration
+
+# This is a huge file and things work ok without it
+rm -f /usr/share/icons/HighContrast/icon-theme.cache
 
 # create /etc/sysconfig/desktop (needed for installation)
 
 cat > /etc/sysconfig/desktop <<EOF
 PREFERRED=/usr/bin/startxfce4
+DISPLAYMANAGER=/usr/sbin/lightdm
 EOF
 
 cat >> /etc/rc.d/init.d/livesys << EOF
@@ -170,7 +31,7 @@ cat >> /etc/rc.d/init.d/livesys << EOF
 mkdir -p /home/liveuser/.config/xfce4
 
 cat > /home/liveuser/.config/xfce4/helpers.rc << FOE
-MailReader=thunderbird
+MailReader=sylpheed-claws
 FileManager=Thunar
 FOE
 
@@ -188,22 +49,21 @@ rm -f /etc/xdg/autostart/xfconf-migration-4.6.desktop || :
 mkdir -p /home/liveuser/.config/xfce4/xfconf/xfce-perchannel-xml
 cp /etc/xdg/xfce4/panel/default.xml /home/liveuser/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml
 
-## change icon theme to gnome
-#sed -i '/IconThemeName/ s!Fedora!gnome!g' /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml
-# hint style slight
-sed -i '/HintStyle/ s!hintfull!hintslight!g' /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml
+# set up lightdm autologin
+sed -i 's/^#autologin-user=.*/autologin-user=liveuser/' /etc/lightdm/lightdm.conf
+sed -i 's/^#autologin-user-timeout=.*/autologin-user-timeout=0/' /etc/lightdm/lightdm.conf
+#sed -i 's/^#show-language-selector=.*/show-language-selector=true/' /etc/lightdm/lightdm-gtk-greeter.conf
 
-# set up timed auto-login for after 60 seconds
-cat >> /etc/gdm/custom.conf << FOE
-[daemon]
-AutomaticLoginEnable=True
-AutomaticLogin=liveuser
-FOE
+# set Xfce as default session, otherwise login will fail
+sed -i 's/^#user-session=.*/user-session=xfce/' /etc/lightdm/lightdm.conf
 
 # Show harddisk install on the desktop
 sed -i -e 's/NoDisplay=true/NoDisplay=false/' /usr/share/applications/liveinst.desktop
 mkdir /home/liveuser/Desktop
 cp /usr/share/applications/liveinst.desktop /home/liveuser/Desktop
+
+# and mark it as executable (new Xfce security feature)
+chmod +x /home/liveuser/Desktop/liveinst.desktop
 
 # this goes at the end after all other changes. 
 chown -R liveuser:liveuser /home/liveuser
@@ -212,3 +72,4 @@ restorecon -R /home/liveuser
 EOF
 
 %end
+

@@ -1,4 +1,4 @@
-# Desktop with customizationst to fit in a CD sized image (package removals, etc.)
+# Desktop with customizations to fit in a CD (package removals, etc.)
 # Maintained by the Fedora Desktop SIG:
 # http://fedoraproject.org/wiki/SIGs/Desktop
 # mailto:desktop@lists.fedoraproject.org
@@ -7,37 +7,44 @@
 %include rfremix-live-minimization.ks
 
 %packages
-# First, no office
 -planner
 
-# Temporary list of things removed from comps but not synced yet
--specspo
+# remove some other applications
+-gnome-boxes
+-gnome-dictionary
+
+# remove input method things we don't need
+-ibus-typing-booster
+-imsettings
+-imsettings-gsettings
 
 # Java plugin
 icedtea-web
 # Drop things that pull in perl
 -linux-atm
--perf
 
 # No printing
 -foomatic-db-ppds
 -foomatic
 
+# we don't want prelink
+-prelink
+
 # Dictionaries are big
+# we're going to try keeping hunspell-* after notting, davidz, and ajax voiced
+# strong preference to giving it a go on #fedora-desktop.
+# also see http://bugzilla.gnome.org/681084
 -aspell-*
--hunspell-*
 -man-pages*
 -words
 
-# Help and art can be big, too
--gnome-user-docs
+# Help and art and fonts can be big, too
 -evolution-help
--gnome-games-help
 -desktop-backgrounds-basic
 -*backgrounds-extras
+-stix-fonts
 
-# Legacy cmdline things we don't want
--nss_db
+# Legacy and cmdline things we don't want
 -krb5-auth-dialog
 -krb5-workstation
 -pam_krb5
@@ -58,25 +65,46 @@ icedtea-web
 -rpcbind
 -acpid
 -ntsysv
+-rmt
+-talk
+-lftp
+-tcpdump
+-dump
 
 # Drop some system-config things
 -system-config-boot
+-system-config-language
 -system-config-rootpassword
 -system-config-services
 -policycoreutils-gui
 
-# save some space
--flite
--orca
--fbreader
--shutter
--gnome-speech
--mplayer*
-
 # utility
 gparted
+shutter
+
+# These things are cut purely for space reasons
+-aisleriot
+-brasero
+-brasero-nautilus
+-bijiben
+-gnome-system-log
+-deja-dup
+-eog
+-gnu-free-mono-fonts
+-gnu-free-sans-fonts
+-gnu-free-serif-fonts
+-uboot-tools
+-dtc
+
+# Without gnu freefonts, the lack of Malayalam coverage is
+# a problem in anaconda (#977764)
+lohit-malayalam-fonts
 
 %end
 
 %post
+
+# This is a huge file and things work ok without it
+rm -f /usr/share/icons/HighContrast/icon-theme.cache
+
 %end

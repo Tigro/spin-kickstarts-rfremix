@@ -14,7 +14,7 @@ part / --size 6096 --fstype ext4
 @graphics
 @sound-and-video
 @gnome-desktop
-@office
+@libreoffice
 nss-mdns
 NetworkManager-vpnc
 NetworkManager-openvpn
@@ -83,7 +83,6 @@ man-pages-ru
 -evolution-help
 -gnome-games
 -gnome-games-help
--nss_db
 vino
 -isdn4k-utils
 -dasher

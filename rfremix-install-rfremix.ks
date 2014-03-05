@@ -12,180 +12,163 @@
 %include rfremix-packages.ks
 
 # Add the repos you wish to use to compose here.  At least one of them needs group data.
-repo --name=russianfedora --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-russianfedora-$releasever&arch=$basearch --exclude kernel*debug* --exclude kernel-kdump* --exclude kernel-PAE* --exclude syslog-ng --exclude java-1.5.0-gcj-devel --exclude astronomy-bookmarks --exclude generic* --exclude java-1.5.0-gcj-javadoc --exclude GConf2-dbus* --exclude bluez-gnome --exclude gnome-background-standard
-repo --name=russianfedora-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-russianfedora-updates-$releasever&arch=$basearch --exclude kmod*PAE*
-#repo --name=russianfedora-updates-testing --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-russianfedora-updates-testing-$releasever&arch=$basearch --exclude kmod*PAE*
-repo --name=rpmfusion-free --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-rpmfusion-free-$releasever&arch=$basearch --exclude kmod*PAE*
-repo --name=rpmfusion-free-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-rpmfusion-free-updates-$releasever&arch=$basearch --exclude kmod*PAE*
-repo --name=rpmfusion-nonfree --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-rpmfusion-nonfree-$releasever&arch=$basearch --exclude kmod*PAE*
-repo --name=rpmfusion-nonfree-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-rpmfusion-nonfree-updates-$releasever&arch=$basearch --exclude kmod*PAE*
-repo --name=russianfedora-free --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=free-fedora-$releasever&arch=$basearch --exclude kmod*PAE*
-repo --name=russianfedora-free-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=free-fedora-updates-released-$releasever&arch=$basearch --exclude kmod*PAE*
-repo --name=russianfedora-nonfree --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=nonfree-fedora-$releasever&arch=$basearch --exclude kmod*PAE*
-repo --name=russianfedora-nonfree-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=nonfree-fedora-updates-released-$releasever&arch=$basearch --exclude kmod*PAE*
-repo --name=russianfedora-fixes --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=fixes-fedora-$releasever&arch=$basearch --exclude kmod*PAE*
-repo --name=russianfedora-fixes-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=fixes-fedora-updates-released-$releasever&arch=$basearch --exclude kmod*PAE*
+
+# Fedora Repos
+repo --name=fedora --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=fedora-rawhide&arch=$basearch
+
+repo --name=fedora-source  --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=fedora-source-rawhide&arch=$basearch
+
+# RPMFusion Repos
+repo --name=rpmfusion-free --mirrorlist=http://mirrors.rpmfusion.org/mirrorlist?repo=free-fedora-rawhide&arch=$basearch
+repo --name=rpmfusion-nonfree --mirrorlist=http://mirrors.rpmfusion.org/mirrorlist?repo=nonfree-fedora-rawhide&arch=$basearch --exclude *nvidia*
+repo --name=rpmfusion-free-source --mirrorlist=http://mirrors.rpmfusion.org/mirrorlist?repo=free-fedora-source-rawhide&arch=$basearch
+repo --name=rpmfusion-nonfree-source --mirrorlist=http://mirrors.rpmfusion.org/mirrorlist?repo=nonfree-fedora-source-rawhide&arch=$basearch --exclude *nvidia*
+
+# Russian Fedora Repos
+repo --name=russianfedora-free --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=free-fedora-rawhide&arch=$basearch  --exclude russianfedora*
+repo --name=russianfedora-free-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=free-fedora-updates-released-rawhide&arch=$basearch
+repo --name=russianfedora-nonfree --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=nonfree-fedora-rawhide&arch=$basearch --exclude java*sun*
+repo --name=russianfedora-nonfree-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=nonfree-fedora-updates-released-rawhide&arch=$basearch --exclude java*sun*
+repo --name=russianfedora-fixes --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=fixes-fedora-rawhide&arch=$basearch
+repo --name=russianfedora-fixes-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=fixes-fedora-updates-released-rawhide&arch=$basearch
+repo --name=russianfedora-branding --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=branding-fedora-rawhide&arch=$basearch
+repo --name=russianfedora-branding-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=branding-fedora-updates-released-rawhide&arch=$basearch
+
+repo --name=russianfedora-fixes-source --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=fixes-fedora-source-rawhide&arch=$basearch
+repo --name=russianfedora-fixes-updates-source --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=fixes-fedora-updates-released-source-rawhide&arch=$basearch
+repo --name=russianfedora-free-source --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=free-fedora-source-rawhide&arch=$basearch
+repo --name=russianfedora-free-updates-source --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=free-fedora-updates-released-source-rawhide&arch=$basearch
+repo --name=russianfedora-nonfree-source --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=nonfree-fedora-source-rawhide&arch=$basearch
+repo --name=russianfedora-nonfree-updates-source --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=nonfree-fedora-updates-released-source-rawhide&arch=$basearch
+repo --name=russianfedora-branding-source --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=branding-fedora-source-rawhide&arch=$basearch
+repo --name=russianfedora-branding-updates-source --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=branding-fedora-updates-released-source-rawhide&arch=$basearch
+
+
 
 # Package manifest for the compose.  Uses repo group metadata to translate groups.
-# (@base is added by default unless you add --nobase to %packages)
 # (default groups for the configured repos are added by --default)
-%packages --default
+# @base got renamed to @standard, but @base is still included by default by pungi.
+%packages --default --nobase
+
+# pungi is an inclusive depsolver so that multiple packages are brought 
+# in to satisify dependencies and we don't always want that. So we  use
+# an exclusion list to cut out things we don't want
+
+-kernel*debug*
+-kernel-kdump*
+-kernel-tools*
+-syslog-ng*
+-astronomy-bookmarks
+-generic*
+-GConf2-dbus*
+-bluez-gnome
+# Periods cause problems in paterns, so replace with *s
+-java-1*8*0-openjdk
+-community-mysql*
+-jruby*
+
 # core
-tcsh
 kernel*
 dracut-*
-# Desktop Packages
-@kde-desktop
-@lxde-desktop
-kdewebdev
-echo-icon-theme
-tracker
-nspluginwrapper
-liferea
-esc
-thunderbird
+
+# Desktops
+
+## common stuff
+@base-x
+@guest-desktop-agents
+@guest-agents
+@standard
+@core
 @dial-up
-# apps
+@fonts
+@input-methods
+@multimedia
+@hardware-support
+@printing
+@admin-tools
+@basic-desktop
+
+## GNOME
+@firefox
+@gnome-desktop
+@epiphany
+@libreoffice
+@gnome-games
+
+## KDE
+@kde-desktop
+@kde-apps
+@kde-education
+@kde-media
+#@kde-office
+
+## XFCE
+@xfce-desktop
+@xfce-apps
+@xfce-extra-plugins
+@xfce-media
+#@xfce-office
+
+## LXDE
+@lxde-desktop
+@lxde-apps
+@lxde-media
+#@lxde-office
+
+## SUGAR
+@sugar-desktop
+@sugar-apps
+
+## MATE
+@mate-desktop
+
+## CINNAMON
+@cinnamon-desktop
+
+# Workstation
 @eclipse
-joe
-emacs
-k3b
-@system-tools
-mc
-wireshark-gnome
-# Devel packages
 @development-libs
 @development-tools
+@c-development
+@rpm-development-tools
 @fedora-packager
 @gnome-software-development
 @kde-software-development
-@web-development
 @x-software-development
-# Server packages
-@dns-server
-@ftp-server
-@mail-server
-@mysql
-@network-server
-@news-server
-@server-cfg
-@smb-server
-@sql-server
+@virtualization
 @web-server
-# Keep dap off the install media, makes Eng & Sci show up
--dap-server-cgi
-# Virt group
-@virtualization --optional
-# filesystem stuff
-@filesystems
-# Languages
-@afrikaans-support
-@albanian-support
-@arabic-support
-@armenian-support
-@assamese-support
-@basque-support
-@belarusian-support
-@bengali-support
-@bhutanese-support
-@burmese-support
-@bosnian-support
-@brazilian-support
-@breton-support
-@british-support
-@bulgarian-support
-@catalan-support
-@chinese-support
-@croatian-support
-@czech-support
-@danish-support
-@dutch-support
-@esperanto-support
-@estonian-support
-@ethiopic-support
-@faroese-support
-@filipino-support
-@finnish-support
-@french-support
-@gaelic-support
-@galician-support
-@georgian-support
-@german-support
-@greek-support
-@gujarati-support
-@hebrew-support
-@hindi-support
-@hungarian-support
-@icelandic-support
-@indonesian-support
-@inuktitut-support
-@irish-support
-@italian-support
-@japanese-support
-@kannada-support
-@kashmiri-support
-@kashubian-support
-@khmer-support
-@konkani-support
-@korean-support
-@lao-support
-@latvian-support
-@lithuanian-support
-@low-saxon-support
-@macedonian-support
-@malay-support
-@malayalam-support
-@maori-support
-@marathi-support
-@mongolian-support
-@nepali-support
-@northern-sotho-support
-@norwegian-support
-@oriya-support
-@persian-support
-@polish-support
-@portuguese-support
-@punjabi-support
-@romanian-support
-@russian-support
-@samoan-support
-@serbian-support
-@sindhi-support
-@sinhala-support
-@slovak-support
-@slovenian-support
-@somali-support
-@southern-ndebele-support
-@southern-sotho-support
-@spanish-support
-@swati-support
-@swedish-support
-@tagalog-support
-@tamil-support
-@telugu-support
-@thai-support
-@tibetan-support
-@tonga-support
-@tsonga-support
-@tswana-support
-@turkish-support
-@ukrainian-support
-@urdu-support
-@venda-support
-@vietnamese-support
-@walloon-support
-@welsh-support
-@xhosa-support
-@zulu-support
-# Size removals
--gimp-help
--java-1.6.0-openjdk-src
--xorg-x11-docs
--kernel-doc
--java-1.5.0-gcj-src
--java-1.5.0-gcj-devel
--libgcj-src
--*javadoc*
--frysk
--*gcj*
+@mongodb
+@perl-web
+@php
+@python-web
+@rubyonrails
+@mysql
+@sql-server
+@design-suite
+## Not included yet due to space concerns
+#@jbossas
+#@milkymist
+#@mingw32
+#@ocaml
+#@robotics-suite
+#@electronic-lab
+
+# Things needed for installation
+@anaconda-tools
+
+# Langpacks
+autocorr-*
+eclipse-nls-*
+hunspell-*
+hyphen-*
+calligra-l10n-*
+kde-l10n-*
+libreoffice-langpack-*
+man-pages-*
+mythes-*
+-gimp-help-*
+
+# Removals
+-PackageKit-zif
+-zif
 %end

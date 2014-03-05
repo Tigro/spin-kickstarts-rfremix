@@ -32,7 +32,7 @@ NetworkManager-pptp
 inkscape
 istanbul
 sK1
-@office
+@libreoffice
 
 # avoid weird case where we pull in more festival stuff than we need
 festival
@@ -44,8 +44,6 @@ festvox-slt-arctic-hts
 -gimp-help-browser
 -evolution-help
 -gnome-games
--gnome-games-help
--nss_db
 -vino
 -isdn4k-utils
 -dasher
@@ -123,7 +121,7 @@ fedora-icon-theme
 %post
 cat >> /etc/rc.d/init.d/livesys << EOF
 
-# Disable the update notifications of kpackagekit
+# Disable the update notifications of apper
 cat > /home/liveuser/.kde/share/config/KPackageKit << KPACKAGEKIT_EOF
 [CheckUpdate]
 autoUpdate=0

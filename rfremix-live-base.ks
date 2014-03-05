@@ -14,36 +14,35 @@ auth --useshadow --enablemd5
 selinux --enforcing
 firewall --enabled --service=mdns
 xconfig --startxonboot
-part / --size 3072 --fstype ext4
+part / --size 8096 --fstype ext4
 services --enabled=NetworkManager --disabled=network,sshd
 
-# To compose against the current release tree, use the following "repo" (enabled by default)
-repo --name=russianfedora --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-russianfedora-15&arch=$basearch --exclude gnome-background-standard
-repo --name=russianfedora-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-russianfedora-updates-15&arch=$basearch
-#repo --name=russianfedora-updates-testing --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-russianfedora-updates-testing-15&arch=$basearch
-repo --name=rpmfusion-free --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-rpmfusion-free-15&arch=$basearch
-repo --name=rpmfusion-nonfree --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=build-rpmfusion-nonfree-15&arch=$basearch
-repo --name=russianfedora-free --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=free-fedora-15&arch=$basearch
-repo --name=russianfedora-nonfree --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=nonfree-fedora-15&arch=$basearch
-repo --name=russianfedora-fixes --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=fixes-fedora-15&arch=$basearch
+%include rfremix-repo.ks
 
 %packages
 @base-x
-@base
+@guest-desktop-agents
+@standard
 @core
 @fonts
 @input-methods
-# use a small pinyin db for live
--ibus-pinyin-db-open-phrase
-ibus-pinyin-db-android
-@admin-tools
 @dial-up
+@multimedia
 @hardware-support
 @printing
+-ubuntu-font-family
+-paratype-pt-sans*
+-*nvidia*
+
+# to decrypt ubuntu partitions
+fuse-encfs
+tcplay
+realcrypt
 
 # Explicitly specified here:
 # <notting> walters: because otherwise dependency loops cause yum issues.
 kernel
+kernel-modules-extra
 
 # This was added a while ago, I think it falls into the category of
 # "Diagnosis/recovery tool useful from a Live OS image".  Leaving this untouched
@@ -56,31 +55,24 @@ wget
 
 # The point of a live image is to install
 anaconda
-isomd5sum
+@anaconda-tools
+
+# grub utility
+grub-customizer
 
 # fpaste is very useful for debugging and very small
 fpaste
 
-# wifi cards modules
-#kmod-wl
-#kmod-rt2860
-#kmod-rt2870
-#kmod-rt3062
-#kmod-rt3070
-#kmod-rt3090
+# Make live images easy to shutdown and the like in libvirt
+qemu-guest-agent
+
+-cairo-freeworld
+-freetype-infinality
+-freetype-freeworld
 
 %end
 
 %post
-
-# Some new rules for GConf
-if [ -x /usr/bin/gconftool-2 ]; then
-    gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t bool /apps/nautilus/preferences/always_use_browser true
-    gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t bool /apps/gnome-terminal/global/use_menu_accelerators false
-    gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t string /desktop/gnome/interface/toolbar_style "both-horiz"
-    gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t list --list-type=string /apps/gedit-2/preferences/encodings/auto_detected "[UTF-8,CURRENT,WINDOWS-1251,KOI8R,ISO-8859-5]"
-    gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t bool /desktop/gnome/interface/menus_have_icons true
-fi
 
 # FIXME: it'd be better to get this installed from a package
 cat > /etc/rc.d/init.d/livesys << EOF
@@ -90,10 +82,13 @@ cat > /etc/rc.d/init.d/livesys << EOF
 #
 # chkconfig: 345 00 99
 # description: Init script for live image.
+### BEGIN INIT INFO
+# X-Start-Before: display-manager
+### END INIT INFO
 
 . /etc/init.d/functions
 
-if ! strstr "\`cat /proc/cmdline\`" liveimg || [ "\$1" != "start" ]; then
+if ! strstr "\`cat /proc/cmdline\`" rd.live.image || [ "\$1" != "start" ]; then
     exit 0
 fi
 
@@ -106,19 +101,15 @@ exists() {
     \$*
 }
 
-touch /.liveimg-configured
-
 # Make sure we don't mangle the hardware clock on shutdown
 ln -sf /dev/null /etc/systemd/system/hwclock-save.service
 
-# mount live image
-if [ -b \`readlink -f /dev/live\` ]; then
-   mkdir -p /mnt/live
-   mount -o ro /dev/live /mnt/live 2>/dev/null || mount /dev/live /mnt/live
-fi
-
 livedir="LiveOS"
 for arg in \`cat /proc/cmdline\` ; do
+  if [ "\${arg##rd.live.dir=}" != "\${arg}" ]; then
+    livedir=\${arg##rd.live.dir=}
+    return
+  fi
   if [ "\${arg##live_dir=}" != "\${arg}" ]; then
     livedir=\${arg##live_dir=}
     return
@@ -132,8 +123,8 @@ if ! strstr "\`cat /proc/cmdline\`" noswap && [ -n "\$swaps" ] ; then
     action "Enabling swap partition \$s" swapon \$s
   done
 fi
-if ! strstr "\`cat /proc/cmdline\`" noswap && [ -f /mnt/live/\${livedir}/swap.img ] ; then
-  action "Enabling swap file" swapon /mnt/live/\${livedir}/swap.img
+if ! strstr "\`cat /proc/cmdline\`" noswap && [ -f /run/initramfs/live/\${livedir}/swap.img ] ; then
+  action "Enabling swap file" swapon /run/initramfs/live/\${livedir}/swap.img
 fi
 
 mountPersistentHome() {
@@ -148,8 +139,8 @@ mountPersistentHome() {
     mountopts="-t jffs2"
   elif [ ! -b "\$homedev" ]; then
     loopdev=\`losetup -f\`
-    if [ "\${homedev##/mnt/live}" != "\${homedev}" ]; then
-      action "Remounting live store r/w" mount -o remount,rw /mnt/live
+    if [ "\${homedev##/run/initramfs/live}" != "\${homedev}" ]; then
+      action "Remounting live store r/w" mount -o remount,rw /run/initramfs/live
     fi
     losetup \$loopdev \$homedev
     homedev=\$loopdev
@@ -183,8 +174,8 @@ findPersistentHome() {
 
 if strstr "\`cat /proc/cmdline\`" persistenthome= ; then
   findPersistentHome
-elif [ -e /mnt/live/\${livedir}/home.img ]; then
-  homedev=/mnt/live/\${livedir}/home.img
+elif [ -e /run/initramfs/live/\${livedir}/home.img ]; then
+  homedev=/run/initramfs/live/\${livedir}/home.img
 fi
 
 # if we have a persistent /home, then we want to go ahead and mount it
@@ -195,9 +186,8 @@ fi
 # make it so that we don't do writing to the overlay for things which
 # are just tmpdirs/caches
 mount -t tmpfs -o mode=0755 varcacheyum /var/cache/yum
-mount -t tmpfs tmp /tmp
 mount -t tmpfs vartmp /var/tmp
-[ -x /sbin/restorecon ] && /sbin/restorecon /var/cache/yum /tmp /var/tmp >/dev/null 2>&1
+[ -x /sbin/restorecon ] && /sbin/restorecon /var/cache/yum /var/tmp >/dev/null 2>&1
 
 if [ -n "\$configdone" ]; then
   exit 0
@@ -206,60 +196,54 @@ fi
 # add fedora user with no passwd
 action "Adding live user" useradd \$USERADDARGS -c "Live System User" liveuser
 passwd -d liveuser > /dev/null
+usermod -aG wheel liveuser > /dev/null
+
+# Remove root password lock
+passwd -d root > /dev/null
 
 # turn off firstboot for livecd boots
-chkconfig --level 345 firstboot off 2>/dev/null
-# We made firstboot a native systemd service, so it can no longer be turned
-# off with chkconfig. It should be possible to turn it off with systemctl, but
-# that doesn't work right either. For now, this is good enough: the firstboot
-# service will start up, but this tells it not to run firstboot. I suspect the
-# other services 'disabled' below are not actually getting disabled properly,
-# with systemd, but we can look into that later. - AdamW 2010/08 F14Alpha
-echo "RUN_FIRSTBOOT=NO" > /etc/sysconfig/firstboot
+systemctl --no-reload disable firstboot-text.service 2> /dev/null || :
+systemctl --no-reload disable firstboot-graphical.service 2> /dev/null || :
+systemctl stop firstboot-text.service 2> /dev/null || :
+systemctl stop firstboot-graphical.service 2> /dev/null || :
 
 # don't use prelink on a running live image
 sed -i 's/PRELINKING=yes/PRELINKING=no/' /etc/sysconfig/prelink &>/dev/null || :
 
-# don't start yum-updatesd for livecd boots
-chkconfig --level 345 yum-updatesd off 2>/dev/null || :
-
 # turn off mdmonitor by default
-chkconfig --level 345 mdmonitor off 2>/dev/null || :
-
-# turn off setroubleshoot on the live image to preserve resources
-chkconfig --level 345 setroubleshoot off 2>/dev/null || :
-
-# turn off rfremixconf script
-chkconfig --level 345 rfremixconf off 2>/dev/null || :
+systemctl --no-reload disable mdmonitor.service 2> /dev/null || :
+systemctl --no-reload disable mdmonitor-takeover.service 2> /dev/null || :
+systemctl stop mdmonitor.service 2> /dev/null || :
+systemctl stop mdmonitor-takeover.service 2> /dev/null || :
 
 # don't enable the gnome-settings-daemon packagekit plugin
 gsettings set org.gnome.settings-daemon.plugins.updates active 'false' || :
 
 # don't start cron/at as they tend to spawn things which are
 # disk intensive that are painful on a live image
-chkconfig --level 345 crond off 2>/dev/null || :
-chkconfig --level 345 atd off 2>/dev/null || :
+systemctl --no-reload disable crond.service 2> /dev/null || :
+systemctl --no-reload disable atd.service 2> /dev/null || :
+systemctl stop crond.service 2> /dev/null || :
+systemctl stop atd.service 2> /dev/null || :
 
-# Stopgap fix for RH #217966; should be fixed in HAL instead
-touch /media/.hal-mtab
+# turn off rfremixconf script
+chkconfig --level 345 rfremixconf off 2>/dev/null || :
 
-# and hack so that we eject the cd on shutdown if we're using a CD...
-if strstr "\`cat /proc/cmdline\`" CDLABEL= ; then
-  cat >> /sbin/halt.local << FOE
-#!/bin/bash
-# XXX: This often gets stuck during shutdown because /etc/init.d/halt
-#      (or something else still running) wants to read files from the block\
-#      device that was ejected.  Disable for now.  Bug #531924
-# we want to eject the cd on halt, but let's also try to avoid
-# io errors due to not being able to get files...
-#cat /sbin/halt > /dev/null
-#cat /sbin/reboot > /dev/null
-#/usr/sbin/eject -p -m \$(readlink -f /dev/live) >/dev/null 2>&1
-#echo "Please remove the CD from your drive and press Enter to finish restarting"
-#read -t 30 < /dev/console
-FOE
-chmod +x /sbin/halt.local
+# disable yum langpacks plugin on live
+if [ -f /usr/lib/gnome-settings-daemon-3.0/gtk-modules/pk-gtk-module.desktop ]; then
+    rm -f /usr/lib/gnome-settings-daemon-3.0/gtk-modules/pk-gtk-module.desktop
 fi
+
+if [ -f /usr/lib64/gnome-settings-daemon-3.0/gtk-modules/pk-gtk-module.desktop ]; then
+    rm -f /usr/lib64/gnome-settings-daemon-3.0/gtk-modules/pk-gtk-module.desktop
+fi
+
+# Mark things as configured
+touch /.liveimg-configured
+
+# add static hostname to work around xauth bug
+# https://bugzilla.redhat.com/show_bug.cgi?id=679486
+echo "localhost" > /etc/hostname
 
 EOF
 
@@ -274,7 +258,7 @@ cat > /etc/rc.d/init.d/livesys-late << EOF
 
 . /etc/init.d/functions
 
-if ! strstr "\`cat /proc/cmdline\`" liveimg || [ "\$1" != "start" ] || [ -e /.liveimg-late-configured ] ; then
+if ! strstr "\`cat /proc/cmdline\`" rd.live.image || [ "\$1" != "start" ] || [ -e /.liveimg-late-configured ] ; then
     exit 0
 fi
 
@@ -317,20 +301,6 @@ EndSection
 FOE
 fi
 
-# adding keyboard switchers
-if [ -f /etc/sysconfig/keyboard ]; then
-    . /etc/sysconfig/keyboard
-    # GNOME
-    LAYOUT_OPT=\$(echo \$OPTIONS | sed 's!grp:!grp\tgrp:!g;s!grp_led:!grp\tgrp_led:!g')
-
-    if [ -d /etc/gconf/gconf.xml.defaults ]; then
-        /usr/bin/gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults \
-            -s -t list --list-type=string /desktop/gnome/peripherals/keyboard/kbd/layouts "[\$LAYOUT]" > /dev/null
-        /usr/bin/gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults \
-            -s -t list --list-type=string /desktop/gnome/peripherals/keyboard/kbd/options "[\$LAYOUT_OPT]" > /dev/null
-    fi
-fi
-
 EOF
 
 chmod 755 /etc/rc.d/init.d/livesys
@@ -341,9 +311,14 @@ chmod 755 /etc/rc.d/init.d/livesys-late
 /sbin/restorecon /etc/rc.d/init.d/livesys-late
 /sbin/chkconfig --add livesys-late
 
+# enable tmpfs for /tmp
+systemctl enable tmp.mount
+
 # work around for poor key import UI in PackageKit
 rm -f /var/lib/rpm/__db*
-rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-fedora
+releasever=$(rpm -q --qf '%{version}\n' rfremix-release)
+basearch=$(uname -m)
+rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-$releasever-$basearch
 echo "Packages within this LiveCD"
 rpm -qa
 # Note that running rpm recreates the rpm db files which aren't needed or wanted

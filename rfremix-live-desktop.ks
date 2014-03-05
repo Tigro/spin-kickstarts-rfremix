@@ -3,37 +3,24 @@
 # mailto:desktop@lists.fedoraproject.org
 
 %include rfremix-live-base.ks
+%include rfremix-desktop-packages.ks
 
-part / --size 4096
-
-%packages
-@graphical-internet
-@sound-and-video
-@gnome-desktop
-@office
-
-# FIXME; apparently the glibc maintainers dislike this, but it got put into the
-# desktop image at some point.  We won't touch this one for now.
-nss-mdns
-
-# This one needs to be kicked out of @base
--smartmontools
-
-%end
+part / --size 8192
 
 %post
 cat >> /etc/rc.d/init.d/livesys << EOF
 
-# do not use menu accelerators in gnome terminal
-if [ -x /usr/bin/gconftool-2 ]; then
-gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s \
-  -t bool /apps/gnome-terminal/global/use_menu_accelerators false
-fi
+# add us,ru layouts by default
+cat > /usr/share/glib-2.0/schemas/org.gnome.desktop.input-sources.gschema.override << FOE
+[org.gnome.desktop.input-sources]
+sources=[('xkb', 'us'), ('xkb', 'ru')]
+xkb-options=['grp:alt_shift_toggle,grp_led:scroll']
+FOE
 
-# disable screensaver locking
-cat >> /usr/share/glib-2.0/schemas/org.gnome.desktop.screensaver.gschema.override << FOE
-[org.gnome.desktop.screensaver]
-lock-enabled=false
+# enable menu accelerator
+cat > /usr/share/glib-2.0/schemas/org.gnome.Terminal.gschema.override <<FOE
+[org.gnome.Terminal.Legacy.Settings]
+menu-accelerator-enabled=false
 FOE
 
 # disable updates plugin
@@ -41,6 +28,10 @@ cat >> /usr/share/glib-2.0/schemas/org.gnome.settings-daemon.plugins.updates.gsc
 [org.gnome.settings-daemon.plugins.updates]
 active=false
 FOE
+
+# don't run gnome-initial-setup
+mkdir ~liveuser/.config
+touch ~liveuser/.config/gnome-initial-setup-done
 
 # make the installer show up
 if [ -f /usr/share/applications/liveinst.desktop ]; then
@@ -51,37 +42,22 @@ if [ -f /usr/share/applications/liveinst.desktop ]; then
 
   cat >> /usr/share/glib-2.0/schemas/org.gnome.shell.gschema.override << FOE
 [org.gnome.shell]
-favorite-apps=['mozilla-firefox.desktop', 'evolution.desktop', 'empathy.desktop', 'rhythmbox.desktop', 'shotwell.desktop', 'openoffice.org-writer.desktop', 'nautilus.desktop', 'anaconda.desktop']
+favorite-apps=['firefox.desktop', 'evolution.desktop', 'empathy.desktop', 'rhythmbox.desktop', 'shotwell.desktop', 'libreoffice-writer.desktop', 'nautilus.desktop', 'gnome-documents.desktop', 'anaconda.desktop']
 FOE
 
-  # add installer to user menu
-  mkdir -p ~liveuser/.local/share/gnome-shell/extensions/Installer@shell-extensions.fedoraproject.org
-  cat >> ~liveuser/.local/share/gnome-shell/extensions/Installer@shell-extensions.fedoraproject.org/metadata.json << FOE
-{"shell-version": ["2.91.91"], "uuid": "Installer@shell-extensions.fedoraproject.org", "name": "Installer", "description": "Install OS from user menu"}
-FOE
-
-  cat >> ~liveuser/.local/share/gnome-shell/extensions/Installer@shell-extensions.fedoraproject.org/extension.js << FOE
-const PopupMenu = imports.ui.popupMenu;
-const Shell = imports.gi.Shell;
-const Main = imports.ui.main;
-const Util = imports.misc.util;
-
-function main() {
-    let app = Shell.AppSystem.get_default().get_app('anaconda.desktop');
-    let item = new PopupMenu.PopupMenuItem(app.get_name());
-    item.connect('activate', function() { app.activate(-1); });
-
-    Main.panel._statusmenu.menu.addMenuItem(item, Main.panel._statusmenu.menu._getMenuItems().length - 1);
-}
-FOE
-
+  # Make the welcome screen show up
+  if [ -f /usr/share/anaconda/gnome/fedora-welcome.desktop ]; then
+    mkdir -p ~liveuser/.config/autostart
+    cp /usr/share/anaconda/gnome/fedora-welcome.desktop /usr/share/applications/
+    cp /usr/share/anaconda/gnome/fedora-welcome.desktop ~liveuser/.config/autostart/
+  fi
 fi
 
 # rebuild schema cache with any overrides we installed
 glib-compile-schemas /usr/share/glib-2.0/schemas
 
-# set up timed auto-login for after 60 seconds
-cat >> /etc/gdm/custom.conf << FOE
+# set up auto-login
+cat > /etc/gdm/custom.conf << FOE
 [daemon]
 AutomaticLoginEnable=True
 AutomaticLogin=liveuser
@@ -91,6 +67,10 @@ FOE
 if [ -f /etc/PackageKit/CommandNotFound.conf ]; then
   sed -i -e 's/^SoftwareSourceSearch=true/SoftwareSourceSearch=false/' /etc/PackageKit/CommandNotFound.conf
 fi
+
+# make sure to set the right permissions and selinux contexts
+chown -R liveuser:liveuser /home/liveuser/
+restorecon -R /home/liveuser/
 
 EOF
 

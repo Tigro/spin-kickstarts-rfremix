@@ -4,7 +4,6 @@
 %packages
 
 # save some space
--samba-client
 -mpage
 -sox
 -hplip
@@ -14,12 +13,12 @@
 -autofs
 # smartcards won't really work on the livecd.
 -coolkey
+-wget
 
 # qlogic firmwares
 -ql2100-firmware
 -ql2200-firmware
 -ql23xx-firmware
--ql2400-firmware
 
 # scanning takes quite a bit of space :/
 -xsane
