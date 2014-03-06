@@ -21,8 +21,8 @@ repo --name=fedora-source  --mirrorlist=http://mirrors.fedoraproject.org/mirrorl
 # RPMFusion Repos
 repo --name=rpmfusion-free --mirrorlist=http://mirrors.rpmfusion.org/mirrorlist?repo=free-fedora-rawhide&arch=$basearch
 repo --name=rpmfusion-nonfree --mirrorlist=http://mirrors.rpmfusion.org/mirrorlist?repo=nonfree-fedora-rawhide&arch=$basearch --exclude *nvidia*
-repo --name=rpmfusion-free-source --mirrorlist=http://mirrors.rpmfusion.org/mirrorlist?repo=free-fedora-source-rawhide&arch=$basearch
-repo --name=rpmfusion-nonfree-source --mirrorlist=http://mirrors.rpmfusion.org/mirrorlist?repo=nonfree-fedora-source-rawhide&arch=$basearch --exclude *nvidia*
+repo --name=rpmfusion-free-source --baseurl=http://mirror.yandex.ru/fedora/rpmfusion/free/fedora/development/rawhide/source/SRPMS/
+repo --name=rpmfusion-nonfree-source --baseurl=http://mirror.yandex.ru/fedora/rpmfusion/nonfree/fedora/development/rawhide/source/SRPMS/
 
 # Russian Fedora Repos
 repo --name=russianfedora-free --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=free-fedora-rawhide&arch=$basearch  --exclude russianfedora*
