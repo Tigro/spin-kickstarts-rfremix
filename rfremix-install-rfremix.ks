@@ -14,9 +14,9 @@
 # Add the repos you wish to use to compose here.  At least one of them needs group data.
 
 # Fedora Repos
-repo --name=fedora --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=fedora-rawhide&arch=$basearch
+repo --name=fedora --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=fedora-rawhide&arch=$basearch&country=nl,fi,se,de,cz,uk
 
-repo --name=fedora-source  --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=fedora-source-rawhide&arch=$basearch
+repo --name=fedora-source  --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=fedora-source-rawhide&arch=$basearch&country=nl,fi,se,de,cz,uk
 
 # RPMFusion Repos
 repo --name=rpmfusion-free --mirrorlist=http://mirrors.rpmfusion.org/mirrorlist?repo=free-fedora-rawhide&arch=$basearch
