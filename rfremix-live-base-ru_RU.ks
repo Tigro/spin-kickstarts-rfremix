@@ -25,6 +25,9 @@ dejavu-serif-fonts
 -vollkorn-fonts
 -wqy-*-fonts
 
+# install proper logos
+rfremix-logos
+
 # remove input methods to free space
 -scim*
 -m17n*
