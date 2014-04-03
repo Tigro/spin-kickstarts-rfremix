@@ -20,4 +20,6 @@ hunspell-ru
 hyphen-ru 
 libreoffice-langpack-ru  
 mythes-ru
+rhughes-gnome-3-12-release
+russianfedora-gnome312-release
 %end
