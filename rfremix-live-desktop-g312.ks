@@ -29,6 +29,12 @@ cat >> /usr/share/glib-2.0/schemas/org.gnome.settings-daemon.plugins.updates.gsc
 active=false
 FOE
 
+# enable dark terminal
+cat >> /usr/share/glib-2.0/schemas/org.gnome.Terminal.gschema.override <<FOE
+[org.gnome.Terminal.Legacy.Settings]
+dark-theme=true
+FOE
+
 # don't run gnome-initial-setup
 mkdir ~liveuser/.config
 touch ~liveuser/.config/gnome-initial-setup-done
