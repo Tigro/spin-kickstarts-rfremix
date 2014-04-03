@@ -3,7 +3,7 @@
 # Maintainer(s):
 # - Arkady L. Shane <ashejn [AT] russianfedora [DOT] ru>
 
-%include rfremix-livecd-desktop.ks
+%include rfremix-livecd-desktop-g312.ks
 %include rfremix-live-base-ru_RU.ks
 
 lang ru_RU.UTF-8
