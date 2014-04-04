@@ -100,6 +100,9 @@ shutter
 # a problem in anaconda (#977764)
 lohit-malayalam-fonts
 
+gnome-music
+bijiben
+
 %end
 
 %post
