@@ -28,4 +28,6 @@ nss-mdns
 -gnome-maps
 -gnome-weather
 
+gnome-classic-session
+
 %end
