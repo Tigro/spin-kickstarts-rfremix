@@ -29,7 +29,6 @@
 -acpid
 
 # drop some system-config things
--system-config-boot
 -system-config-lvm
 -system-config-rootpassword
 #-system-config-services
