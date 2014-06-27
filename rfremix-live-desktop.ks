@@ -8,6 +8,10 @@
 part / --size 8192
 
 %post
+
+# This is a huge file and things work ok without it
+rm -f /usr/share/icons/HighContrast/icon-theme.cache
+
 cat >> /etc/rc.d/init.d/livesys << EOF
 
 # add us,ru layouts by default
@@ -24,9 +28,9 @@ menu-accelerator-enabled=false
 FOE
 
 # disable updates plugin
-cat >> /usr/share/glib-2.0/schemas/org.gnome.settings-daemon.plugins.updates.gschema.override << FOE
-[org.gnome.settings-daemon.plugins.updates]
-active=false
+cat >> /usr/share/glib-2.0/schemas/org.gnome.software.gschema.override << FOE
+[org.gnome.software]
+download-updates=false
 FOE
 
 # don't run gnome-initial-setup
