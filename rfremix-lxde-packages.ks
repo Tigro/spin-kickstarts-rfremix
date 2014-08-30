@@ -64,6 +64,7 @@ thunderbird
 transmission
 
 @libreoffice
+@networkmanager-submodules
 pavucontrol
 
 yumex
