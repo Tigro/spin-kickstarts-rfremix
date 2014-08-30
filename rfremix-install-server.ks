@@ -68,63 +68,94 @@ repo --name=russianfedora-nonfree-updates-source --mirrorlist=http://mirrors.rfr
 -kernel-tools*
 -syslog-ng*
 -astronomy-bookmarks
--generic*
+-generic-logos*
+-generic-release*
 -GConf2-dbus*
 -bluez-gnome
-# Periods cause problems in paterns, so replace with *s
--java-1*8*0-openjdk
 -community-mysql*
--jruby*
 
 # core
 kernel*
 dracut-*
 
-# Desktops
+# No desktops
+-cinnamon*
+-enlightenment*
+-gnome-shell
+-gnome-session
+-kde*
+-lightdm-kde
+-lightdm-razorqt
+# Pulls in qt
+-oprofile-gui
+
+-@legacy-fonts
+
 
 ## common stuff
-@base-x
 @guest-agents
 @standard
 @core
-@input-methods
 @multimedia
 @hardware-support
-@admin-tools
-@basic-desktop
 
-# Workstation
-@eclipse
+# Some development tools
 @development-libs
 @development-tools
 @c-development
 @rpm-development-tools
 @fedora-packager
-@virtualization
-@web-server
-@mongodb
-@perl-web
-@php
-@python-web
-@rubyonrails
+# RFRemix Server.
+# Including this causes the fedora-release-server package to be included,
+# which in turn enables server-product-environment, and due to to its priority
+# this will be the default environment.
+@server-product
+@headless-management
+@container-management
+
+# Common server packages
 @mysql
 @sql-server
-@design-suite
-@jbossas
+@web-server
+
+# Web Server environment
+@haproxy
+@mongodb
+@perl-web
+@python-web
+@php
+@rubyonrails
+@tomcat
+
+# Infrastructure Server
+@directory-server
+@dogtag
+@dns-server
+@freeipa-server
+@ftp-server
+@mail-server
+@network-server
+@printing
+@smb-server
+@virtualization
+@load-balancer
+@ha
+
+@javaenterprise
+
+# “uservisible” groups we want to offer
+@editors
+@network-server
+@system-tools
+@text-internet
 
 # Things needed for installation
 @anaconda-tools
 
 # Langpacks
 autocorr-*
-eclipse-nls-*
 hunspell-*
-hyphen-*
-calligra-l10n-*
-kde-l10n-*
-libreoffice-langpack-*
 man-pages-*
-mythes-*
 -gimp-help-*
 
 # Removals
