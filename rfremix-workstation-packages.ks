@@ -16,7 +16,7 @@
 @multimedia
 @networkmanager-submodules
 @printing
-@workstation-product
+@rfremix-workstation-product
 
 # Exclude unwanted packages from @anaconda-tools group
 -gfs2-utils
