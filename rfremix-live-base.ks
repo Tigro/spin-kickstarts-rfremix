@@ -70,7 +70,6 @@ fpaste
 %end
 
 %post
-
 # FIXME: it'd be better to get this installed from a package
 cat > /etc/rc.d/init.d/livesys << EOF
 #!/bin/bash
@@ -220,14 +219,14 @@ systemctl stop atd.service 2> /dev/null || :
 # turn off rfremixconf script
 chkconfig --level 345 rfremixconf off 2>/dev/null || :
 
-# disable yum langpacks plugin on live
-if [ -f /usr/lib/gnome-settings-daemon-3.0/gtk-modules/pk-gtk-module.desktop ]; then
-    rm -f /usr/lib/gnome-settings-daemon-3.0/gtk-modules/pk-gtk-module.desktop
-fi
-
-if [ -f /usr/lib64/gnome-settings-daemon-3.0/gtk-modules/pk-gtk-module.desktop ]; then
-    rm -f /usr/lib64/gnome-settings-daemon-3.0/gtk-modules/pk-gtk-module.desktop
-fi
+## disable yum langpacks plugin on live
+#if [ -f /usr/lib/gnome-settings-daemon-3.0/gtk-modules/pk-gtk-module.desktop ]; then
+#    rm -f /usr/lib/gnome-settings-daemon-3.0/gtk-modules/pk-gtk-module.desktop
+#fi
+#
+#if [ -f /usr/lib64/gnome-settings-daemon-3.0/gtk-modules/pk-gtk-module.desktop ]; then
+#    rm -f /usr/lib64/gnome-settings-daemon-3.0/gtk-modules/pk-gtk-module.desktop
+#fi
 
 # Mark things as configured
 touch /.liveimg-configured
@@ -315,8 +314,8 @@ EOF
 
 # work around for poor key import UI in PackageKit
 rm -f /var/lib/rpm/__db*
-releasever=$(rpm -q --qf '%{version}\n' rfremix-release)
-basearch=$(uname -m)
+releasever=$(rpm -q --qf '%{version}\n' --whatprovides rfremix-release)
+basearch=$(uname -i)
 rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-$releasever-$basearch
 echo "Packages within this LiveCD"
 rpm -qa
