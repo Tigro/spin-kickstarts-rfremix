@@ -95,7 +95,6 @@ dracut-*
 @gnome-desktop
 @epiphany
 @libreoffice
-@gnome-games
 
 ## KDE
 @kde-desktop
@@ -124,8 +123,6 @@ dracut-*
 @c-development
 @rpm-development-tools
 @fedora-packager
-@gnome-software-development
-@kde-software-development
 @x-software-development
 @virtualization
 @web-server
