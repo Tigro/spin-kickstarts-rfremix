@@ -66,7 +66,6 @@ repo --name=russianfedora-nonfree-updates-source --mirrorlist=http://mirrors.rfr
 -GConf2-dbus*
 -bluez-gnome
 # Periods cause problems in paterns, so replace with *s
--java-1*8*0-openjdk
 -community-mysql*
 -jruby*
 
@@ -103,24 +102,12 @@ dracut-*
 @kde-apps
 @kde-education
 @kde-media
-#@kde-office
 
 ## XFCE
 @xfce-desktop
 @xfce-apps
 @xfce-extra-plugins
 @xfce-media
-#@xfce-office
-
-## LXDE
-@lxde-desktop
-@lxde-apps
-@lxde-media
-#@lxde-office
-
-## SUGAR
-@sugar-desktop
-@sugar-apps
 
 ## MATE
 @mate-desktop
@@ -130,6 +117,7 @@ dracut-*
 
 # Workstation
 @rfremix-workstation-product
+
 @eclipse
 @development-libs
 @development-tools
@@ -141,13 +129,10 @@ dracut-*
 @x-software-development
 @virtualization
 @web-server
-@mongodb
 @perl-web
 @php
 @python-web
-@rubyonrails
 @mysql
-@sql-server
 @design-suite
 ## Not included yet due to space concerns
 #@jbossas
@@ -165,7 +150,6 @@ autocorr-*
 eclipse-nls-*
 hunspell-*
 hyphen-*
-calligra-l10n-*
 kde-l10n-*
 libreoffice-langpack-*
 man-pages-*
