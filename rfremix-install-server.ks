@@ -91,12 +91,12 @@ dracut-*
 
 -@legacy-fonts
 
+-@multimedia
 
 ## common stuff
 @guest-agents
 @standard
 @core
-@multimedia
 @hardware-support
 
 # Some development tools
@@ -113,6 +113,7 @@ dracut-*
 @server-product
 @headless-management
 @container-management
+@domain-client
 
 # Common server packages
 @mysql
