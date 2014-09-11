@@ -155,7 +155,6 @@ xorg-x11-drv-wacom
 xorg-x11-drv-v4l
 xorg-x11-utils
 xorg-x11-drivers
-xorg-x11-drv-keyboard
 #xorg-x11-xkb-utils
 #xorg-x11-apps
 
