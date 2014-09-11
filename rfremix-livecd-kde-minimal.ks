@@ -142,7 +142,6 @@ xorg-x11-drv-dummy
 xorg-x11-drv-evdev
 xorg-x11-drv-fbdev
 xorg-x11-drv-intel
-xorg-x11-drv-mga
 xorg-x11-drv-nouveau
 xorg-x11-drv-openchrome
 xorg-x11-drv-qxl
