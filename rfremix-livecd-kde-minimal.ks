@@ -138,7 +138,6 @@ mesa-dri-drivers
 mesa-libGL
 mesa-libGLU
 xorg-x11-drv-ati
-xorg-x11-drv-cirrus
 xorg-x11-drv-dummy
 xorg-x11-drv-evdev
 xorg-x11-drv-fbdev
