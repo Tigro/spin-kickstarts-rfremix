@@ -57,6 +57,9 @@ wget
 anaconda
 @anaconda-tools
 
+# Need aajohan-comfortaa-fonts for the SVG rnotes images
+aajohan-comfortaa-fonts
+
 # grub utility
 grub-customizer
 
