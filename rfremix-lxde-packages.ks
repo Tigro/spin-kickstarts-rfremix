@@ -69,5 +69,7 @@ pavucontrol
 
 yumex
 
+rfremix-logos
+
 %end
 
