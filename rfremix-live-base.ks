@@ -63,6 +63,9 @@ grub-customizer
 # fpaste is very useful for debugging and very small
 fpaste
 
+inxi
+mediainfo
+
 # Make live images easy to shutdown and the like in libvirt
 qemu-guest-agent
 
