@@ -66,6 +66,9 @@ grub-customizer
 # fpaste is very useful for debugging and very small
 fpaste
 
+inxi
+mediainfo
+
 -cairo-freeworld
 -freetype-infinality
 -freetype-freeworld
