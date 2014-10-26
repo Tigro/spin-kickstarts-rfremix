@@ -48,7 +48,6 @@ kdegraphics-thumbnailers
 
 # fonts (we make no bones about admitting we're english-only)
 wqy-microhei-fonts                     # a compact CJK font, to replace:
--nhn-nanum-gothic-fonts                        # Korean (old name, still in comps)
 -naver-nanum-gothic-fonts              # Korean
 -vlgothic-fonts                                # Japanese
 -adobe-source-han-sans-cn-fonts                # simplified Chinese
