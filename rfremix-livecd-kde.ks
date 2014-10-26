@@ -1,7 +1,7 @@
 # rfremix-livecd-kde.ks
 #
 # Description:
-# - RFRemix Livecd Spin with the K Desktop Environment (KDE), default 1 GB version
+# - RFRemix Livecd Spin with the K Desktop Environment (KDE), default 1.4 GB version
 #
 # Maintainer(s):
 # - Arkady L. Shane <ashejn@russainfedora.ru>
