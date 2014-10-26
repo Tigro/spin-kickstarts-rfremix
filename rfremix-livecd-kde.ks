@@ -19,7 +19,6 @@ part / --size=8192
 # don't include these for now to fit on a cd
 -desktop-backgrounds-basic
 -kdeaccessibility*
--scribus			# scribus is too big for the live images
 -kdeartwork-screensavers	# screensavers are not needed on live images
 #-ktorrent			# kget has also basic torrent features (~3 megs)
 digikam				# digikam has duplicate functionality with gwenview (~28 megs)
