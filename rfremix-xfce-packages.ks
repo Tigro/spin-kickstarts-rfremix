@@ -63,8 +63,6 @@ pavucontrol
 # System
 gparted
 
-# java plugin
-icedtea-web
 xfce4-cellmodem-plugin
 xfce4-clipman-plugin
 xfce4-cpugraph-plugin

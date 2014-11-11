@@ -18,8 +18,6 @@
 -imsettings
 -imsettings-gsettings
 
-# Java plugin
-icedtea-web
 # Drop things that pull in perl
 -linux-atm
 

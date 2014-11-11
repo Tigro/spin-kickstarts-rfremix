@@ -49,9 +49,6 @@ pavucontrol
 # System
 gparted
 
-# java plugin
-icedtea-web
-
 # system
 dconf-editor
 
