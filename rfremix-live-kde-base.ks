@@ -40,12 +40,11 @@ chmod a+x /home/liveuser/.xsession
 chown liveuser:liveuser /home/liveuser/.xsession
 
 # set up autologin for user liveuser
-sed -i 's/#AutoLoginEnable=true/AutoLoginEnable=true/' /etc/kde/kdm/kdmrc
-sed -i 's/#AutoLoginUser=fred/AutoLoginUser=liveuser/' /etc/kde/kdm/kdmrc
-
-# set up user liveuser as default user and preselected user
-sed -i 's/#PreselectUser=Default/PreselectUser=Default/' /etc/kde/kdm/kdmrc
-sed -i 's/#DefaultUser=johndoe/DefaultUser=liveuser/' /etc/kde/kdm/kdmrc
+cat > /etc/sddm.conf << SDDM_EOF
+[Autologin]
+User=liveuser
+Session=kde-plasma.desktop
+SDDM_EOF
 
 # add liveinst.desktop to favorites menu
 mkdir -p /home/liveuser/.kde/share/config/
@@ -90,6 +89,12 @@ cat > /home/liveuser/.kde/share/config/kdedrc << KDEDRC_EOF
 [Module-apperd]
 autoload=false
 KDEDRC_EOF
+
+# Disable baloo
+cat > /home/liveuser/.kde/share/config/baloofilerc << BALOO_EOF
+[Basic Settings]
+Indexing-Enabled=false
+BALOO_EOF
 
 # Disable kres-migrator
 cat > /home/liveuser/.kde/share/config/kres-migratorrc << KRES_EOF
