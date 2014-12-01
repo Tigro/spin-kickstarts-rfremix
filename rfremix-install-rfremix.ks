@@ -129,7 +129,7 @@ dracut-*
 @cinnamon-desktop
 
 # Workstation
-@eclipse
+# @eclipse
 @development-libs
 @development-tools
 @c-development
