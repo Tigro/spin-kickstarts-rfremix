@@ -14,7 +14,7 @@
 # Add the repos you wish to use to compose here.  At least one of them needs group data.
 
 # Fedora Repos
-repo --name=fedora --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=fedora-20&arch=$basearch
+repo --name=fedora --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=fedora-20&arch=$basearch --exclude calligra-l10n --exclude gtk2* --exclude gtk3* --exclude ibus* --exclude imsettings* --exclude kactivities --exclude kde-baseapps --exclude kde-l10n --exclude kdelibs* --exclude kdepim* --exclude kipi-plugins* --exclude libcmis --exclude libkdcraw --exclude libkgeomap --exclude libkolabxml --exclude libplist --exclude libreoffice-core --exclude libreoffice-kde --exclude libreoffice-opensymbol-fonts --exclude libreoffice-ure --exclude librtmp --exclude marble --exclude marble-libs --exclude PackageKit-glib --exclude sane-backends --exclude sane-backends-drivers-scanners --exclude sane-backends-libs --exclude usbmuxd --exclude xsane-gimp
 repo --name=fedora-updates --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=updates-released-f20&arch=$basearch
 #repo --name=fedora-updates-testing --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=updates-testing-f20&arch=$basearch
 
@@ -23,7 +23,7 @@ repo --name=fedora-updates-source  --mirrorlist=http://mirrors.fedoraproject.org
 #repo --name=fedora-updates-testing-source  --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=updates-testing-source-f20&arch=$basearch
 
 # RPMFusion Repos
-repo --name=rpmfusion-free --mirrorlist=http://mirrors.rpmfusion.org/mirrorlist?repo=free-fedora-20&arch=$basearch
+repo --name=rpmfusion-free --mirrorlist=http://mirrors.rpmfusion.org/mirrorlist?repo=free-fedora-20&arch=$basearch --exclude gstreamer-ffmpeg --exclude gstreamer1-libav --exclude gstreamer1-plugins-bad-free --exclude gstreamer1-plugins-bad-freeworld --exclude gstreamer1-plugins-good --exclude gstreamer1-plugins-ugly
 repo --name=rpmfusion-free-updates --mirrorlist=http://mirrors.rpmfusion.org/mirrorlist?repo=free-fedora-updates-released-20&arch=$basearch
 repo --name=rpmfusion-nonfree --mirrorlist=http://mirrors.rpmfusion.org/mirrorlist?repo=nonfree-fedora-20&arch=$basearch --exclude *nvidia*
 repo --name=rpmfusion-nonfree-updates --mirrorlist=http://mirrors.rpmfusion.org/mirrorlist?repo=nonfree-fedora-updates-released-20&arch=$basearch --exclude *nvidia*
