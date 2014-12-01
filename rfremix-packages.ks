@@ -30,4 +30,6 @@ k3b-extras-freeworld
 libreoffice-kde
 shotwell
 simple-scan
+
+-viber
 %end
