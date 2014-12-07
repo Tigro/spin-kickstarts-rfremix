@@ -69,8 +69,6 @@ fpaste
 inxi
 mediainfo
 
--cairo-freeworld
--freetype-infinality
 -freetype-freeworld
 
 %end
