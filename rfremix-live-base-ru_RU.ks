@@ -19,7 +19,6 @@ dejavu-serif-fonts
 -un-extra-*-fonts
 -un-core-*-fonts
 -vlgothic-fonts
--vlgothic-fonts-common
 -vlgothic-p-fonts
 -vollkorn-fonts
 -wqy-*-fonts
