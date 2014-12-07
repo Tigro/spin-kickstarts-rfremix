@@ -74,5 +74,6 @@ kernel*
 @anaconda-tools
 -fedora-productimg-cloud
 -fedora-productimg-server
+fedora-productimg-workstation
 
 %end
