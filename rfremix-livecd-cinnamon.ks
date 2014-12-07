@@ -65,23 +65,33 @@ PREFERRED=/usr/bin/cinnamon-session
 DISPLAYMANAGER=/usr/sbin/lightdm
 EOF
 
+# enable menu accelerator
+cat > /usr/share/glib-2.0/schemas/org.gnome.Terminal.gschema.override <<FOE
+[org.gnome.Terminal.Legacy.Settings]
+menu-accelerator-enabled=false
+FOE
+
 cat >> /etc/rc.d/init.d/livesys << EOF
 
-# disable screensaver locking
-#cat > /usr/share/glib-2.0/schemas/org.mate.lockdown.gschema.override <<FOE
-#[org.mate.lockdown]
-#disable-lock-screen=true
-#FOE
+cat > /usr/share/glib-2.0/schemas/org.gnome.desktop.lockdown.gschema.override <<foe
+[org.gnome.desktop.lockdown]
+disable-lock-screen=true
+foe
 
-#cat > /usr/share/glib-2.0/schemas/org.gnome.desktop.lockdown.gschema.override <<FOE
-#[org.gnome.desktop.lockdown]
-#disable-lock-screen=true
-#FOE
+cat > /usr/share/glib-2.0/schemas/org.cinnamon.desktop.lockdown.gschema.override <<foe
+[org.cinnamon.desktop.lockdown]
+disable-lock-screen=true
+foe
 
-#cat > /usr/share/glib-2.0/schemas/org.mate.screensaver.gschema.override <<FOE
-#[org.mate.screensaver]
-#lock-enabled=false
-#FOE
+cat > /usr/share/glib-2.0/schemas/org.gnome.screensaver.gschema.override <<FOE
+[org.gnome.screensaver]
+lock-enabled=false
+FOE
+
+cat > /usr/share/glib-2.0/schemas/org.cinnamon.screensaver.gschema.override <<FOE
+[org.cinnamon.screensaver]
+lock-enabled=false
+FOE
 
 # set up lightdm autologin
 sed -i 's/^#autologin-user=.*/autologin-user=liveuser/' /etc/lightdm/lightdm.conf
