@@ -72,5 +72,7 @@ kernel*
 
 # Things needed for installation
 @anaconda-tools
+-fedora-productimg-cloud
+-fedora-productimg-server
 
 %end
