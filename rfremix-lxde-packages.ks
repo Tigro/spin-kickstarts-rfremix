@@ -49,7 +49,6 @@ metacity
 
 # drop some system-config things
 #-system-config-language
--system-config-lvm
 -system-config-network
 -system-config-rootpassword
 #-system-config-services

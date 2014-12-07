@@ -41,7 +41,6 @@ gnome-keyring-pam
 -naver-nanum-gothic-fonts # save 14MB
 
 # drop some system-config things
--system-config-lvm
 -system-config-network
 -system-config-rootpassword
 #-system-config-services

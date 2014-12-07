@@ -38,7 +38,6 @@ system-config-printer-applet
 -acpid
 
 # drop some system-config things
--system-config-lvm
 -system-config-rootpassword
 #-system-config-services
 -policycoreutils-gui

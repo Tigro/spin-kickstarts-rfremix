@@ -51,7 +51,6 @@ pavumeter
 
 # usability
 system-config-printer
-#system-config-lvm
 
 # utility
 testdisk
