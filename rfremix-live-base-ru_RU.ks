@@ -15,7 +15,6 @@ dejavu-serif-fonts
 -paktype-*-fonts
 -smc-*-fonts
 -thai-scalable-fonts-common
--thai-scalable-fonts-compat
 -thai-scalable-*-fonts
 -un-extra-*-fonts
 -un-core-*-fonts
