@@ -15,6 +15,15 @@
 @firefox
 @libreoffice
 
+# some apps from mate-applications
+caja-actions
+mate-disk-usage-analyzer
+mate-netspeed
+
+# system tools
+system-config-printer
+system-config-printer-applet
+
 # dictionaries are big
 -aspell-*
 #-man-pages-*
