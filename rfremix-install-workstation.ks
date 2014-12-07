@@ -12,13 +12,13 @@
 # Add the repos you wish to use to compose here.  At least one of them needs group data.
 
 # Fedora Repos
-repo --name=fedora --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=fedora-21&arch=$basearch
-repo --name=fedora-updates --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=updates-released-f21&arch=$basearch
+repo --name=fedora --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=fedora-21&arch=$basearch --excludepkgs=fedora-productimg-cloud,fedora-productimg-server
+repo --name=fedora-updates --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=updates-released-f21&arch=$basearch --excludepkgs=fedora-productimg-cloud,fedora-productimg-server
 #repo --name=fedora-updates-testing --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=updates-testing-f21&arch=$basearch
 
 repo --name=fedora-source  --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=fedora-source-21&arch=$basearch
-repo --name=fedora-updates-source  --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=updates-released-source-f21&arch=$basearch
-#repo --name=fedora-updates-testing-source  --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=updates-testing-source-f21&arch=$basearch
+repo --name=fedora-updates-source  --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=updates-released-source-f21&arch=$basearch --excludepkgs=fedora-productimg-cloud,fedora-productimg-server
+#repo --name=fedora-updates-testing-source  --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=updates-testing-source-f21&arch=$basearch --excludepkgs=fedora-productimg-cloud,fedora-productimg-server
 
 # RPMFusion Repos
 repo --name=rpmfusion-free --mirrorlist=http://mirrors.rpmfusion.org/mirrorlist?repo=free-fedora-21&arch=$basearch
