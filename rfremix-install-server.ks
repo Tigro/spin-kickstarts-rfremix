@@ -18,12 +18,12 @@
 # In the master branch the rawhide repo commands should be uncommented.
 
 # Fedora Repos
-repo --name=fedora --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=fedora-21&arch=$basearch
-repo --name=fedora-updates --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=updates-released-f21&arch=$basearch
+repo --name=fedora --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=fedora-21&arch=$basearch --excludepkgs=fedora-productimg-cloud,fedora-productimg-workstation
+repo --name=fedora-updates --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=updates-released-f21&arch=$basearch --excludepkgs=fedora-productimg-cloud,fedora-productimg-workstation
 #repo --name=fedora-updates-testing --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=updates-testing-f21&arch=$basearch
 
-repo --name=fedora-source  --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=fedora-source-21&arch=$basearch
-repo --name=fedora-updates-source  --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=updates-released-source-f21&arch=$basearch
+repo --name=fedora-source  --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=fedora-source-21&arch=$basearch --excludepkgs=fedora-productimg-cloud,fedora-productimg-workstation
+repo --name=fedora-updates-source  --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=updates-released-source-f21&arch=$basearch --excludepkgs=fedora-productimg-cloud,fedora-productimg-workstation
 #repo --name=fedora-updates-testing-source  --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=updates-testing-source-f21&arch=$basearch
 
 # RPMFusion Repos
@@ -58,6 +58,10 @@ repo --name=russianfedora-nonfree-updates-source --mirrorlist=http://mirrors.rfr
 # (default groups for the configured repos are added by --default)
 # @base got renamed to @standard, but @base is still included by default by pungi.
 %packages --default
+
+-fedora-productimg-cloud
+fedora-productimg-server
+-fedora-productimg-workstation
 
 # pungi is an inclusive depsolver so that multiple packages are brought 
 # in to satisify dependencies and we don't always want that. So we  use
@@ -105,6 +109,7 @@ dracut-*
 @c-development
 @rpm-development-tools
 @fedora-packager
+
 # RFRemix Server.
 # Including this causes the fedora-release-server package to be included,
 # which in turn enables server-product-environment, and due to to its priority
@@ -153,6 +158,7 @@ dracut-*
 
 # Things needed for installation
 @anaconda-tools
+fedora-productimg-server
 
 # Langpacks
 autocorr-*
