@@ -114,7 +114,7 @@ dracut-*
 # which in turn enables server-product-environment, and due to to its priority
 # this will be the default environment.
 @^rfremix-server-product-environment
-@rfremx-server-product
+@rfremix-server-product
 @headless-management
 @container-management
 @domain-client
