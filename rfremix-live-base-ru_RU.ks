@@ -1,3 +1,6 @@
+# include Russian Fedora and RPMFusion repos
+%include rfremix-repo-not-rawhide.ks
+
 # Fonts and input methods for Russia
 
 %packages
@@ -5,53 +8,31 @@
 dejavu-sans-fonts
 dejavu-sans-mono-fonts
 dejavu-serif-fonts
--cjkuni-*-fonts
--jomolhari-fonts
--kacst-*-fonts
--khmeros-*-fonts
--lklug-fonts
--lohit-*-fonts
--sil-*-fonts
--paktype-*-fonts
--smc-*-fonts
--thai-scalable-fonts-common
--thai-scalable-*-fonts
--un-extra-*-fonts
--un-core-*-fonts
--vlgothic-fonts
--vlgothic-p-fonts
--vollkorn-fonts
--wqy-*-fonts
-
-# remove input methods to free space
--scim*
--m17n*
--ibus*
--anthy
--kasumi
--libhangul
+ucs-miscfixed-fonts
 
 # codecs
-gstreamer-plugins-ugly
+gstreamer-ffmpeg
 gstreamer-plugins-bad-free
 gstreamer-plugins-bad-nonfree
-gstreamer-ffmpeg
+gstreamer-plugins-ugly
+gstreamer1-libav
+gstreamer1-plugins-bad-free
+gstreamer1-plugins-ugly
 
+# yes many peoples love flash
 flash-plugin
 
+# should be to feel better
 bash-completion
+fpaste
+grub-customizer
+mc
+wget
 
-# multimedia
-paman
-paprefs
-pavucontrol
-pavumeter
-
-# usability
-system-config-printer
-
-# utility
-testdisk
+# avoid theese
+-*nvidia*
+-freetype-freeworld
+-ubuntu-font-family
 
 %end
 
@@ -63,4 +44,5 @@ cat >> /etc/rc.d/init.d/livesys << EOF
 localectl set-x11-keymap us,ru pc105 , grp:alt_shift_toggle
 
 EOF
+
 %end
