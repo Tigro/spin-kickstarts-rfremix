@@ -34,6 +34,9 @@ wget
 -freetype-freeworld
 -ubuntu-font-family
 
+# configuration
+rfremix-config
+
 %end
 
 %post
