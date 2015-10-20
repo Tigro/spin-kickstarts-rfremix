@@ -45,6 +45,9 @@ russianfedora-fixes-release
 russianfedora-nonfree-release
 russianfedora-branding-release
 
+# vpn for Beeline
+NetworkManager-l2tp
+
 %end
 
 %post

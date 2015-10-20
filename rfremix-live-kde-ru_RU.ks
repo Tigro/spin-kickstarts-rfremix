@@ -19,6 +19,10 @@ hunspell-ru
 hyphen-ru 
 libreoffice-langpack-ru  
 mythes-ru
+
+# vpn for Beeline
+plasma-nm-l2tp
+
 %end
 
 %post
