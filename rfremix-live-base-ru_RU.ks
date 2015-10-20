@@ -37,6 +37,14 @@ wget
 # configuration
 rfremix-config
 
+# repos
+rpmfusion-free-release
+rpmfusion-nonfree-release
+russianfedora-free-release
+russianfedora-fixes-release
+russianfedora-nonfree-release
+russianfedora-branding-release
+
 %end
 
 %post
