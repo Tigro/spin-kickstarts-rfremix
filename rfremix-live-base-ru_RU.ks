@@ -25,6 +25,7 @@ flash-plugin
 # should be to feel better
 bash-completion
 fpaste
+gpm
 grub-customizer
 mc
 wget
