@@ -52,7 +52,12 @@ NetworkManager-l2tp
 %end
 
 %post
+
+cat >> /etc/rc.d/init.d/livesys << EOF
+
 # set system keymaps
 localectl set-x11-keymap us,ru pc105 , grp:alt_shift_toggle
+
+EOF
 
 %end
