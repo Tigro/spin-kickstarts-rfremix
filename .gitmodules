@@ -1,4 +1,0 @@
-[submodule "spin-kickstarts"]
-	path = spin-kickstarts
-	url = http://git.fedorahosted.org/git/spin-kickstarts.git
-	branch = f23
