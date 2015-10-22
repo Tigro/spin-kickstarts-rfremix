@@ -3,7 +3,7 @@
 # Maintainer(s):
 # - Arkady L. Shane <ashejn [AT] russianfedora [DOT] ru>
 
-%include fedora-live-mate_compiz.ks
+%include spin-kickstarts/fedora-live-mate_compiz.ks
 %include rfremix-live-base-ru_RU.ks
 
 lang ru_RU.UTF-8
