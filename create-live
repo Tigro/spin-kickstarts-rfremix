@@ -1,0 +1,151 @@
+#!/bin/sh
+
+export LANG=C
+
+usage()
+{
+  echo
+  echo "Create RFRemix Live images based on Fedora 23 package base"
+  echo "from internet."
+  echo
+  echo "create-live <imagename> <i686|x86_64|all> <version>"
+  echo "	-c - Cinnamon LiveCD"
+  echo "	-g - Workstation (with GNOME) LiveCD"
+  echo "	-k - KDE LiveCD"
+  echo "	-x - XFCE LiveCD"
+  echo "	-l - LXDE LiveCD"
+  echo "	-m - MATE LiveCD"
+  echo "	-a - ALL Images"
+  exit 2
+}
+
+ok()
+{
+  echo -e "\t\t\\033[0;32m[  OK  ]\\033[0;39m"
+}
+
+fail()
+{
+  echo -e "\t\t\\033[0;31m[ FAIL ]\\033[0;39m"
+}
+
+faile()
+{
+  echo -e "\t\t\\033[0;31m[ FAIL ]\\033[0;39m"
+  exit 1
+}
+
+if [ `id -u` -ne 0 ]; then
+  echo "Login as root! Abort..."
+  exit 3
+fi
+
+BUILDDIR="$(pwd)"
+CONFIGPATH="$BUILDDIR"
+LOGFILE="$BUILDDIR/logs/build-$(date +%Y%m%d%H%M).log"
+
+case "$1" in
+  -c)
+    DIST="Live-Cinnamon"
+    CONFIG="$CONFIGPATH/rfremix-live-cinnamon-ru_RU.ks"
+    ;;
+  -g)
+    DIST="Live-Workstation"
+    CONFIG="$CONFIGPATH/rfremix-live-workstation-ru_RU.ks"
+    ;;
+  -k)
+    DIST=("Live-KDE")
+    CONFIG=("$CONFIGPATH/rfremix-live-kde-ru_RU.ks")
+    ;;
+  -x)
+    DIST=("Live-XFCE")
+    CONFIG=("$CONFIGPATH/rfremix-live-xfce-ru_RU.ks")
+    ;;
+  -l)
+    DIST=("Live-LXDE")
+    CONFIG=("$CONFIGPATH/rfremix-live-lxde-ru_RU.ks")
+    ;;
+  -m)
+    DIST=("Live-MATE_Compiz")
+    CONFIG=("$CONFIGPATH/rfremix-live-mate_compiz-ru_RU.ks")
+    ;;
+  -a)
+    DIST=("Live-Workstation" "Live-KDE" "Live-XFCE" "Live-LXDE" "Live-MATE_Compiz" "Live-Cinnamon")
+    CONFIG=("$CONFIGPATH/rfremix-live-workstation-ru_RU.ks"
+            "$CONFIGPATH/rfremix-live-kde-ru_RU.ks"
+            "$CONFIGPATH/rfremix-live-xfce-ru_RU.ks"
+            "$CONFIGPATH/rfremix-live-lxde-ru_RU.ks"
+            "$CONFIGPATH/rfremix-live-mate_compiz-ru_RU.ks"
+            "$CONFIGPATH/rfremix-live-cinnamon-ru_RU.ks")
+    ;;
+  -clean-all)
+    rm -f *.iso *-CHECKSUM
+    exit 0
+    ;;
+  *)
+    usage
+    ;;
+esac
+
+case "$2" in
+  all)
+    ARCH="x86_64 i686"
+    ;;
+  i686)
+    ARCH="i686"
+    ;;
+  x86_64)
+    ARCH="x86_64"
+    ;;
+  *)
+    usage
+    ;;
+esac
+
+# can we build x86_64 on an i386?
+echo $ARCH | grep x86_64 > /dev/null 2>&1
+
+if [ "$?" -eq 0 -a "$(uname -m)" != "x86_64" ]; then
+  echo "You cannot build x86_64 images on an i386 arch. Abort..."
+  exit 10
+fi
+
+version=$3
+releasever=$(echo $version | awk -F[.-] '{ print $1 }')
+
+if [ "x$version" == "x" ]; then
+  usage
+fi
+
+echo -n "Creating Build directory                       "
+mkdir -p $BUILDDIR/tmp $BUILDDIR/logs && ok || faile
+
+echo "Logging to $LOGFILE"
+
+pushd $BUILDDIR > /dev/null
+
+for arch in $ARCH; do
+  for i in `seq 0 $((${#DIST[*]}-1))`; do
+    if [ ! -f "${CONFIG[i]}" ]; then
+      echo "${CONFIG[i]}" does not exist.
+      exit 10
+    fi
+
+    rm -f RFRemix-${DIST[i]}-$arch-$version.iso
+    rm -f RFRemix-${DIST[i]}-$arch-$version-CHECKSUM
+
+    LABEL=$(echo RFRemix-${DIST[i]}-$arch-$version.iso | sed 's!\.iso!!g' | cut -b 1-32)
+
+    echo -n "Creating RFRemix-${DIST[i]}-$arch-$version.iso "
+
+    setarch $arch livecd-creator -v -d -t $BUILDDIR/tmp --cache=$BUILDDIR/tmp \
+        -f $LABEL --releasever=$releasever --product=RFRemix --title="RFRemix $(echo ${DIST[i]} | sed 's@-@ @g;s@_@ @g')" -c ${CONFIG[i]} >> $LOGFILE 2>&1 && \
+      if [ "$LABEL.iso" != "RFRemix-${DIST[i]}-$arch-$version.iso" ]; then
+        mv $LABEL.iso RFRemix-${DIST[i]}-$arch-$version.iso; fi && \
+      sha256sum RFRemix-${DIST[i]}-$arch-$version.iso > \
+        RFRemix-${DIST[i]}-$arch-$version-CHECKSUM && ok || fail
+  done
+done
+
+popd > /dev/null
+
