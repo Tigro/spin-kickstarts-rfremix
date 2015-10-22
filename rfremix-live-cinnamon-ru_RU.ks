@@ -3,7 +3,7 @@
 # Maintainer(s):
 # - Arkady L. Shane <ashejn [AT] russianfedora [DOT] ru>
 
-%include spin-kickstarts/fedora-livecd-cinnamon.ks
+%include spin-kickstarts/fedora-live-cinnamon.ks
 %include rfremix-live-base-ru_RU.ks
 
 lang ru_RU.UTF-8
