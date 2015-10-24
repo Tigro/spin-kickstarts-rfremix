@@ -31,3 +31,7 @@ repo --name=russianfedora-nonfree-source --mirrorlist=http://mirrors.rfremix.ru/
 repo --name=russianfedora-nonfree-updates-source --mirrorlist=http://mirrors.rfremix.ru/mirrorlist?repo=nonfree-fedora-updates-released-source-$releasever&arch=$basearch
 
 %include spin-kickstarts/fedora-install-workstation.ks
+
+%packages --default
+rfremix-config
+%end
