@@ -29,11 +29,15 @@ Building Install Images
 =======================
 
 ```
-XZ_DEFAULTS=--memlimit-compress=3700MiB /usr/bin/pungi -c rfremix-install-workstation.ks \
-	--installpkgs fedora-productimg-workstation --ver 23 --variant Workstation --family RFRemix
+XZ_DEFAULTS=--memlimit-compress=3700MiB /usr/bin/pungi \
+	-c rfremix-install-workstation.ks \
+	--installpkgs fedora-productimg-workstation \
+	--ver 23 --variant Workstation --family RFRemix
 ```
 
 ```
-XZ_DEFAULTS=--memlimit-compress=3700MiB /usr/bin/pungi -c rfremix-install-server.ks \
-	--installpkgs fedora-productimg-server --ver 23 --variant Server --family RFRemix
+XZ_DEFAULTS=--memlimit-compress=3700MiB /usr/bin/pungi \
+	-c rfremix-install-server.ks \
+	--installpkgs fedora-productimg-server \
+	--ver 23 --variant Server --family RFRemix
 ```
