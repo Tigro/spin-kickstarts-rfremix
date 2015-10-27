@@ -1,3 +1,7 @@
+* 23.0.0 - Tue Oct 27 2015 Arkady L. Shane <ashejn@russianfedora.pro>
+- full rebase of ks scripts
+- added server ks script
+
 * 18.0.0 - Wed Sep 19 2012 Arkady L. Shane <ashejn@yandex-team.ru>
 - rewrite install ks for new repo metadata
 - new branch
