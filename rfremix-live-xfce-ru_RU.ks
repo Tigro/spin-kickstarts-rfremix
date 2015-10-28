@@ -17,4 +17,7 @@ hunspell-ru
 hyphen-ru 
 libreoffice-langpack-ru  
 mythes-ru
+
+xfce4-kbdleds-plugin
+xfce4-xkb-plugin
 %end
