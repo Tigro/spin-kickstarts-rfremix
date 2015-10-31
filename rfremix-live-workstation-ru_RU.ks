@@ -35,7 +35,10 @@ FOE
 cat > /usr/share/glib-2.0/schemas/org.gnome.Terminal.gschema.override <<FOE
 [org.gnome.Terminal.Legacy.Settings]
 menu-accelerator-enabled=false
+dark-theme true
 FOE
+
+glib-compile-schemas /usr/share/glib-2.0/schemas
 
 %end
 
