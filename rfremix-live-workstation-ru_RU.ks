@@ -19,9 +19,7 @@ libreoffice-langpack-ru
 mythes-ru
 
 # Classic session for GNOME
-gnome-classic-session
-clipit
-gnome-tweak-tool
+@rfremix-workstation-product
 %end
 
 %post
