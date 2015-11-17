@@ -1,0 +1,115 @@
+#!/bin/bash
+
+# Copyright (C) 2013 Red Hat Inc.
+# SPDX-License-Identifier:	GPL-2.0+
+
+usage()
+{
+  echo
+  echo "Create RFRemix Live images based on Fedora 23 package base"
+  echo "from internet."
+  echo
+  echo "create-live <imagename> <i686|x86_64|all> <version> <release>"
+  echo "	-c - Cinnamon LiveCD"
+  echo "	-w - Workstation (with GNOME) LiveCD"
+  echo "	-k - KDE LiveCD"
+  echo "	-x - XFCE LiveCD"
+  echo "	-l - LXDE LiveCD"
+  echo "	-m - MATE LiveCD"
+  echo "	-a - ALL Images"
+  exit 2
+}
+
+case "$1" in
+  -c)
+    SPINS="Cinnamon"
+    ;;
+  -w)
+    SPINS="Workstation"
+    ;;
+  -k)
+    SPINS="KDE"
+    ;;
+  -x)
+    SPINS="XFCE"
+    ;;
+  -l)
+    SPINS="LXDE"
+    ;;
+  -m)
+    SPINS="MATE_Compiz"
+    ;;
+  -a)
+    SPINS="Workstation KDE XFCE LXDE MATE_Compiz Cinnamon"
+    ;;
+  *)
+    usage
+    ;;
+esac
+
+case "$2" in
+  all)
+    ARCHES="x86_64 i686"
+    ;;
+  i686)
+    ARCHES="i686"
+    ;;
+  x86_64)
+    ARCHES="x86_64"
+    ;;
+  *)
+    usage
+    ;;
+esac
+
+RELEASE=$3
+BUILD=$4
+
+if [ "x$RELEASE" == "x" -o "x$BUILD" == "x" ]; then
+  usage
+fi
+
+VERSION=$(echo $RELEASE | awk -F[.-] '{ print $1 }')
+
+KSEXTRAARGS="-v F23"
+
+if [ "$VERSION" == "rawhide" ]; then
+TARGET=rawhide
+else
+TARGET=dist-rfr$VERSION
+fi
+
+GITHASH=$(git rev-parse --short HEAD)
+
+for spin in $SPINS
+do
+    declare -l lspin
+    lspin=$spin
+    ksflatten $KSEXTRAARGS -c rfremix-live-$lspin-ru_RU.ks -o rfremix-live-$lspin-$GITHASH-ru_RU.ks >& /dev/null
+    for ARCH in $ARCHES
+    do
+       if [[ $ARCH == i686 ]]
+         then BASEARCH=i386
+         else BASEARCH=$ARCH
+       fi
+    koji spin-livecd --scratch  --release $BUILD --noprogress RFRemix-Live-$spin-$ARCH $RELEASE --nowait \
+	--repo=http://mirror.yandex.ru/fedora/linux/releases/$VERSION/Everything/$BASEARCH/os/ \
+	--repo=http://mirror.yandex.ru/fedora/linux/updates/$VERSION/$BASEARCH/ \
+	--repo=http://mirror.yandex.ru/fedora/rpmfusion/free/fedora/releases/22/Everything/$BASEARCH/os/ \
+	--repo=http://mirror.yandex.ru/fedora/rpmfusion/free/fedora/updates/22/$BASEARCH/ \
+	--repo=http://mirror.yandex.ru/fedora/rpmfusion/free/fedora/updates/testing/$VERSION/$BASEARCH/ \
+	--repo=http://mirror.yandex.ru/fedora/rpmfusion/nonfree/fedora/releases/22/Everything/$BASEARCH/os/ \
+	--repo=http://mirror.yandex.ru/fedora/rpmfusion/nonfree/fedora/updates/22/$BASEARCH/ \
+	--repo=http://mirror.yandex.ru/fedora/rpmfusion/nonfree/fedora/updates/testing/$VERSION/$BASEARCH/ \
+	--repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/branding/fedora/releases/$VERSION/Everything/$BASEARCH/os \
+	--repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/branding/fedora/updates/$VERSION/$BASEARCH \
+	--repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/fixes/fedora/releases/$VERSION/Everything/$BASEARCH/os \
+	--repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/fixes/fedora/updates/$VERSION/$BASEARCH \
+	--repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/free/fedora/releases/$VERSION/Everything/$BASEARCH/os \
+	--repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/free/fedora/updates/$VERSION/$BASEARCH \
+	--repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/nonfree/fedora/releases/$VERSION/Everything/$BASEARCH/os \
+	--repo=http://mirror.yandex.ru/fedora/russianfedora/russianfedora/nonfree/fedora/updates/$VERSION/$BASEARCH \
+	$TARGET $ARCH rfremix-live-$lspin-$GITHASH-ru_RU.ks
+   done
+done
+
