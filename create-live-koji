@@ -71,7 +71,7 @@ fi
 
 VERSION=$(echo $RELEASE | awk -F[.-] '{ print $1 }')
 
-KSEXTRAARGS="-v F23"
+KSEXTRAARGS="-v F21"
 
 if [ "$VERSION" == "rawhide" ]; then
 TARGET=rawhide
