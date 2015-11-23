@@ -6,6 +6,8 @@
 %include spin-kickstarts/fedora-live-workstation.ks
 %include rfremix-live-base-ru_RU.ks
 
+part / --size 10144
+
 lang ru_RU.UTF-8
 keyboard ru
 timezone Europe/Moscow
