@@ -27,6 +27,9 @@ case "$1" in
   -w)
     SPINS="Workstation"
     ;;
+  -t)
+    SPINS="Workstation_Tigro"
+    ;;
   -k)
     SPINS="KDE"
     ;;
