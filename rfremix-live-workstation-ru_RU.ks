@@ -20,6 +20,9 @@ mythes-ru
 
 # Classic session for GNOME
 @rfremix-workstation-product
+
+# Default Shell theme
+gnome-shell-theme-korora
 %end
 
 %post
@@ -36,6 +39,12 @@ cat > /usr/share/glib-2.0/schemas/org.gnome.Terminal.gschema.override <<FOE
 [org.gnome.Terminal.Legacy.Settings]
 menu-accelerator-enabled=false
 dark-theme=true
+FOE
+
+# set Korora Shell theme by default
+cat > /usr/share/glib-2.0/schemas/org.gnome.shell.extensions.user-theme.gschema.override <<FOE
+[org.gnome.shell.extensions.user-theme]
+name='Korora'
 FOE
 
 glib-compile-schemas /usr/share/glib-2.0/schemas
